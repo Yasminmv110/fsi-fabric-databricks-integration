@@ -1,0 +1,4 @@
+# Local environment settings; keep the shareable placeholder example tracked.
+.env
+.env.*
+!.env.example
