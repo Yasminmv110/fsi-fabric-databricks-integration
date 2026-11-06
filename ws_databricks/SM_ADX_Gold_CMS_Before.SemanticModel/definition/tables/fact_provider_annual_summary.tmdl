@@ -1,0 +1,188 @@
+table fact_provider_annual_summary
+	lineageTag: 00000000-0000-0000-0000-884a2a018f16
+	sourceLineageTag: [gold].[fact_provider_annual_summary]
+
+	column provider_number
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 00000000-0000-0000-0000-b322b4e5c214
+		sourceLineageTag: provider_number
+		summarizeBy: none
+		sourceColumn: provider_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-7d4ebd9db750
+		sourceLineageTag: claim_year
+		summarizeBy: sum
+		sourceColumn: claim_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_type
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-39101d862acc
+		sourceLineageTag: claim_type
+		summarizeBy: none
+		sourceColumn: claim_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-7a98427be125
+		sourceLineageTag: claim_count
+		summarizeBy: sum
+		sourceColumn: claim_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column beneficiary_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-ef1f6c726ed9
+		sourceLineageTag: beneficiary_count
+		summarizeBy: sum
+		sourceColumn: beneficiary_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_claim_payment_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-3ea28fcd74ea
+		sourceLineageTag: total_claim_payment_amt
+		summarizeBy: sum
+		sourceColumn: total_claim_payment_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_claim_payment_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-757fec6e2f0a
+		sourceLineageTag: avg_claim_payment_amt
+		summarizeBy: sum
+		sourceColumn: avg_claim_payment_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_primary_payer_paid_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-cceab2412747
+		sourceLineageTag: total_primary_payer_paid_amt
+		summarizeBy: sum
+		sourceColumn: total_primary_payer_paid_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_beneficiary_cost_share_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-ae8ac90fbedf
+		sourceLineageTag: total_beneficiary_cost_share_amt
+		summarizeBy: sum
+		sourceColumn: total_beneficiary_cost_share_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_claim_duration_days
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 2)
+		lineageTag: 00000000-0000-0000-0000-95b4314d4bad
+		sourceLineageTag: avg_claim_duration_days
+		summarizeBy: sum
+		sourceColumn: avg_claim_duration_days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column total_length_of_stay_days
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-3f12fece1346
+		sourceLineageTag: total_length_of_stay_days
+		summarizeBy: sum
+		sourceColumn: total_length_of_stay_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_length_of_stay_days
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 2)
+		lineageTag: 00000000-0000-0000-0000-71e57adec21d
+		sourceLineageTag: avg_length_of_stay_days
+		summarizeBy: sum
+		sourceColumn: avg_length_of_stay_days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_diagnosis_code_count
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 2)
+		lineageTag: 00000000-0000-0000-0000-ab486745db94
+		sourceLineageTag: avg_diagnosis_code_count
+		summarizeBy: sum
+		sourceColumn: avg_diagnosis_code_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_procedure_code_count
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 2)
+		lineageTag: 00000000-0000-0000-0000-486b182b7bef
+		sourceLineageTag: avg_procedure_code_count
+		summarizeBy: sum
+		sourceColumn: avg_procedure_code_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-996c7007318b
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_provider_annual_summary = entity
+		mode: directLake
+		source
+			entityName: fact_provider_annual_summary
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

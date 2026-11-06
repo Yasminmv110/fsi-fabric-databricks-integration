@@ -1,0 +1,415 @@
+/// Preaggregated population-health fact table at Summary Year, State Code, and Demographic Key grain. Contains beneficiary/condition counts, averages, prevalence, reimbursement, and institutional utilization. Additive counts can be summed across disjoint groups, but averages, rates, and per-beneficiary values must be recomputed or weighted rather than summed. Does not support provider attribution.
+entity 'Population Health Summary'
+	lineageTag: 00000000-0000-0000-0000-fac1e52cb029
+	backingTable: 'Population Health Summary'
+
+	/// Calendar year represented by this population summary group. Foreign key to Calendar Year and part of the year/state/demographic grain.
+	property summary_year
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-5430d3111193
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Summary Year'
+
+		synonym 'Summary Year'
+
+		synonym 'Beneficiary Summary Year'
+
+	/// Source state code for this population group. Foreign key to State and part of the year/state/demographic grain.
+	property state_code
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-a1c4a1ec05ac
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'State Code'
+
+		synonym 'State Code'
+
+		synonym 'State Identifier'
+
+	/// Foreign key to the sex/race/age-band grouping in Demographic. Part of the year/state/demographic summary grain.
+	property demographic_key
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-8d96dfbd99e6
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Demographic Key'
+
+		synonym 'Demographic Key'
+
+		synonym 'Demographic Group Key'
+
+	/// Number of beneficiaries in this year/state/demographic group. Summing across years counts beneficiary-year observations, not distinct people across the selected period.
+	property beneficiary_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-835397cc987b
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Beneficiary Count'
+
+		synonym 'Beneficiary Count'
+
+		synonym 'Number of Beneficiaries'
+
+	/// Number of beneficiaries flagged as deceased in this annual population group. Across years, the same person may contribute to more than one observation.
+	property deceased_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-f39875ed9544
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Deceased Beneficiary Count'
+
+		synonym 'Deceased Beneficiary Count'
+
+		synonym 'Deceased Beneficiaries'
+
+	/// Number of beneficiaries with the end-stage renal disease indicator in this annual population group. Divide by the matching Beneficiary Count for group prevalence.
+	property esrd_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-56c4173f882f
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'End-Stage Renal Disease Count'
+
+		synonym 'End-Stage Renal Disease Count'
+
+		synonym 'ESRD Beneficiary Count'
+
+	/// Precomputed mean beneficiary age for this year/state/demographic group. Do not sum or take an unweighted mean across groups; use the Average Age measure for observation-weighted reporting.
+	property avg_age
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-0cb9055081e7
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Average Age'
+
+		synonym 'Average Age'
+
+		synonym 'Mean Age'
+
+	/// Precomputed mean chronic condition count for this annual population group. Do not sum or average groups equally; use the Average Chronic Condition Count measure.
+	property avg_chronic_condition_count
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-391b72ae6667
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Average Chronic Condition Count'
+
+		synonym 'Average Chronic Condition Count'
+
+		synonym 'Mean Chronic Condition Count'
+
+	/// Number of beneficiaries with at least three recorded chronic conditions in this annual population group. Divide aggregated counts by matching beneficiary-year counts for prevalence.
+	property multi_chronic_3plus_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-2099fc0d50a3
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Beneficiaries with 3+ Chronic Conditions'
+
+		synonym 'Beneficiaries with 3+ Chronic Conditions'
+
+		synonym 'Beneficiaries with At Least Three Chronic Conditions'
+
+	/// Number of beneficiaries flagged with Alzheimer's disease in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property alzheimers_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-dae49ee482c8
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Alzheimer''s Disease Count'
+
+		synonym 'Alzheimer''s Disease Count'
+
+		synonym 'Alzheimer''s Disease Total'
+
+	/// Number of beneficiaries flagged with heart failure in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property heart_failure_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-33e72f287542
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Heart Failure Count'
+
+		synonym 'Heart Failure Count'
+
+		synonym 'Heart Failure Total'
+
+	/// Number of beneficiaries flagged with chronic kidney disease in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property chronic_kidney_disease_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-df16dbabc763
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Chronic Kidney Disease Count'
+
+		synonym 'Chronic Kidney Disease Count'
+
+		synonym 'Chronic Kidney Disease Total'
+
+	/// Number of beneficiaries flagged with cancer in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property cancer_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-aae0c9d72521
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Cancer Count'
+
+		synonym 'Cancer Count'
+
+		synonym 'Cancer Total'
+
+	/// Number of beneficiaries flagged with chronic obstructive pulmonary disease (COPD) in this annual population group. Across years counts affected beneficiary-year observations.
+	property copd_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-228e6bd83978
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'COPD Count'
+
+		synonym 'COPD Count'
+
+		synonym 'COPD Total'
+
+	/// Number of beneficiaries flagged with depression in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property depression_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-ba263e6fec90
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Depression Count'
+
+		synonym 'Depression Count'
+
+		synonym 'Depression Total'
+
+	/// Number of beneficiaries flagged with diabetes in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property diabetes_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-20568bffec22
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Diabetes Count'
+
+		synonym 'Diabetes Count'
+
+		synonym 'Diabetes Total'
+
+	/// Number of beneficiaries flagged with ischemic heart disease in this annual population group. Across years counts affected beneficiary-year observations.
+	property ischemic_heart_disease_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-c4633c04c854
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Ischemic Heart Disease Count'
+
+		synonym 'Ischemic Heart Disease Count'
+
+		synonym 'Ischemic Heart Disease Total'
+
+	/// Number of beneficiaries flagged with osteoporosis in this annual population group. Additive across disjoint groups; across years counts affected beneficiary-year observations.
+	property osteoporosis_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-c050fe8fe116
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Osteoporosis Count'
+
+		synonym 'Osteoporosis Count'
+
+		synonym 'Osteoporosis Total'
+
+	/// Number of beneficiaries flagged with rheumatoid arthritis/osteoarthritis in this annual population group. Across years counts affected beneficiary-year observations.
+	property rheumatoid_osteo_arthritis_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-d140dcf1d0b5
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Rheumatoid/Osteo Arthritis Count'
+
+		synonym 'Rheumatoid/Osteo Arthritis Count'
+
+		synonym 'Rheumatoid/Osteo Arthritis Total'
+
+	/// Number of beneficiaries flagged with stroke or transient ischemic attack (TIA) in this annual population group. Across years counts affected beneficiary-year observations.
+	property stroke_tia_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-887e9c316db1
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Stroke/TIA Count'
+
+		synonym 'Stroke/TIA Count'
+
+		synonym 'Stroke/TIA Total'
+
+	/// Precomputed diabetes prevalence for this annual population group. Non-additive: do not sum or average group rates equally. Use the Diabetes Prevalence Rate measure to recompute for the current selection.
+	property diabetes_prevalence_rate
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-0c1de1f4d406
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Diabetes Prevalence Rate'
+
+		synonym 'Diabetes Prevalence Rate'
+
+		synonym 'Diabetes Prevalence'
+
+	/// Precomputed heart failure prevalence for this annual population group. Non-additive: do not sum or average group rates equally. Use the Heart Failure Prevalence Rate measure.
+	property heart_failure_prevalence_rate
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-c7d7e8bafc1b
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Heart Failure Prevalence Rate'
+
+		synonym 'Heart Failure Prevalence Rate'
+
+		synonym 'Heart Failure Prevalence'
+
+	/// Precomputed ischemic heart disease prevalence for this annual population group. Non-additive: do not sum or average group rates equally. Use the Ischemic Heart Disease Prevalence Rate measure.
+	property ischemic_heart_disease_prevalence_rate
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-67b64a3ea4a1
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Ischemic Heart Disease Prevalence Rate'
+
+		synonym 'Ischemic Heart Disease Prevalence Rate'
+
+		synonym 'Ischemic Heart Disease Prevalence'
+
+	/// Total Medicare reimbursement in US dollars for this annual population group, including inpatient, outpatient, and carrier amounts. Additive across disjoint groups and years.
+	property total_medicare_reimbursement_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-80fa3f2b5ea6
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Total Medicare Reimbursement Amount'
+
+		synonym 'Total Medicare Reimbursement Amount'
+
+		synonym 'Total Medicare Reimbursement in USD'
+
+	/// Precomputed Medicare reimbursement per beneficiary in US dollars for this annual group. Non-additive; do not sum or average group ratios equally. The Reimbursement per Beneficiary measure uses distinct people over the selected period.
+	property medicare_reimbursement_per_beneficiary_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-edb10206d4be
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Medicare Reimbursement per Beneficiary'
+
+		synonym 'Medicare Reimbursement per Beneficiary'
+
+		synonym 'Medicare Reimbursement per Person'
+
+	/// Total beneficiary financial responsibility in US dollars recorded for this annual population group. Distinct from Medicare reimbursement and claim payment amounts.
+	property total_beneficiary_responsibility_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-61778e5c01ee
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Total Beneficiary Responsibility Amount'
+
+		synonym 'Total Beneficiary Responsibility Amount'
+
+		synonym 'Total Beneficiary Responsibility in USD'
+
+	/// Total inpatient claims for beneficiaries in this annual population group. Additive across disjoint year/state/demographic groups; no provider attribution.
+	property inpatient_claim_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-0ad16c6408d3
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Inpatient Claim Count'
+
+		synonym 'Inpatient Claim Count'
+
+		synonym 'Number of Inpatient Claims'
+
+	/// Aggregated inpatient length of stay in days for this annual population group. A total, not average length of stay or distinct beneficiary count.
+	property inpatient_length_of_stay_days
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-7ce6d2e57bd1
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Inpatient Length of Stay (Days)'
+
+		synonym 'Inpatient Length of Stay (Days)'
+
+		synonym 'Total Inpatient Stay Days'
+
+	/// Total outpatient claims for beneficiaries in this annual population group. Additive across disjoint year/state/demographic groups; no provider attribution.
+	property outpatient_claim_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-a06c22513b58
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Outpatient Claim Count'
+
+		synonym 'Outpatient Claim Count'
+
+		synonym 'Number of Outpatient Claims'
+
+	/// Total inpatient claim payments in US dollars for this annual population group. Distinct from annual-summary Medicare reimbursement.
+	property inpatient_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-25d0eccfa43d
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Inpatient Claim Payment Amount'
+
+		synonym 'Inpatient Claim Payment Amount'
+
+		synonym 'Inpatient Claim Payment in USD'
+
+	/// Total outpatient claim payments in US dollars for this annual population group. Distinct from annual-summary Medicare reimbursement.
+	property outpatient_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-638b6e37691c
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Outpatient Claim Payment Amount'
+
+		synonym 'Outpatient Claim Payment Amount'
+
+		synonym 'Outpatient Claim Payment in USD'
+
+	/// Precomputed inpatient claim count per 1,000 beneficiaries in this annual group. Non-additive; recompute as 1,000 times aggregated inpatient claims divided by matching beneficiary-year counts.
+	property inpatient_claims_per_1000
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-a85006fdaf7e
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Inpatient Claims per 1,000'
+
+		synonym 'Inpatient Claims per 1,000'
+
+		synonym 'Inpatient Claims per Thousand Beneficiaries'
+
+	/// Precomputed outpatient claim count per 1,000 beneficiaries in this annual group. Non-additive; recompute as 1,000 times aggregated outpatient claims divided by matching beneficiary-year counts.
+	property outpatient_claims_per_1000
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-5efa067bf97b
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Outpatient Claims per 1,000'
+
+		synonym 'Outpatient Claims per 1,000'
+
+		synonym 'Outpatient Claims per Thousand Beneficiaries'
+
+	/// Recorded load timestamp for this gold-layer population summary record. Operational lineage metadata, not the summary year.
+	property _gold_load_ts
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-009e4852bc53
+
+		backingConfiguration
+			valueColumn: 'Population Health Summary'.'Gold Load Timestamp'
+
+		synonym 'Gold Load Timestamp'
+
+		synonym 'Gold Layer Load Timestamp'
+
+		synonym 'Gold Load Time'
+

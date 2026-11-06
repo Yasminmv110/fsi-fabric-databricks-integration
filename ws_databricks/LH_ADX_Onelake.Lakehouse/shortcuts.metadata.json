@@ -1,0 +1,15 @@
+[
+  {
+    "name": "insurance",
+    "path": "/Tables/bronze",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/bronze/insurance",
+        "itemId": "00000000-0000-0000-0000-b1a2b4da1ff6",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "DatabricksCatalog"
+      }
+    }
+  }
+]

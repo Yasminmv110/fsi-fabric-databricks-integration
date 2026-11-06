@@ -1,0 +1,37 @@
+/// State-code dimension used to filter annual beneficiary utilization and population health summaries by the state recorded for the summary year. Codes are source-system geographic identifiers, not necessarily postal abbreviations. Does not filter provider claims.
+table State
+	lineageTag: 00000000-0000-0000-0000-adf383b32f06
+	sourceLineageTag: 00000000-0000-0000-0000-a9dd1d786bdd
+
+	/// Source-system state identifier and key of the State dimension. Joins to state codes in annual beneficiary and population summaries; do not assume postal abbreviations or provider location.
+	column 'State Code'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-d30cdb9c05ff
+		sourceLineageTag: 00000000-0000-0000-0000-67440076eb15
+		sourceColumn: state_code
+
+	/// Recorded load timestamp for this gold-layer state record. Operational lineage metadata.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-9f792d47057d
+		sourceLineageTag: 00000000-0000-0000-0000-bc9b68eca2f0
+		sourceColumn: _gold_load_ts
+
+	partition State-partition = entity
+		mode: directQuery
+		source
+			entityName: State
+			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5'
+
+		annotation ONT_PinnedAtUtc = 2026-10-29T15:47:42.5701133+00:00
+
+		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-4f0a9fa9337a
+
+		annotation ONT_ItemId = 00000000-0000-0000-0000-171fc01efbf5
+
+		annotation ONT_ItemKind = SemanticModel
+
+		annotation ONT_WorkspaceName = WS_Databricks
+
+		annotation ONT_ItemName = SM_ADX_Gold_CMS_After
+

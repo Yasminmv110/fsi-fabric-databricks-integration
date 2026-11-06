@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/mirroredAzureDatabricksCatalog/definition/mirroredAzureDatabricksCatalogDefinition/1.0.0/schema.json",
+  "autoSync": "Enabled",
+  "catalogName": "onelake_storage_insurance",
+  "databricksWorkspaceConnectionId": "00000000-0000-0000-0000-3cca5472dfa6",
+  "mirrorConfiguration": {
+    "schemas": []
+  },
+  "mirroringMode": "Full"
+}

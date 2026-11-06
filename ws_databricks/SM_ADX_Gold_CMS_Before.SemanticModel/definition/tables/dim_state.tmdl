@@ -1,0 +1,34 @@
+table dim_state
+	lineageTag: 00000000-0000-0000-0000-7eae86185499
+	sourceLineageTag: [gold].[dim_state]
+
+	column state_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-d2a81b9e7866
+		sourceLineageTag: state_code
+		summarizeBy: none
+		sourceColumn: state_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-5df16ea4913b
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_state = entity
+		mode: directLake
+		source
+			entityName: dim_state
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

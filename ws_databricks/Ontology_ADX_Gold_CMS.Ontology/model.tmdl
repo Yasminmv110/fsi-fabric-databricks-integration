@@ -1,0 +1,24 @@
+model Model
+
+ref table Beneficiary
+ref table 'Claim Type'
+ref table Demographic
+ref table Provider
+ref table State
+ref table 'Calendar Year'
+ref table 'Annual Beneficiary Utilization'
+ref table 'Population Health Summary'
+ref table 'Annual Provider Claims Summary'
+
+ref entity Beneficiary
+ref entity 'Claim Type'
+ref entity Demographic
+ref entity Provider
+ref entity State
+ref entity 'Calendar Year'
+ref entity 'Annual Beneficiary Utilization'
+ref entity 'Population Health Summary'
+ref entity 'Annual Provider Claims Summary'
+
+ref namespace default
+

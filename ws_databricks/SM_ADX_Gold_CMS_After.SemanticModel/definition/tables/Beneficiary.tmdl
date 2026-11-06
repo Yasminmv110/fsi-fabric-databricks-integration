@@ -1,0 +1,118 @@
+/// Beneficiary dimension keyed by Beneficiary ID, containing birth/death dates, sex, race, latest recorded geography, and observed summary-year range. Filters Annual Beneficiary Utilization. Latest geography is not necessarily the beneficiary's geography in an earlier year; use State and Demographic dimensions for annual breakdowns.
+table Beneficiary
+	lineageTag: 00000000-0000-0000-0000-a21aac163092
+	sourceLineageTag: [gold].[dim_beneficiary]
+
+	/// Source beneficiary identifier and unique key of the Beneficiary dimension. Joins to annual beneficiary utilization; use for distinct-person counts rather than counting annual fact rows.
+	column 'Beneficiary ID'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-6b464a5e084b
+		sourceLineageTag: beneficiary_id
+		summarizeBy: none
+		sourceColumn: beneficiary_id
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Beneficiary birth date as recorded in the source. Use annual Age at Year End for year-specific age analysis.
+	column 'Birth Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 00000000-0000-0000-0000-c377fd2ddd56
+		sourceLineageTag: birth_date
+		summarizeBy: none
+		sourceColumn: birth_date
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Beneficiary death date as recorded in the source. A blank date means no death date is recorded, not independently verified living status.
+	column 'Death Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 00000000-0000-0000-0000-afcedbae402e
+		sourceLineageTag: death_date
+		summarizeBy: none
+		sourceColumn: death_date
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Beneficiary sex category as supplied by the source. For annual demographic filtering, use the related Demographic dimension.
+	column Sex
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-8a02fa6b1fc7
+		sourceLineageTag: sex
+		summarizeBy: none
+		sourceColumn: sex
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Beneficiary race category as supplied by the source. For annual demographic filtering, use the related Demographic dimension.
+	column Race
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-dc672e254797
+		sourceLineageTag: race
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Latest recorded source-system state code for the beneficiary. May differ from the state recorded in earlier annual summaries; not a relationship key to the State dimension.
+	column 'Latest State Code'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-5567ad176791
+		sourceLineageTag: latest_state_code
+		summarizeBy: none
+		sourceColumn: latest_state_code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Latest recorded source-system county code for the beneficiary. Interpret with the corresponding state code; not necessarily the county in earlier summary years.
+	column 'Latest County Code'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-379edcb4d232
+		sourceLineageTag: latest_county_code
+		summarizeBy: none
+		sourceColumn: latest_county_code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Earliest summary year observed for the beneficiary in the loaded data; not necessarily the first year of Medicare enrollment.
+	column 'First Summary Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00000000-0000-0000-0000-aa126f931875
+		sourceLineageTag: first_summary_year
+		summarizeBy: none
+		sourceColumn: first_summary_year
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Latest summary year observed for the beneficiary in the loaded data; not necessarily the last year of Medicare enrollment.
+	column 'Last Summary Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00000000-0000-0000-0000-401fc9ff022b
+		sourceLineageTag: last_summary_year
+		summarizeBy: none
+		sourceColumn: last_summary_year
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Recorded load timestamp for this gold-layer beneficiary record. Operational lineage metadata, not a birth, death, or coverage date.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 00000000-0000-0000-0000-4fd6297e63b3
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_beneficiary = entity
+		mode: directLake
+		source
+			entityName: dim_beneficiary
+			schemaName: gold
+			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
+

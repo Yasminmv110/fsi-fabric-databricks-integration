@@ -1,0 +1,28 @@
+[
+  {
+    "name": "silver",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/silver",
+        "itemId": "00000000-0000-0000-0000-f4c546437746",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "DatabricksCatalog"
+      }
+    }
+  },
+  {
+    "name": "bronze",
+    "path": "/Tables",
+    "target": {
+      "type": "OneLake",
+      "oneLake": {
+        "path": "Tables/bronze",
+        "itemId": "00000000-0000-0000-0000-f4c546437746",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "artifactType": "DatabricksCatalog"
+      }
+    }
+  }
+]

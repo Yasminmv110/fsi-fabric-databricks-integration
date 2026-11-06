@@ -1,0 +1,493 @@
+/// Annual beneficiary-level fact table at beneficiary-year grain, with annual geography/demographics, age, coverage months, condition indicators, Medicare reimbursement, and inpatient/outpatient utilization. Supports year/state/demographic/beneficiary analysis. Multi-year population averages and prevalence measures are beneficiary-year weighted; Total Beneficiaries counts distinct people. No provider relationship.
+entity 'Annual Beneficiary Utilization'
+	lineageTag: 00000000-0000-0000-0000-9b23aa848094
+	backingTable: 'Annual Beneficiary Utilization'
+
+	/// Beneficiary identifier for this annual observation; foreign key to Beneficiary. A beneficiary can appear in multiple summary years.
+	property beneficiary_id
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-1d625af1b6a3
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Beneficiary ID'
+
+		synonym 'Beneficiary ID'
+
+		synonym 'Member ID'
+
+		synonym 'Person ID'
+
+	/// Calendar year represented by this beneficiary's annual summary. Foreign key to Calendar Year.
+	property summary_year
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-b5792a0071b9
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Summary Year'
+
+		synonym 'Summary Year'
+
+		synonym 'Beneficiary Summary Year'
+
+	/// Source state code recorded for this beneficiary in the summary year. Foreign key to State; may differ from the beneficiary dimension's latest state.
+	property state_code
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-44bbe1441e3b
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'State Code'
+
+		synonym 'State Code'
+
+		synonym 'State Identifier'
+
+	/// Foreign key to the sex/race/age-band combination in Demographic for this beneficiary-year observation.
+	property demographic_key
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-de5a32c422b4
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Demographic Key'
+
+		synonym 'Demographic Key'
+
+		synonym 'Demographic Group Key'
+
+	/// Source county code recorded for the beneficiary in the summary year. Interpret in combination with State Code.
+	property county_code
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-843863b0950a
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'County Code'
+
+		synonym 'County Code'
+
+		synonym 'County Identifier'
+
+	/// Beneficiary age in years at the end of Summary Year. Average across beneficiary-year observations using the Average Age measure; do not sum ages.
+	property age_at_year_end
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-61d78a3e3657
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Age at Year End'
+
+		synonym 'Age at Year End'
+
+		synonym 'Year-End Age'
+
+		synonym 'Annual Beneficiary Age'
+
+	/// Deceased-status indicator recorded in this beneficiary's annual summary. Use the source annual status rather than inferring status from a missing death date.
+	property is_deceased
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-1810515d4c02
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Is Deceased'
+
+		synonym 'Is Deceased'
+
+		synonym 'Deceased Indicator'
+
+	/// End-stage renal disease indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_esrd
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-353e7e4a529b
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has End-Stage Renal Disease'
+
+		synonym 'Has End-Stage Renal Disease'
+
+		synonym 'ESRD Indicator'
+
+		synonym 'End-Stage Renal Disease Indicator'
+
+	/// Number of Medicare Part A coverage months recorded for the beneficiary in Summary Year. Summing produces beneficiary-months, not distinct covered people.
+	property part_a_coverage_months
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-8c388795043e
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Part A Coverage Months'
+
+		synonym 'Part A Coverage Months'
+
+		synonym 'Medicare Part A Covered Months'
+
+	/// Number of Medicare Part B coverage months recorded for the beneficiary in Summary Year. Summing produces beneficiary-months, not distinct covered people.
+	property part_b_coverage_months
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-633951d4f5a4
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Part B Coverage Months'
+
+		synonym 'Part B Coverage Months'
+
+		synonym 'Medicare Part B Covered Months'
+
+	/// Number of HMO coverage months recorded for the beneficiary in Summary Year. Summing produces beneficiary-months; coverage categories may overlap.
+	property hmo_coverage_months
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-d07b81fdeda4
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'HMO Coverage Months'
+
+		synonym 'HMO Coverage Months'
+
+		synonym 'HMO Covered Months'
+
+	/// Number of Medicare Part D coverage months recorded for the beneficiary in Summary Year. Summing produces beneficiary-months, not distinct covered people.
+	property part_d_coverage_months
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-3f5533b84255
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Part D Coverage Months'
+
+		synonym 'Part D Coverage Months'
+
+		synonym 'Medicare Part D Covered Months'
+
+	/// Alzheimer's disease indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_alzheimers
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-65c579f91087
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Alzheimer''s Disease'
+
+		synonym 'Has Alzheimer''s Disease'
+
+		synonym 'Alzheimer''s Disease Indicator'
+
+	/// Heart failure indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_heart_failure
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-0de1e00eedac
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Heart Failure'
+
+		synonym 'Has Heart Failure'
+
+		synonym 'Heart Failure Indicator'
+
+	/// Chronic kidney disease indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_chronic_kidney_disease
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-2cc971764c3a
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Chronic Kidney Disease'
+
+		synonym 'Has Chronic Kidney Disease'
+
+		synonym 'Chronic Kidney Disease Indicator'
+
+	/// Cancer indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_cancer
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-fd15ebae747a
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Cancer'
+
+		synonym 'Has Cancer'
+
+		synonym 'Cancer Indicator'
+
+	/// Chronic obstructive pulmonary disease (COPD) indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_copd
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-11f93658acbd
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has COPD'
+
+		synonym 'Has COPD'
+
+		synonym 'COPD Indicator'
+
+	/// Depression indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_depression
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-5763329afd90
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Depression'
+
+		synonym 'Has Depression'
+
+		synonym 'Depression Indicator'
+
+	/// Diabetes indicator for this beneficiary-year; observed values are 0 and 1. Prevalence measures treat value 1 as condition present.
+	property has_diabetes
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-9bac1f65b952
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Diabetes'
+
+		synonym 'Has Diabetes'
+
+		synonym 'Diabetes Indicator'
+
+	/// Ischemic heart disease indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_ischemic_heart_disease
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-4ef19f064a68
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Ischemic Heart Disease'
+
+		synonym 'Has Ischemic Heart Disease'
+
+		synonym 'Ischemic Heart Disease Indicator'
+
+	/// Osteoporosis indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_osteoporosis
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-912efd600075
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Osteoporosis'
+
+		synonym 'Has Osteoporosis'
+
+		synonym 'Osteoporosis Indicator'
+
+	/// Rheumatoid arthritis/osteoarthritis indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_rheumatoid_osteo_arthritis
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-48e6706909f9
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Rheumatoid/Osteo Arthritis'
+
+		synonym 'Has Rheumatoid/Osteo Arthritis'
+
+		synonym 'Rheumatoid/Osteo Arthritis Indicator'
+
+	/// Stroke or transient ischemic attack (TIA) indicator for this beneficiary-year. Prevalence measures treat value 1 as condition present.
+	property has_stroke_tia
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-12540172cbf2
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Has Stroke/TIA'
+
+		synonym 'Has Stroke/TIA'
+
+		synonym 'Stroke/TIA Indicator'
+
+	/// Number of chronic conditions recorded for this beneficiary-year. Used for the Average Chronic Condition Count and 3+ Chronic Conditions Prevalence Rate measures.
+	property chronic_condition_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-e2731529677e
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Chronic Condition Count'
+
+		synonym 'Chronic Condition Count'
+
+		synonym 'Number of Chronic Conditions'
+
+	/// Annual Medicare reimbursement amount in US dollars for inpatient services in the beneficiary summary. Distinct from the inpatient claim-payment aggregate.
+	property inpatient_medicare_reimbursement_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-e5799bed0b93
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Inpatient Medicare Reimbursement Amount'
+
+		synonym 'Inpatient Medicare Reimbursement Amount'
+
+		synonym 'Inpatient Medicare Reimbursement in USD'
+
+	/// Annual Medicare reimbursement amount in US dollars for outpatient services in the beneficiary summary. Distinct from the outpatient claim-payment aggregate.
+	property outpatient_medicare_reimbursement_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-b06ac653a5f7
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Outpatient Medicare Reimbursement Amount'
+
+		synonym 'Outpatient Medicare Reimbursement Amount'
+
+		synonym 'Outpatient Medicare Reimbursement in USD'
+
+	/// Annual Medicare reimbursement amount in US dollars for carrier services in the beneficiary summary. Carrier claims are not included in the inpatient/outpatient claim-count measures.
+	property carrier_medicare_reimbursement_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-7d15e214d27d
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Carrier Medicare Reimbursement Amount'
+
+		synonym 'Carrier Medicare Reimbursement Amount'
+
+		synonym 'Carrier Medicare Reimbursement in USD'
+
+	/// Total Medicare reimbursement in US dollars for the beneficiary-year, including inpatient, outpatient, and carrier amounts. Source for Total Medicare Reimbursement; not equivalent to total institutional claim payments.
+	property total_medicare_reimbursement_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-18b6e1e80a4c
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Total Medicare Reimbursement Amount'
+
+		synonym 'Total Medicare Reimbursement Amount'
+
+		synonym 'Total Medicare Reimbursement in USD'
+
+	/// Total beneficiary financial responsibility in US dollars recorded in the annual summary. Distinct from Medicare reimbursement and from claim-derived cost-share aggregates.
+	property total_beneficiary_responsibility_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-6f21a8d1e937
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Total Beneficiary Responsibility Amount'
+
+		synonym 'Total Beneficiary Responsibility Amount'
+
+		synonym 'Total Beneficiary Responsibility in USD'
+
+	/// Number of inpatient claims attributed to this beneficiary-year. Sum for beneficiary-based claim analysis by year, state, and demographic; does not identify the provider.
+	property inpatient_claim_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-324f5f577a0b
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Inpatient Claim Count'
+
+		synonym 'Inpatient Claim Count'
+
+		synonym 'Number of Inpatient Claims'
+
+	/// Aggregated inpatient length of stay in days recorded for this beneficiary-year. Not a distinct-patient count or an average stay.
+	property inpatient_length_of_stay_days
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-c6790e8dea5f
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Inpatient Length of Stay (Days)'
+
+		synonym 'Inpatient Length of Stay (Days)'
+
+		synonym 'Total Inpatient Stay Days'
+
+	/// Aggregated inpatient utilization-day value recorded for this beneficiary-year. Retained separately from length of stay; do not assume the two metrics are interchangeable.
+	property inpatient_utilization_days
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-25a2678e89f8
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Inpatient Utilization Days'
+
+		synonym 'Inpatient Utilization Days'
+
+		synonym 'Inpatient Service Days'
+
+	/// Aggregated inpatient claim payments in US dollars for this beneficiary-year. Claim-derived payment metric, distinct from annual-summary inpatient Medicare reimbursement.
+	property inpatient_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-2bc78df356a0
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Inpatient Claim Payment Amount'
+
+		synonym 'Inpatient Claim Payment Amount'
+
+		synonym 'Inpatient Claim Payment in USD'
+
+	/// Aggregated inpatient beneficiary cost sharing in US dollars for this beneficiary-year, as recorded in the claim summary.
+	property inpatient_cost_share_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-e188f473921d
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Inpatient Cost Share Amount'
+
+		synonym 'Inpatient Cost Share Amount'
+
+		synonym 'Inpatient Cost Share in USD'
+
+	/// Number of outpatient claims attributed to this beneficiary-year. Sum for beneficiary-based claim analysis by year, state, and demographic; does not identify the provider.
+	property outpatient_claim_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-ed033c3df57b
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Outpatient Claim Count'
+
+		synonym 'Outpatient Claim Count'
+
+		synonym 'Number of Outpatient Claims'
+
+	/// Outpatient visit-day value aggregated for this beneficiary-year. Not a claim count; do not assume distinct calendar days without checking source derivation.
+	property outpatient_visit_days
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-974b1b628b71
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Outpatient Visit Days'
+
+		synonym 'Outpatient Visit Days'
+
+		synonym 'Outpatient Visit-Day Total'
+
+	/// Aggregated outpatient claim payments in US dollars for this beneficiary-year. Claim-derived payment metric, distinct from annual-summary outpatient Medicare reimbursement.
+	property outpatient_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-d587980ef1fa
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Outpatient Claim Payment Amount'
+
+		synonym 'Outpatient Claim Payment Amount'
+
+		synonym 'Outpatient Claim Payment in USD'
+
+	/// Aggregated outpatient beneficiary cost sharing in US dollars for this beneficiary-year, as recorded in the claim summary.
+	property outpatient_cost_share_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-aa813cff4506
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Outpatient Cost Share Amount'
+
+		synonym 'Outpatient Cost Share Amount'
+
+		synonym 'Outpatient Cost Share in USD'
+
+	/// Total institutional claim payments in US dollars recorded for this beneficiary-year across inpatient and outpatient claims. Distinct from total Medicare reimbursement, which also includes carrier amounts.
+	property total_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-5565b2c54b97
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Total Claim Payment Amount'
+
+		synonym 'Total Claim Payment Amount'
+
+		synonym 'Total Claim Payment in USD'
+
+	/// Recorded load timestamp for this gold-layer beneficiary-year record. Operational lineage metadata, not the coverage or claim year.
+	property _gold_load_ts
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-03497dccb1aa
+
+		backingConfiguration
+			valueColumn: 'Annual Beneficiary Utilization'.'Gold Load Timestamp'
+
+		synonym 'Gold Load Timestamp'
+
+		synonym 'Gold Layer Load Timestamp'
+
+		synonym 'Gold Load Time'
+

@@ -1,0 +1,78 @@
+/// Provider dimension keyed by Provider Number, containing observed claim-year range and indicators for inpatient/outpatient claims. Filters Annual Provider Claims Summary only; the model has no provider-to-beneficiary/state/demographic attribution.
+table Provider
+	lineageTag: 00000000-0000-0000-0000-b50eb019b287
+	sourceLineageTag: [gold].[dim_provider]
+
+	/// Source provider identifier and unique key of the Provider dimension. Joins to Annual Provider Claims Summary; not assumed to be a National Provider Identifier.
+	column 'Provider Number'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-41fc986643ed
+		sourceLineageTag: provider_number
+		summarizeBy: none
+		sourceColumn: provider_number
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Earliest claim year observed for this provider in the loaded data; not necessarily the provider's first year of operation.
+	column 'First Claim Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00000000-0000-0000-0000-fdaacd671184
+		sourceLineageTag: first_claim_year
+		summarizeBy: none
+		sourceColumn: first_claim_year
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Latest claim year observed for this provider in the loaded data; not necessarily the provider's last year of operation.
+	column 'Last Claim Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00000000-0000-0000-0000-9eeccec0aefd
+		sourceLineageTag: last_claim_year
+		summarizeBy: none
+		sourceColumn: last_claim_year
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Source indicator that this provider has inpatient claims in the loaded data. Describes observed claim-type presence, not the number of claims.
+	column 'Has Inpatient Claims'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00000000-0000-0000-0000-bc252d964fe8
+		sourceLineageTag: has_inpatient_claims
+		summarizeBy: none
+		sourceColumn: has_inpatient_claims
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Source indicator that this provider has outpatient claims in the loaded data. Describes observed claim-type presence, not the number of claims.
+	column 'Has Outpatient Claims'
+		dataType: int64
+		formatString: 0
+		lineageTag: 00000000-0000-0000-0000-b848b2a6510c
+		sourceLineageTag: has_outpatient_claims
+		summarizeBy: none
+		sourceColumn: has_outpatient_claims
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Recorded load timestamp for this gold-layer provider record. Operational lineage metadata, not a claim date.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 00000000-0000-0000-0000-42fc3ecf6fc1
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_provider = entity
+		mode: directLake
+		source
+			entityName: dim_provider
+			schemaName: gold
+			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
+

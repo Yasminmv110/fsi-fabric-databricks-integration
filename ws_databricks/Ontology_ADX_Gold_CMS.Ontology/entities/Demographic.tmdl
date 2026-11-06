@@ -1,0 +1,105 @@
+/// Demographic dimension keyed by Demographic Key, with sex, race, age band, and display-sort columns. Filters Annual Beneficiary Utilization and Population Health Summary. Represents the demographic grouping attached to each annual summary, not a provider characteristic.
+entity Demographic
+	lineageTag: 00000000-0000-0000-0000-f2b32d3480ab
+	backingTable: Demographic
+
+	/// Unique key identifying a demographic combination of sex, race, and age band. Joins to annual beneficiary utilization and population health summaries.
+	property demographic_key
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-7fe07ab9f18c
+
+		backingConfiguration
+			valueColumn: Demographic.'Demographic Key'
+
+		synonym 'Demographic Key'
+
+		synonym 'Demographic Group Key'
+
+	/// Source sex category for this annual demographic grouping. Use to slice beneficiary and population-health measures; does not filter provider claims.
+	property sex
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-d29c7180196c
+
+		backingConfiguration
+			valueColumn: Demographic.Sex
+
+		synonym Sex
+
+		synonym 'Sex Category'
+
+	/// Source race category for this annual demographic grouping. Use to slice beneficiary and population-health measures; does not filter provider claims.
+	property race
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-0f1d511b8e2a
+
+		backingConfiguration
+			valueColumn: Demographic.Race
+
+		synonym Race
+
+		synonym 'Race Category'
+
+	/// Age-range label for this demographic grouping. Use with annual beneficiary and population summaries; Age Band Sort Order supplies the intended display sequence.
+	property age_band
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-be766dfb6ebf
+
+		backingConfiguration
+			valueColumn: Demographic.'Age Band'
+
+		synonym 'Age Band'
+
+		synonym 'Age Group'
+
+		synonym 'Age Range'
+
+	/// Numeric display-order value for sex categories. Technical sorting metadata; not a population metric and should not be aggregated.
+	property sex_sort
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-12f7b0953db6
+
+		backingConfiguration
+			valueColumn: Demographic.'Sex Sort Order'
+
+		synonym 'Sex Sort Order'
+
+		synonym 'Sex Category Display Order'
+
+	/// Numeric display-order value for race categories. Technical sorting metadata; not a population metric and should not be aggregated.
+	property race_sort
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-fa1f33ac9c1e
+
+		backingConfiguration
+			valueColumn: Demographic.'Race Sort Order'
+
+		synonym 'Race Sort Order'
+
+		synonym 'Race Category Display Order'
+
+	/// Numeric display-order value for age bands. Technical sorting metadata; not an age or population metric and should not be aggregated.
+	property age_band_sort
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-5887941c4d75
+
+		backingConfiguration
+			valueColumn: Demographic.'Age Band Sort Order'
+
+		synonym 'Age Band Sort Order'
+
+		synonym 'Age Group Display Order'
+
+	/// Recorded load timestamp for this gold-layer demographic record. Operational lineage metadata, not the summary year.
+	property _gold_load_ts
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-072961308e47
+
+		backingConfiguration
+			valueColumn: Demographic.'Gold Load Timestamp'
+
+		synonym 'Gold Load Timestamp'
+
+		synonym 'Gold Layer Load Timestamp'
+
+		synonym 'Gold Load Time'
+

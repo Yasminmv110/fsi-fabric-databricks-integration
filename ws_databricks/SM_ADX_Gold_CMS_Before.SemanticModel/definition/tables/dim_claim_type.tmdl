@@ -1,0 +1,44 @@
+table dim_claim_type
+	lineageTag: 00000000-0000-0000-0000-7be52e88277d
+	sourceLineageTag: [gold].[dim_claim_type]
+
+	column claim_type
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-02da15587423
+		sourceLineageTag: claim_type
+		summarizeBy: none
+		sourceColumn: claim_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column claim_type_description
+		dataType: string
+		sourceProviderType: varchar(100)
+		lineageTag: 00000000-0000-0000-0000-ab6c7d0c1bf7
+		sourceLineageTag: claim_type_description
+		summarizeBy: none
+		sourceColumn: claim_type_description
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-4075f7a7c103
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_claim_type = entity
+		mode: directLake
+		source
+			entityName: dim_claim_type
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,118 @@
+table dim_beneficiary
+	lineageTag: 00000000-0000-0000-0000-5f67b0f4f638
+	sourceLineageTag: [gold].[dim_beneficiary]
+
+	column beneficiary_id
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 00000000-0000-0000-0000-0826b6ec4ca5
+		sourceLineageTag: beneficiary_id
+		summarizeBy: none
+		sourceColumn: beneficiary_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column birth_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 00000000-0000-0000-0000-18612041f34a
+		sourceLineageTag: birth_date
+		summarizeBy: none
+		sourceColumn: birth_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column death_date
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 00000000-0000-0000-0000-7924429758d0
+		sourceLineageTag: death_date
+		summarizeBy: none
+		sourceColumn: death_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column sex
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-9304396a7023
+		sourceLineageTag: sex
+		summarizeBy: none
+		sourceColumn: sex
+
+		annotation SummarizationSetBy = Automatic
+
+	column race
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-e0faf07e2fcf
+		sourceLineageTag: race
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_state_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-3fa647454899
+		sourceLineageTag: latest_state_code
+		summarizeBy: none
+		sourceColumn: latest_state_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column latest_county_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-d8543d04f956
+		sourceLineageTag: latest_county_code
+		summarizeBy: none
+		sourceColumn: latest_county_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_summary_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-db839ace2deb
+		sourceLineageTag: first_summary_year
+		summarizeBy: sum
+		sourceColumn: first_summary_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_summary_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-ce9749227cfd
+		sourceLineageTag: last_summary_year
+		summarizeBy: sum
+		sourceColumn: last_summary_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-05f4130cf85c
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_beneficiary = entity
+		mode: directLake
+		source
+			entityName: dim_beneficiary
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

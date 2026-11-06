@@ -1,0 +1,81 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/ontology/1.0.0/schema.json",
+  "artifactId": "00000000-0000-0000-0000-2c87fee129b6",
+  "workspaceId": "00000000-0000-0000-0000-000000000000",
+  "displayName": "Ontology_ADX_Gold_CMS",
+  "elements": [
+    {
+      "id": "Beneficiary",
+      "is_selected": true,
+      "display_name": "Beneficiary",
+      "type": "ontology.entity",
+      "description": "Beneficiary dimension keyed by Beneficiary ID, containing birth/death dates, sex, race, latest recorded geography, and observed summary-year range. Filters Annual Beneficiary Utilization. Latest geography is not necessarily the beneficiary's geography in an earlier year; use State and Demographic dimensions for annual breakdowns.",
+      "children": []
+    },
+    {
+      "id": "Claim Type",
+      "is_selected": true,
+      "display_name": "Claim Type",
+      "type": "ontology.entity",
+      "description": "Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.",
+      "children": []
+    },
+    {
+      "id": "Demographic",
+      "is_selected": true,
+      "display_name": "Demographic",
+      "type": "ontology.entity",
+      "description": "Demographic dimension keyed by Demographic Key, with sex, race, age band, and display-sort columns. Filters Annual Beneficiary Utilization and Population Health Summary. Represents the demographic grouping attached to each annual summary, not a provider characteristic.",
+      "children": []
+    },
+    {
+      "id": "Provider",
+      "is_selected": true,
+      "display_name": "Provider",
+      "type": "ontology.entity",
+      "description": "Provider dimension keyed by Provider Number, containing observed claim-year range and indicators for inpatient/outpatient claims. Filters Annual Provider Claims Summary only; the model has no provider-to-beneficiary/state/demographic attribution.",
+      "children": []
+    },
+    {
+      "id": "State",
+      "is_selected": true,
+      "display_name": "State",
+      "type": "ontology.entity",
+      "description": "State-code dimension used to filter annual beneficiary utilization and population health summaries by the state recorded for the summary year. Codes are source-system geographic identifiers, not necessarily postal abbreviations. Does not filter provider claims.",
+      "children": []
+    },
+    {
+      "id": "Calendar Year",
+      "is_selected": true,
+      "display_name": "Calendar Year",
+      "type": "ontology.entity",
+      "description": "Shared year dimension filtering beneficiary and population summaries by Summary Year and provider claims by Claim Year. Fact tables can have different year coverage; provider claims include 2007 while beneficiary summaries currently cover 2008-2010.",
+      "children": []
+    },
+    {
+      "id": "Annual Beneficiary Utilization",
+      "is_selected": true,
+      "display_name": "Annual Beneficiary Utilization",
+      "type": "ontology.entity",
+      "description": "Annual beneficiary-level fact table at beneficiary-year grain, with annual geography/demographics, age, coverage months, condition indicators, Medicare reimbursement, and inpatient/outpatient utilization. Supports year/state/demographic/beneficiary analysis. Multi-year population averages and prevalence measures are beneficiary-year weighted; Total Beneficiaries counts distinct people. No provider relationship.",
+      "children": []
+    },
+    {
+      "id": "Population Health Summary",
+      "is_selected": true,
+      "display_name": "Population Health Summary",
+      "type": "ontology.entity",
+      "description": "Preaggregated population-health fact table at Summary Year, State Code, and Demographic Key grain. Contains beneficiary/condition counts, averages, prevalence, reimbursement, and institutional utilization. Additive counts can be summed across disjoint groups, but averages, rates, and per-beneficiary values must be recomputed or weighted rather than summed. Does not support provider attribution.",
+      "children": []
+    },
+    {
+      "id": "Annual Provider Claims Summary",
+      "is_selected": true,
+      "display_name": "Annual Provider Claims Summary",
+      "type": "ontology.entity",
+      "description": "Provider claims fact table at Provider Number, Claim Year, and Claim Type grain, containing claim/beneficiary counts, payments, cost sharing, and claim characteristics. Supports year/provider/claim-type analysis only. Beneficiary counts are not additive across providers/types/years; average columns require appropriate weighting. Coverage differs from annual beneficiary summaries, so totals need not match across all years.",
+      "children": []
+    }
+  ],
+  "entitiesWithUserAuthoredDescriptions": []
+}

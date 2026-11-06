@@ -1,0 +1,131 @@
+/// Beneficiary dimension keyed by Beneficiary ID, containing birth/death dates, sex, race, latest recorded geography, and observed summary-year range. Filters Annual Beneficiary Utilization. Latest geography is not necessarily the beneficiary's geography in an earlier year; use State and Demographic dimensions for annual breakdowns.
+entity Beneficiary
+	lineageTag: 00000000-0000-0000-0000-24325afc9006
+	backingTable: Beneficiary
+
+	/// Source beneficiary identifier and unique key of the Beneficiary dimension. Joins to annual beneficiary utilization; use for distinct-person counts rather than counting annual fact rows.
+	property beneficiary_id
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-18a0371af74f
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Beneficiary ID'
+
+		synonym 'Beneficiary ID'
+
+		synonym 'Member ID'
+
+		synonym 'Person ID'
+
+	/// Beneficiary birth date as recorded in the source. Use annual Age at Year End for year-specific age analysis.
+	property birth_date
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-71c794a50432
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Birth Date'
+
+		synonym 'Birth Date'
+
+		synonym 'Date of Birth'
+
+		synonym DOB
+
+	/// Beneficiary death date as recorded in the source. A blank date means no death date is recorded, not independently verified living status.
+	property death_date
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-9c03a2be9e2e
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Death Date'
+
+		synonym 'Death Date'
+
+		synonym 'Date of Death'
+
+	/// Beneficiary sex category as supplied by the source. For annual demographic filtering, use the related Demographic dimension.
+	property sex
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-ded2a9362083
+
+		backingConfiguration
+			valueColumn: Beneficiary.Sex
+
+		synonym Sex
+
+		synonym 'Sex Category'
+
+	/// Beneficiary race category as supplied by the source. For annual demographic filtering, use the related Demographic dimension.
+	property race
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-6eb94a4efc01
+
+		backingConfiguration
+			valueColumn: Beneficiary.Race
+
+		synonym Race
+
+		synonym 'Race Category'
+
+	/// Latest recorded source-system state code for the beneficiary. May differ from the state recorded in earlier annual summaries; not a relationship key to the State dimension.
+	property latest_state_code
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-d9b01c497c93
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Latest State Code'
+
+		synonym 'Latest State Code'
+
+		synonym 'Most Recent State Code'
+
+	/// Latest recorded source-system county code for the beneficiary. Interpret with the corresponding state code; not necessarily the county in earlier summary years.
+	property latest_county_code
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-abbadbd8c478
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Latest County Code'
+
+		synonym 'Latest County Code'
+
+		synonym 'Most Recent County Code'
+
+	/// Earliest summary year observed for the beneficiary in the loaded data; not necessarily the first year of Medicare enrollment.
+	property first_summary_year
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-995f7d28389d
+
+		backingConfiguration
+			valueColumn: Beneficiary.'First Summary Year'
+
+		synonym 'First Summary Year'
+
+		synonym 'Earliest Summary Year'
+
+	/// Latest summary year observed for the beneficiary in the loaded data; not necessarily the last year of Medicare enrollment.
+	property last_summary_year
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-73c9bc0b8893
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Last Summary Year'
+
+		synonym 'Last Summary Year'
+
+		synonym 'Most Recent Summary Year'
+
+	/// Recorded load timestamp for this gold-layer beneficiary record. Operational lineage metadata, not a birth, death, or coverage date.
+	property _gold_load_ts
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-4464cc5b0cf9
+
+		backingConfiguration
+			valueColumn: Beneficiary.'Gold Load Timestamp'
+
+		synonym 'Gold Load Timestamp'
+
+		synonym 'Gold Layer Load Timestamp'
+
+		synonym 'Gold Load Time'
+

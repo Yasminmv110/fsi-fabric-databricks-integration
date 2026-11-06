@@ -1,0 +1,79 @@
+/// Demographic dimension keyed by Demographic Key, with sex, race, age band, and display-sort columns. Filters Annual Beneficiary Utilization and Population Health Summary. Represents the demographic grouping attached to each annual summary, not a provider characteristic.
+table Demographic
+	lineageTag: 00000000-0000-0000-0000-df8a891f7a02
+	sourceLineageTag: 00000000-0000-0000-0000-26a759f3cf7a
+
+	/// Unique key identifying a demographic combination of sex, race, and age band. Joins to annual beneficiary utilization and population health summaries.
+	column 'Demographic Key'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-7fe07ab9f18c
+		sourceLineageTag: 00000000-0000-0000-0000-7b88e4dbd4ed
+		sourceColumn: demographic_key
+
+	/// Source sex category for this annual demographic grouping. Use to slice beneficiary and population-health measures; does not filter provider claims.
+	column Sex
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-d29c7180196c
+		sourceLineageTag: 00000000-0000-0000-0000-9ba378bb9313
+		sourceColumn: sex
+
+	/// Source race category for this annual demographic grouping. Use to slice beneficiary and population-health measures; does not filter provider claims.
+	column Race
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-0f1d511b8e2a
+		sourceLineageTag: 00000000-0000-0000-0000-2029e8377dfe
+		sourceColumn: race
+
+	/// Age-range label for this demographic grouping. Use with annual beneficiary and population summaries; Age Band Sort Order supplies the intended display sequence.
+	column 'Age Band'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-be766dfb6ebf
+		sourceLineageTag: 00000000-0000-0000-0000-c6998dfdfccc
+		sourceColumn: age_band
+
+	/// Numeric display-order value for sex categories. Technical sorting metadata; not a population metric and should not be aggregated.
+	column 'Sex Sort Order'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-12f7b0953db6
+		sourceLineageTag: 00000000-0000-0000-0000-bea989b8d723
+		sourceColumn: sex_sort
+
+	/// Numeric display-order value for race categories. Technical sorting metadata; not a population metric and should not be aggregated.
+	column 'Race Sort Order'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-fa1f33ac9c1e
+		sourceLineageTag: 00000000-0000-0000-0000-7d852cf7cabf
+		sourceColumn: race_sort
+
+	/// Numeric display-order value for age bands. Technical sorting metadata; not an age or population metric and should not be aggregated.
+	column 'Age Band Sort Order'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-5887941c4d75
+		sourceLineageTag: 00000000-0000-0000-0000-a5fe1124a6a1
+		sourceColumn: age_band_sort
+
+	/// Recorded load timestamp for this gold-layer demographic record. Operational lineage metadata, not the summary year.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-072961308e47
+		sourceLineageTag: 00000000-0000-0000-0000-e564afdbc523
+		sourceColumn: _gold_load_ts
+
+	partition Demographic-partition = entity
+		mode: directQuery
+		source
+			entityName: Demographic
+			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5'
+
+		annotation ONT_PinnedAtUtc = 2026-10-29T15:47:42.5701133+00:00
+
+		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-4f0a9fa9337a
+
+		annotation ONT_ItemId = 00000000-0000-0000-0000-171fc01efbf5
+
+		annotation ONT_ItemKind = SemanticModel
+
+		annotation ONT_WorkspaceName = WS_Databricks
+
+		annotation ONT_ItemName = SM_ADX_Gold_CMS_After
+

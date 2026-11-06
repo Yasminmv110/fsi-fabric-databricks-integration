@@ -1,0 +1,403 @@
+table fact_population_health_summary
+	lineageTag: 00000000-0000-0000-0000-3c22c0b11cb7
+	sourceLineageTag: [gold].[fact_population_health_summary]
+
+	column summary_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-76731bf65bc6
+		sourceLineageTag: summary_year
+		summarizeBy: sum
+		sourceColumn: summary_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column state_code
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-5aa984773498
+		sourceLineageTag: state_code
+		summarizeBy: none
+		sourceColumn: state_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column demographic_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-9331bbf58073
+		sourceLineageTag: demographic_key
+		summarizeBy: sum
+		sourceColumn: demographic_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column beneficiary_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-832f9a82f123
+		sourceLineageTag: beneficiary_count
+		summarizeBy: sum
+		sourceColumn: beneficiary_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column deceased_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-e45be06aa081
+		sourceLineageTag: deceased_count
+		summarizeBy: sum
+		sourceColumn: deceased_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column esrd_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-d0da1079f662
+		sourceLineageTag: esrd_count
+		summarizeBy: sum
+		sourceColumn: esrd_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_age
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 2)
+		lineageTag: 00000000-0000-0000-0000-3f57d0cd619a
+		sourceLineageTag: avg_age
+		summarizeBy: sum
+		sourceColumn: avg_age
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column avg_chronic_condition_count
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 2)
+		lineageTag: 00000000-0000-0000-0000-a1eaf9e47ead
+		sourceLineageTag: avg_chronic_condition_count
+		summarizeBy: sum
+		sourceColumn: avg_chronic_condition_count
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column multi_chronic_3plus_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-15a9fd3cdcfb
+		sourceLineageTag: multi_chronic_3plus_count
+		summarizeBy: sum
+		sourceColumn: multi_chronic_3plus_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column alzheimers_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-ff1c95526684
+		sourceLineageTag: alzheimers_count
+		summarizeBy: sum
+		sourceColumn: alzheimers_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column heart_failure_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-02c05955827b
+		sourceLineageTag: heart_failure_count
+		summarizeBy: sum
+		sourceColumn: heart_failure_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column chronic_kidney_disease_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-33156cdcb59b
+		sourceLineageTag: chronic_kidney_disease_count
+		summarizeBy: sum
+		sourceColumn: chronic_kidney_disease_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column cancer_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-54685645fe34
+		sourceLineageTag: cancer_count
+		summarizeBy: sum
+		sourceColumn: cancer_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column copd_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-aa49ff6a1c50
+		sourceLineageTag: copd_count
+		summarizeBy: sum
+		sourceColumn: copd_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column depression_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-141379d5c2f9
+		sourceLineageTag: depression_count
+		summarizeBy: sum
+		sourceColumn: depression_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column diabetes_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-1e872db4402e
+		sourceLineageTag: diabetes_count
+		summarizeBy: sum
+		sourceColumn: diabetes_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column ischemic_heart_disease_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-d1ce841ea645
+		sourceLineageTag: ischemic_heart_disease_count
+		summarizeBy: sum
+		sourceColumn: ischemic_heart_disease_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column osteoporosis_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-ab839eb0fa47
+		sourceLineageTag: osteoporosis_count
+		summarizeBy: sum
+		sourceColumn: osteoporosis_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column rheumatoid_osteo_arthritis_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-eb6b5ff0a683
+		sourceLineageTag: rheumatoid_osteo_arthritis_count
+		summarizeBy: sum
+		sourceColumn: rheumatoid_osteo_arthritis_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column stroke_tia_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-81a6a8ea80b9
+		sourceLineageTag: stroke_tia_count
+		summarizeBy: sum
+		sourceColumn: stroke_tia_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column diabetes_prevalence_rate
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 4)
+		lineageTag: 00000000-0000-0000-0000-4080a3dfb361
+		sourceLineageTag: diabetes_prevalence_rate
+		summarizeBy: sum
+		sourceColumn: diabetes_prevalence_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column heart_failure_prevalence_rate
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 4)
+		lineageTag: 00000000-0000-0000-0000-80facd8cc429
+		sourceLineageTag: heart_failure_prevalence_rate
+		summarizeBy: sum
+		sourceColumn: heart_failure_prevalence_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column ischemic_heart_disease_prevalence_rate
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		sourceProviderType: decimal(9, 4)
+		lineageTag: 00000000-0000-0000-0000-2be56b04379a
+		sourceLineageTag: ischemic_heart_disease_prevalence_rate
+		summarizeBy: sum
+		sourceColumn: ischemic_heart_disease_prevalence_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column total_medicare_reimbursement_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-e561aaf22929
+		sourceLineageTag: total_medicare_reimbursement_amt
+		summarizeBy: sum
+		sourceColumn: total_medicare_reimbursement_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column medicare_reimbursement_per_beneficiary_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-99bf303afd86
+		sourceLineageTag: medicare_reimbursement_per_beneficiary_amt
+		summarizeBy: sum
+		sourceColumn: medicare_reimbursement_per_beneficiary_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_beneficiary_responsibility_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-ebda833a00d6
+		sourceLineageTag: total_beneficiary_responsibility_amt
+		summarizeBy: sum
+		sourceColumn: total_beneficiary_responsibility_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column inpatient_claim_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-4f487b4e8391
+		sourceLineageTag: inpatient_claim_count
+		summarizeBy: sum
+		sourceColumn: inpatient_claim_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column inpatient_length_of_stay_days
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-7613fcbb54d6
+		sourceLineageTag: inpatient_length_of_stay_days
+		summarizeBy: sum
+		sourceColumn: inpatient_length_of_stay_days
+
+		annotation SummarizationSetBy = Automatic
+
+	column outpatient_claim_count
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-c029c5079295
+		sourceLineageTag: outpatient_claim_count
+		summarizeBy: sum
+		sourceColumn: outpatient_claim_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column inpatient_claim_payment_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-369d8cacd0b2
+		sourceLineageTag: inpatient_claim_payment_amt
+		summarizeBy: sum
+		sourceColumn: inpatient_claim_payment_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column outpatient_claim_payment_amt
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-b2d2b96cf1fe
+		sourceLineageTag: outpatient_claim_payment_amt
+		summarizeBy: sum
+		sourceColumn: outpatient_claim_payment_amt
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column inpatient_claims_per_1000
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-4cd9990d336a
+		sourceLineageTag: inpatient_claims_per_1000
+		summarizeBy: sum
+		sourceColumn: inpatient_claims_per_1000
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column outpatient_claims_per_1000
+		dataType: double
+		sourceProviderType: decimal(18, 2)
+		lineageTag: 00000000-0000-0000-0000-4d0b9b036bbd
+		sourceLineageTag: outpatient_claims_per_1000
+		summarizeBy: sum
+		sourceColumn: outpatient_claims_per_1000
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-c5ae78511039
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_population_health_summary = entity
+		mode: directLake
+		source
+			entityName: fact_population_health_summary
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

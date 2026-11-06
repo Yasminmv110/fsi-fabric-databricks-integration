@@ -1,0 +1,189 @@
+/// Provider claims fact table at Provider Number, Claim Year, and Claim Type grain, containing claim/beneficiary counts, payments, cost sharing, and claim characteristics. Supports year/provider/claim-type analysis only. Beneficiary counts are not additive across providers/types/years; average columns require appropriate weighting. Coverage differs from annual beneficiary summaries, so totals need not match across all years.
+entity 'Annual Provider Claims Summary'
+	lineageTag: 00000000-0000-0000-0000-a056c2579569
+	backingTable: 'Annual Provider Claims Summary'
+
+	/// Provider identifier for this claim summary group. Foreign key to Provider and part of the provider/year/claim-type grain.
+	property provider_number
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-f90468730ef0
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Provider Number'
+
+		synonym 'Provider Number'
+
+		synonym 'Provider ID'
+
+		synonym 'Provider Identifier'
+
+	/// Calendar year assigned to this provider claim summary by the source. Foreign key to Calendar Year; part of the provider/year/claim-type grain.
+	property claim_year
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-3d99d6b9fcd4
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Claim Year'
+
+		synonym 'Claim Year'
+
+		synonym 'Year of Claim'
+
+	/// Inpatient or Outpatient category for this provider/year group. Foreign key to Claim Type and part of the provider/year/claim-type grain.
+	property claim_type
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-05eda741ef93
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Claim Type'
+
+		synonym 'Claim Type'
+
+		synonym 'Claim Category'
+
+	/// Number of claims in this provider/year/claim-type group. Additive across groups; source for Total Provider Claims. Does not support beneficiary state or demographic filtering.
+	property claim_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-1684066b5a05
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Claim Count'
+
+		synonym 'Claim Count'
+
+		synonym 'Number of Claims'
+
+	/// Beneficiary count recorded for this provider/year/claim-type group. Not additive across providers, claim types, or years because the same person can occur in multiple groups.
+	property beneficiary_count
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-380502a76694
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Beneficiary Count'
+
+		synonym 'Beneficiary Count'
+
+		synonym 'Number of Beneficiaries'
+
+	/// Total claim payments in US dollars for this provider/year/claim-type group. Additive across disjoint claim groups; not the same metric as annual beneficiary Medicare reimbursement.
+	property total_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-2b8607da8faa
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Total Claim Payment Amount'
+
+		synonym 'Total Claim Payment Amount'
+
+		synonym 'Total Claim Payment in USD'
+
+	/// Mean claim payment in US dollars within this provider/year/claim-type group. Non-additive; recompute overall mean from total payments divided by claim count rather than averaging group means.
+	property avg_claim_payment_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-4854965daa4b
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Average Claim Payment Amount'
+
+		synonym 'Average Claim Payment Amount'
+
+		synonym 'Mean Claim Payment Amount'
+
+	/// Total primary-payer paid amount in US dollars recorded for claims in this provider/year/claim-type group. Distinct from the claim payment and beneficiary cost-share fields.
+	property total_primary_payer_paid_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-149f2d8d1aca
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Total Primary Payer Paid Amount'
+
+		synonym 'Total Primary Payer Paid Amount'
+
+		synonym 'Total Primary Payer Paid in USD'
+
+	/// Total beneficiary claim cost sharing in US dollars for this provider/year/claim-type group. Distinct from payer payments and annual-summary beneficiary responsibility.
+	property total_beneficiary_cost_share_amt
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-23099899b313
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Total Beneficiary Cost Share Amount'
+
+		synonym 'Total Beneficiary Cost Share Amount'
+
+		synonym 'Total Beneficiary Cost Share in USD'
+
+	/// Precomputed mean claim duration in days for this provider/year/claim-type group. Non-additive; combine groups using source-consistent eligible-claim weighting, not an unweighted average.
+	property avg_claim_duration_days
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-94b67e50af24
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Average Claim Duration (Days)'
+
+		synonym 'Average Claim Duration (Days)'
+
+		synonym 'Mean Claim Duration in Days'
+
+	/// Aggregated claim length of stay in days for this provider/year/claim-type group. Interpret by claim type; not an average or a distinct count of patients/days.
+	property total_length_of_stay_days
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-1f47affc1092
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Total Length of Stay (Days)'
+
+		synonym 'Total Length of Stay (Days)'
+
+		synonym 'Total Stay Days'
+
+	/// Precomputed mean claim length of stay in days for this provider/year/claim-type group. Non-additive; preserve the source's eligible-claim denominator when combining groups.
+	property avg_length_of_stay_days
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-a4b15b8d97ec
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Average Length of Stay (Days)'
+
+		synonym 'Average Length of Stay (Days)'
+
+		synonym 'Mean Length of Stay in Days'
+
+	/// Precomputed mean number of diagnosis codes per claim in this provider/year/claim-type group. Non-additive; combine with source-consistent eligible-claim weighting.
+	property avg_diagnosis_code_count
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-beac1303dbcb
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Average Diagnosis Code Count'
+
+		synonym 'Average Diagnosis Code Count'
+
+		synonym 'Mean Diagnosis Code Count'
+
+	/// Precomputed mean number of procedure codes per claim in this provider/year/claim-type group. Non-additive; combine with source-consistent eligible-claim weighting.
+	property avg_procedure_code_count
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-00db59790736
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Average Procedure Code Count'
+
+		synonym 'Average Procedure Code Count'
+
+		synonym 'Mean Procedure Code Count'
+
+	/// Recorded load timestamp for this gold-layer provider claim summary record. Operational lineage metadata, not the claim year.
+	property _gold_load_ts
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-04cf96d8c7b4
+
+		backingConfiguration
+			valueColumn: 'Annual Provider Claims Summary'.'Gold Load Timestamp'
+
+		synonym 'Gold Load Timestamp'
+
+		synonym 'Gold Layer Load Timestamp'
+
+		synonym 'Gold Load Time'
+

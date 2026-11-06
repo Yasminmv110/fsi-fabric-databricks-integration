@@ -1,0 +1,40 @@
+relationship 00000000-0000-0000-0000-c868ac34a04b
+	fromColumn: 'Annual Beneficiary Utilization'.'Beneficiary ID'
+	toColumn: Beneficiary.'Beneficiary ID'
+
+relationship 00000000-0000-0000-0000-c1041cc352f4
+	fromColumn: 'Annual Beneficiary Utilization'.'Summary Year'
+	toColumn: 'Calendar Year'.'Calendar Year'
+
+relationship 00000000-0000-0000-0000-b544d2cbdc80
+	fromColumn: 'Annual Beneficiary Utilization'.'State Code'
+	toColumn: State.'State Code'
+
+relationship 00000000-0000-0000-0000-4353906193be
+	fromColumn: 'Annual Beneficiary Utilization'.'Demographic Key'
+	toColumn: Demographic.'Demographic Key'
+
+relationship 00000000-0000-0000-0000-e5507b4d6574
+	fromColumn: 'Annual Provider Claims Summary'.'Provider Number'
+	toColumn: Provider.'Provider Number'
+
+relationship 00000000-0000-0000-0000-e82e18b663dc
+	fromColumn: 'Annual Provider Claims Summary'.'Claim Year'
+	toColumn: 'Calendar Year'.'Calendar Year'
+
+relationship 00000000-0000-0000-0000-7517a66380ea
+	fromColumn: 'Annual Provider Claims Summary'.'Claim Type'
+	toColumn: 'Claim Type'.'Claim Type'
+
+relationship 00000000-0000-0000-0000-1ac87a099ec9
+	fromColumn: 'Population Health Summary'.'Summary Year'
+	toColumn: 'Calendar Year'.'Calendar Year'
+
+relationship 00000000-0000-0000-0000-a061cd720f4e
+	fromColumn: 'Population Health Summary'.'State Code'
+	toColumn: State.'State Code'
+
+relationship 00000000-0000-0000-0000-afacf6defff3
+	fromColumn: 'Population Health Summary'.'Demographic Key'
+	toColumn: Demographic.'Demographic Key'
+

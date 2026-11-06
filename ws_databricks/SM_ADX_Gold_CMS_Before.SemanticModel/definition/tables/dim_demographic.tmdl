@@ -1,0 +1,98 @@
+table dim_demographic
+	lineageTag: 00000000-0000-0000-0000-5671967c93ba
+	sourceLineageTag: [gold].[dim_demographic]
+
+	column demographic_key
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-d2ef09577158
+		sourceLineageTag: demographic_key
+		summarizeBy: sum
+		sourceColumn: demographic_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column sex
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-a760c0115c5b
+		sourceLineageTag: sex
+		summarizeBy: none
+		sourceColumn: sex
+
+		annotation SummarizationSetBy = Automatic
+
+	column race
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-e72a8ead2467
+		sourceLineageTag: race
+		summarizeBy: none
+		sourceColumn: race
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_band
+		dataType: string
+		sourceProviderType: varchar(10)
+		lineageTag: 00000000-0000-0000-0000-2e880241f7a5
+		sourceLineageTag: age_band
+		summarizeBy: none
+		sourceColumn: age_band
+
+		annotation SummarizationSetBy = Automatic
+
+	column sex_sort
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-738bc13eb245
+		sourceLineageTag: sex_sort
+		summarizeBy: sum
+		sourceColumn: sex_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column race_sort
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-2b1fd419add0
+		sourceLineageTag: race_sort
+		summarizeBy: sum
+		sourceColumn: race_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column age_band_sort
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-132635954ff9
+		sourceLineageTag: age_band_sort
+		summarizeBy: sum
+		sourceColumn: age_band_sort
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-fb44f7fc27eb
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_demographic = entity
+		mode: directLake
+		source
+			entityName: dim_demographic
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

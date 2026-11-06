@@ -1,0 +1,1200 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json",
+  "artifactId": "00000000-0000-0000-0000-b8a987ce1580",
+  "workspaceId": "00000000-0000-0000-0000-000000000000",
+  "dataSourceInstructions": null,
+  "displayName": "WH_ADX_CMS_Gold",
+  "type": "data_warehouse",
+  "userDescription": null,
+  "metadata": null,
+  "elements": [
+    {
+      "id": "00000000-0000-0000-0000-3d6a71952aa8",
+      "is_selected": false,
+      "display_name": "Schemas",
+      "type": "schema_grouping",
+      "description": null,
+      "children": [
+        {
+          "id": "00000000-0000-0000-0000-843dd3dd43ab",
+          "is_selected": false,
+          "display_name": "gold",
+          "type": "warehouse_tables.schema",
+          "description": null,
+          "children": [
+            {
+              "id": "00000000-0000-0000-0000-bf87bbfca86c",
+              "is_selected": false,
+              "display_name": "Tables",
+              "type": "table_grouping",
+              "description": null,
+              "children": [
+                {
+                  "id": "00000000-0000-0000-0000-d9dd20c6027d",
+                  "is_selected": true,
+                  "display_name": "dim_demographic",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-d9716167275d",
+                      "is_selected": true,
+                      "display_name": "demographic_key",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-f998dee9b80c",
+                      "is_selected": true,
+                      "display_name": "sex",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-e14ca96865ff",
+                      "is_selected": true,
+                      "display_name": "race",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-4cfd8d218f1f",
+                      "is_selected": true,
+                      "display_name": "age_band",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-e461c030f55a",
+                      "is_selected": true,
+                      "display_name": "sex_sort",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-c6e4ecd89916",
+                      "is_selected": true,
+                      "display_name": "race_sort",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-5a3e3b097085",
+                      "is_selected": true,
+                      "display_name": "age_band_sort",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-6b804a9cc72b",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-11b77f04a47e",
+                  "is_selected": true,
+                  "display_name": "dim_claim_type",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-a492fce22e16",
+                      "is_selected": true,
+                      "display_name": "claim_type",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a8cefa376d63",
+                      "is_selected": true,
+                      "display_name": "claim_type_description",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-7d6917518687",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-f0c2f6c173f7",
+                  "is_selected": true,
+                  "display_name": "dim_beneficiary",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-eb5395fbfab4",
+                      "is_selected": true,
+                      "display_name": "beneficiary_id",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-937d2cac4db1",
+                      "is_selected": true,
+                      "display_name": "birth_date",
+                      "type": "warehouse_tables.column",
+                      "data_type": "date",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-81ca59f892cd",
+                      "is_selected": true,
+                      "display_name": "death_date",
+                      "type": "warehouse_tables.column",
+                      "data_type": "date",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-86207716bee3",
+                      "is_selected": true,
+                      "display_name": "sex",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-6a54d1b896bb",
+                      "is_selected": true,
+                      "display_name": "race",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-e01cf7b7e5ef",
+                      "is_selected": true,
+                      "display_name": "latest_state_code",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-c01f44043755",
+                      "is_selected": true,
+                      "display_name": "latest_county_code",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-8bbe79f59292",
+                      "is_selected": true,
+                      "display_name": "first_summary_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-c0f778646289",
+                      "is_selected": true,
+                      "display_name": "last_summary_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-6d3d42cff10d",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-23d32e6bee3d",
+                  "is_selected": true,
+                  "display_name": "fact_beneficiary_annual_utilization",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-ef849a718c2c",
+                      "is_selected": true,
+                      "display_name": "beneficiary_id",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-fc9d6c7d0a1b",
+                      "is_selected": true,
+                      "display_name": "summary_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-ba6ade8f45fc",
+                      "is_selected": true,
+                      "display_name": "state_code",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-0e4cd53a24f6",
+                      "is_selected": true,
+                      "display_name": "demographic_key",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a751a5027dda",
+                      "is_selected": true,
+                      "display_name": "county_code",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-1734dc7a197f",
+                      "is_selected": true,
+                      "display_name": "age_at_year_end",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-5199f694e316",
+                      "is_selected": true,
+                      "display_name": "is_deceased",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a7f753e853db",
+                      "is_selected": true,
+                      "display_name": "has_esrd",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-7ecc5f95efa8",
+                      "is_selected": true,
+                      "display_name": "part_a_coverage_months",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-876c46fbb9d8",
+                      "is_selected": true,
+                      "display_name": "part_b_coverage_months",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-96953f4d41d8",
+                      "is_selected": true,
+                      "display_name": "hmo_coverage_months",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-cdded252014e",
+                      "is_selected": true,
+                      "display_name": "part_d_coverage_months",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-64312df2631a",
+                      "is_selected": true,
+                      "display_name": "has_alzheimers",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-32004c6c76c3",
+                      "is_selected": true,
+                      "display_name": "has_heart_failure",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-dc559c54c7d6",
+                      "is_selected": true,
+                      "display_name": "has_chronic_kidney_disease",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-5389943a6b50",
+                      "is_selected": true,
+                      "display_name": "has_cancer",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-965f75b1ebae",
+                      "is_selected": true,
+                      "display_name": "has_copd",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-4ad06c1a3683",
+                      "is_selected": true,
+                      "display_name": "has_depression",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-23caee2cc885",
+                      "is_selected": true,
+                      "display_name": "has_diabetes",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-9d31ad2cb2e1",
+                      "is_selected": true,
+                      "display_name": "has_ischemic_heart_disease",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-d0a8a1049875",
+                      "is_selected": true,
+                      "display_name": "has_osteoporosis",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-004a1d29f6cb",
+                      "is_selected": true,
+                      "display_name": "has_rheumatoid_osteo_arthritis",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a9305f92e2ff",
+                      "is_selected": true,
+                      "display_name": "has_stroke_tia",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-3c5b993b522d",
+                      "is_selected": true,
+                      "display_name": "chronic_condition_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-56a656a2cb11",
+                      "is_selected": true,
+                      "display_name": "inpatient_medicare_reimbursement_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a33448f14dd7",
+                      "is_selected": true,
+                      "display_name": "outpatient_medicare_reimbursement_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-728c3496abf4",
+                      "is_selected": true,
+                      "display_name": "carrier_medicare_reimbursement_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a3e9f2a4bb8b",
+                      "is_selected": true,
+                      "display_name": "total_medicare_reimbursement_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-629281ff535b",
+                      "is_selected": true,
+                      "display_name": "total_beneficiary_responsibility_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-2be3d8080518",
+                      "is_selected": true,
+                      "display_name": "inpatient_claim_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-3038abab7765",
+                      "is_selected": true,
+                      "display_name": "inpatient_length_of_stay_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-cc467b6940f6",
+                      "is_selected": true,
+                      "display_name": "inpatient_utilization_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-b12edeecf4e1",
+                      "is_selected": true,
+                      "display_name": "inpatient_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-1d3bfef3b29d",
+                      "is_selected": true,
+                      "display_name": "inpatient_cost_share_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-569220e549a2",
+                      "is_selected": true,
+                      "display_name": "outpatient_claim_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-3423a6d08719",
+                      "is_selected": true,
+                      "display_name": "outpatient_visit_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-5767acb97223",
+                      "is_selected": true,
+                      "display_name": "outpatient_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-b904cd90ea59",
+                      "is_selected": true,
+                      "display_name": "outpatient_cost_share_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-6cadc78430c8",
+                      "is_selected": true,
+                      "display_name": "total_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-3c3f260d3a54",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-a80d4da44d22",
+                  "is_selected": true,
+                  "display_name": "fact_provider_annual_summary",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-31aa918ef265",
+                      "is_selected": true,
+                      "display_name": "provider_number",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-ec6a3ca6be0a",
+                      "is_selected": true,
+                      "display_name": "claim_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-079c3acfaefc",
+                      "is_selected": true,
+                      "display_name": "claim_type",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-c2cd62417299",
+                      "is_selected": true,
+                      "display_name": "claim_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a8607284aa2c",
+                      "is_selected": true,
+                      "display_name": "beneficiary_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-9a504603e41c",
+                      "is_selected": true,
+                      "display_name": "total_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-88e26b3ab99f",
+                      "is_selected": true,
+                      "display_name": "avg_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-7f055245a9cb",
+                      "is_selected": true,
+                      "display_name": "total_primary_payer_paid_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-73399dfdbb89",
+                      "is_selected": true,
+                      "display_name": "total_beneficiary_cost_share_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-c80745298cf7",
+                      "is_selected": true,
+                      "display_name": "avg_claim_duration_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-bfd6d8337e74",
+                      "is_selected": true,
+                      "display_name": "total_length_of_stay_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-0e81269d7d95",
+                      "is_selected": true,
+                      "display_name": "avg_length_of_stay_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-8af0d311d45b",
+                      "is_selected": true,
+                      "display_name": "avg_diagnosis_code_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-697b7715e865",
+                      "is_selected": true,
+                      "display_name": "avg_procedure_code_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-a1120d668a84",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-db0a345398d6",
+                  "is_selected": true,
+                  "display_name": "fact_population_health_summary",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-918922790bb5",
+                      "is_selected": true,
+                      "display_name": "summary_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-fdf829a4ee80",
+                      "is_selected": true,
+                      "display_name": "state_code",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-8d6c26bba82b",
+                      "is_selected": true,
+                      "display_name": "demographic_key",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-e11b247a6065",
+                      "is_selected": true,
+                      "display_name": "beneficiary_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-34249e171438",
+                      "is_selected": true,
+                      "display_name": "deceased_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-6c000b950fad",
+                      "is_selected": true,
+                      "display_name": "esrd_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-dee7d92ff2fa",
+                      "is_selected": true,
+                      "display_name": "avg_age",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-012b4bb9a32b",
+                      "is_selected": true,
+                      "display_name": "avg_chronic_condition_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-5c9f82b8518d",
+                      "is_selected": true,
+                      "display_name": "multi_chronic_3plus_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-f66397ab4b56",
+                      "is_selected": true,
+                      "display_name": "alzheimers_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-cf8fb86abfe8",
+                      "is_selected": true,
+                      "display_name": "heart_failure_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-e4d17116e913",
+                      "is_selected": true,
+                      "display_name": "chronic_kidney_disease_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-90472eaba23a",
+                      "is_selected": true,
+                      "display_name": "cancer_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-019a39742298",
+                      "is_selected": true,
+                      "display_name": "copd_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-35e14e7f65a1",
+                      "is_selected": true,
+                      "display_name": "depression_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-89282d18d390",
+                      "is_selected": true,
+                      "display_name": "diabetes_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-7003e926885c",
+                      "is_selected": true,
+                      "display_name": "ischemic_heart_disease_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-1e21b3d1e5db",
+                      "is_selected": true,
+                      "display_name": "osteoporosis_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-164b13ffd24b",
+                      "is_selected": true,
+                      "display_name": "rheumatoid_osteo_arthritis_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-fe9819c00e1f",
+                      "is_selected": true,
+                      "display_name": "stroke_tia_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-15bea3ba4343",
+                      "is_selected": true,
+                      "display_name": "diabetes_prevalence_rate",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-7fa57eaf641f",
+                      "is_selected": true,
+                      "display_name": "heart_failure_prevalence_rate",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-dd1884dbbd02",
+                      "is_selected": true,
+                      "display_name": "ischemic_heart_disease_prevalence_rate",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-7c76ef48577f",
+                      "is_selected": true,
+                      "display_name": "total_medicare_reimbursement_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-19964040a12f",
+                      "is_selected": true,
+                      "display_name": "medicare_reimbursement_per_beneficiary_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-5fa5545310f7",
+                      "is_selected": true,
+                      "display_name": "total_beneficiary_responsibility_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-bb72a643ac46",
+                      "is_selected": true,
+                      "display_name": "inpatient_claim_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-dcc7682c136c",
+                      "is_selected": true,
+                      "display_name": "inpatient_length_of_stay_days",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-66f935e5ad4f",
+                      "is_selected": true,
+                      "display_name": "outpatient_claim_count",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-8915a84e8df7",
+                      "is_selected": true,
+                      "display_name": "inpatient_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-f3accfc3f8de",
+                      "is_selected": true,
+                      "display_name": "outpatient_claim_payment_amt",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-59325c2edcc3",
+                      "is_selected": true,
+                      "display_name": "inpatient_claims_per_1000",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-58a4676d9715",
+                      "is_selected": true,
+                      "display_name": "outpatient_claims_per_1000",
+                      "type": "warehouse_tables.column",
+                      "data_type": "decimal",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-88e3a1df66df",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-a43c0db51d57",
+                  "is_selected": true,
+                  "display_name": "dim_year",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-b81edafa57fc",
+                      "is_selected": true,
+                      "display_name": "calendar_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-05193e8af61c",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-e7d5f7873efe",
+                  "is_selected": true,
+                  "display_name": "dim_state",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-21c6952903a9",
+                      "is_selected": true,
+                      "display_name": "state_code",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-491837947954",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": "00000000-0000-0000-0000-36a9e8fc2f0a",
+                  "is_selected": true,
+                  "display_name": "dim_provider",
+                  "type": "warehouse_tables.table",
+                  "description": null,
+                  "children": [
+                    {
+                      "id": "00000000-0000-0000-0000-a2129394b027",
+                      "is_selected": true,
+                      "display_name": "provider_number",
+                      "type": "warehouse_tables.column",
+                      "data_type": "varchar",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-b9f4b8356a81",
+                      "is_selected": true,
+                      "display_name": "first_claim_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-fb7244427f12",
+                      "is_selected": true,
+                      "display_name": "last_claim_year",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-ada6283f8390",
+                      "is_selected": true,
+                      "display_name": "has_inpatient_claims",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-6fc52070173a",
+                      "is_selected": true,
+                      "display_name": "has_outpatient_claims",
+                      "type": "warehouse_tables.column",
+                      "data_type": "int",
+                      "description": null,
+                      "children": []
+                    },
+                    {
+                      "id": "00000000-0000-0000-0000-291d9a38be80",
+                      "is_selected": true,
+                      "display_name": "_gold_load_ts",
+                      "type": "warehouse_tables.column",
+                      "data_type": "datetime2",
+                      "description": null,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

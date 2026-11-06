@@ -1,0 +1,149 @@
+/// Provider claims fact table at Provider Number, Claim Year, and Claim Type grain, containing claim/beneficiary counts, payments, cost sharing, and claim characteristics. Supports year/provider/claim-type analysis only. Beneficiary counts are not additive across providers/types/years; average columns require appropriate weighting. Coverage differs from annual beneficiary summaries, so totals need not match across all years.
+table 'Annual Provider Claims Summary'
+	lineageTag: 00000000-0000-0000-0000-e7f2bea4f816
+	sourceLineageTag: 00000000-0000-0000-0000-89e90bc18c96
+
+	/// Claim counts from annual provider claims summary. Use with Calendar Year, Provider, and Claim Type dimensions. State, Demographic, and Beneficiary dimensions do not filter this measure; joint provider/demographic or provider/state attribution is unavailable. Includes years outside beneficiary summary coverage.
+	measure 'Total Provider Claims' = EXTERNALMEASURE("Total Provider Claims", INTEGER, "DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5")
+		formatString: #,0
+		displayFolder: Claims\Provider
+		lineageTag: 00000000-0000-0000-0000-44ddff5f089b
+		sourceLineageTag: 00000000-0000-0000-0000-83c5a617977e
+
+	/// Provider-summary inpatient claim count in current year/provider context, intersected with the selected Claim Type. State, demographic, and beneficiary filters are not supported.
+	measure 'Provider Inpatient Claim Count' = EXTERNALMEASURE("Provider Inpatient Claim Count", INTEGER, "DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5")
+		formatString: #,0
+		displayFolder: Claims\Provider
+		lineageTag: 00000000-0000-0000-0000-acbdc0cd475d
+		sourceLineageTag: 00000000-0000-0000-0000-b83c789c4735
+
+	/// Provider-summary outpatient claim count in current year/provider context, intersected with the selected Claim Type. State, demographic, and beneficiary filters are not supported.
+	measure 'Provider Outpatient Claim Count' = EXTERNALMEASURE("Provider Outpatient Claim Count", INTEGER, "DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5")
+		formatString: #,0
+		displayFolder: Claims\Provider
+		lineageTag: 00000000-0000-0000-0000-1f3ca51781a9
+		sourceLineageTag: 00000000-0000-0000-0000-aeaa0bc28b1b
+
+	/// Provider identifier for this claim summary group. Foreign key to Provider and part of the provider/year/claim-type grain.
+	column 'Provider Number'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-f90468730ef0
+		sourceLineageTag: 00000000-0000-0000-0000-304c91eb97e2
+		sourceColumn: provider_number
+
+	/// Calendar year assigned to this provider claim summary by the source. Foreign key to Calendar Year; part of the provider/year/claim-type grain.
+	column 'Claim Year'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-3d99d6b9fcd4
+		sourceLineageTag: 00000000-0000-0000-0000-cf12dbacd281
+		sourceColumn: claim_year
+
+	/// Inpatient or Outpatient category for this provider/year group. Foreign key to Claim Type and part of the provider/year/claim-type grain.
+	column 'Claim Type'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-05eda741ef93
+		sourceLineageTag: 00000000-0000-0000-0000-fda4a89dde99
+		sourceColumn: claim_type
+
+	/// Number of claims in this provider/year/claim-type group. Additive across groups; source for Total Provider Claims. Does not support beneficiary state or demographic filtering.
+	column 'Claim Count'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-1684066b5a05
+		sourceLineageTag: 00000000-0000-0000-0000-789a9a7f5fdc
+		sourceColumn: claim_count
+
+	/// Beneficiary count recorded for this provider/year/claim-type group. Not additive across providers, claim types, or years because the same person can occur in multiple groups.
+	column 'Beneficiary Count'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-380502a76694
+		sourceLineageTag: 00000000-0000-0000-0000-05528e2b177c
+		sourceColumn: beneficiary_count
+
+	/// Total claim payments in US dollars for this provider/year/claim-type group. Additive across disjoint claim groups; not the same metric as annual beneficiary Medicare reimbursement.
+	column 'Total Claim Payment Amount'
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-2b8607da8faa
+		sourceLineageTag: 00000000-0000-0000-0000-a3d042e2f11a
+		sourceColumn: total_claim_payment_amt
+
+	/// Mean claim payment in US dollars within this provider/year/claim-type group. Non-additive; recompute overall mean from total payments divided by claim count rather than averaging group means.
+	column 'Average Claim Payment Amount'
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-4854965daa4b
+		sourceLineageTag: 00000000-0000-0000-0000-01cc66349c7c
+		sourceColumn: avg_claim_payment_amt
+
+	/// Total primary-payer paid amount in US dollars recorded for claims in this provider/year/claim-type group. Distinct from the claim payment and beneficiary cost-share fields.
+	column 'Total Primary Payer Paid Amount'
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-149f2d8d1aca
+		sourceLineageTag: 00000000-0000-0000-0000-1206292161cc
+		sourceColumn: total_primary_payer_paid_amt
+
+	/// Total beneficiary claim cost sharing in US dollars for this provider/year/claim-type group. Distinct from payer payments and annual-summary beneficiary responsibility.
+	column 'Total Beneficiary Cost Share Amount'
+		dataType: double
+		lineageTag: 00000000-0000-0000-0000-23099899b313
+		sourceLineageTag: 00000000-0000-0000-0000-2547dbbad16a
+		sourceColumn: total_beneficiary_cost_share_amt
+
+	/// Precomputed mean claim duration in days for this provider/year/claim-type group. Non-additive; combine groups using source-consistent eligible-claim weighting, not an unweighted average.
+	column 'Average Claim Duration (Days)'
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-94b67e50af24
+		sourceLineageTag: 00000000-0000-0000-0000-419f229cd7a0
+		sourceColumn: avg_claim_duration_days
+
+	/// Aggregated claim length of stay in days for this provider/year/claim-type group. Interpret by claim type; not an average or a distinct count of patients/days.
+	column 'Total Length of Stay (Days)'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-1f47affc1092
+		sourceLineageTag: 00000000-0000-0000-0000-1e10496ff9b8
+		sourceColumn: total_length_of_stay_days
+
+	/// Precomputed mean claim length of stay in days for this provider/year/claim-type group. Non-additive; preserve the source's eligible-claim denominator when combining groups.
+	column 'Average Length of Stay (Days)'
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-a4b15b8d97ec
+		sourceLineageTag: 00000000-0000-0000-0000-cc6593fc7891
+		sourceColumn: avg_length_of_stay_days
+
+	/// Precomputed mean number of diagnosis codes per claim in this provider/year/claim-type group. Non-additive; combine with source-consistent eligible-claim weighting.
+	column 'Average Diagnosis Code Count'
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-beac1303dbcb
+		sourceLineageTag: 00000000-0000-0000-0000-31d4380e6411
+		sourceColumn: avg_diagnosis_code_count
+
+	/// Precomputed mean number of procedure codes per claim in this provider/year/claim-type group. Non-additive; combine with source-consistent eligible-claim weighting.
+	column 'Average Procedure Code Count'
+		dataType: decimal
+		lineageTag: 00000000-0000-0000-0000-00db59790736
+		sourceLineageTag: 00000000-0000-0000-0000-3633621509fc
+		sourceColumn: avg_procedure_code_count
+
+	/// Recorded load timestamp for this gold-layer provider claim summary record. Operational lineage metadata, not the claim year.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-04cf96d8c7b4
+		sourceLineageTag: 00000000-0000-0000-0000-9d9c37c488c1
+		sourceColumn: _gold_load_ts
+
+	partition 'Annual Provider Claims Summary-partition' = entity
+		mode: directQuery
+		source
+			entityName: Annual Provider Claims Summary
+			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5'
+
+		annotation ONT_PinnedAtUtc = 2026-10-29T15:47:42.5701133+00:00
+
+		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-4f0a9fa9337a
+
+		annotation ONT_ItemId = 00000000-0000-0000-0000-171fc01efbf5
+
+		annotation ONT_ItemKind = SemanticModel
+
+		annotation ONT_WorkspaceName = WS_Databricks
+
+		annotation ONT_ItemName = SM_ADX_Gold_CMS_After
+

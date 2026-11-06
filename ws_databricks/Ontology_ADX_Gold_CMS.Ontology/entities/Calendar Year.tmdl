@@ -1,0 +1,31 @@
+/// Shared year dimension filtering beneficiary and population summaries by Summary Year and provider claims by Claim Year. Fact tables can have different year coverage; provider claims include 2007 while beneficiary summaries currently cover 2008-2010.
+entity 'Calendar Year'
+	lineageTag: 00000000-0000-0000-0000-55d7cbc7625c
+	backingTable: 'Calendar Year'
+
+	/// Four-digit calendar year shared by beneficiary/population Summary Year and provider Claim Year. Use this dimension for consistent year filters across the fact tables.
+	property calendar_year
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-7a76a1604b2a
+
+		backingConfiguration
+			valueColumn: 'Calendar Year'.'Calendar Year'
+
+		synonym 'Calendar Year'
+
+		synonym Year
+
+	/// Recorded load timestamp for this gold-layer year record. Operational lineage metadata, not the analytical calendar year.
+	property _gold_load_ts
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-913a32b1e1fa
+
+		backingConfiguration
+			valueColumn: 'Calendar Year'.'Gold Load Timestamp'
+
+		synonym 'Gold Load Timestamp'
+
+		synonym 'Gold Layer Load Timestamp'
+
+		synonym 'Gold Load Time'
+

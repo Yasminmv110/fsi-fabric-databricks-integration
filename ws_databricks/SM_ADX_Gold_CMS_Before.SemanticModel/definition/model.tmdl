@@ -1,0 +1,23 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+ref table dim_demographic
+ref table dim_claim_type
+ref table dim_beneficiary
+ref table fact_beneficiary_annual_utilization
+ref table fact_provider_annual_summary
+ref table fact_population_health_summary
+ref table dim_year
+ref table dim_state
+ref table dim_provider
+

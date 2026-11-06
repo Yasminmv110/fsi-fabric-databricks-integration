@@ -1,0 +1,78 @@
+table dim_provider
+	lineageTag: 00000000-0000-0000-0000-173f8f5907a0
+	sourceLineageTag: [gold].[dim_provider]
+
+	column provider_number
+		dataType: string
+		sourceProviderType: varchar(50)
+		lineageTag: 00000000-0000-0000-0000-86614cbd21c7
+		sourceLineageTag: provider_number
+		summarizeBy: none
+		sourceColumn: provider_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_claim_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-428e18bbc3cf
+		sourceLineageTag: first_claim_year
+		summarizeBy: sum
+		sourceColumn: first_claim_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_claim_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-7f13a73c4a7e
+		sourceLineageTag: last_claim_year
+		summarizeBy: sum
+		sourceColumn: last_claim_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_inpatient_claims
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-3f668b1c80a1
+		sourceLineageTag: has_inpatient_claims
+		summarizeBy: sum
+		sourceColumn: has_inpatient_claims
+
+		annotation SummarizationSetBy = Automatic
+
+	column has_outpatient_claims
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-5d132f8ed1b9
+		sourceLineageTag: has_outpatient_claims
+		summarizeBy: sum
+		sourceColumn: has_outpatient_claims
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-31cc6747aa4a
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_provider = entity
+		mode: directLake
+		source
+			entityName: dim_provider
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

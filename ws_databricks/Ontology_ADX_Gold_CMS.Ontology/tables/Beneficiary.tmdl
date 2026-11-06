@@ -1,0 +1,93 @@
+/// Beneficiary dimension keyed by Beneficiary ID, containing birth/death dates, sex, race, latest recorded geography, and observed summary-year range. Filters Annual Beneficiary Utilization. Latest geography is not necessarily the beneficiary's geography in an earlier year; use State and Demographic dimensions for annual breakdowns.
+table Beneficiary
+	lineageTag: 00000000-0000-0000-0000-5f5a938ff53c
+	sourceLineageTag: 00000000-0000-0000-0000-a21aac163092
+
+	/// Source beneficiary identifier and unique key of the Beneficiary dimension. Joins to annual beneficiary utilization; use for distinct-person counts rather than counting annual fact rows.
+	column 'Beneficiary ID'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-18a0371af74f
+		sourceLineageTag: 00000000-0000-0000-0000-6b464a5e084b
+		sourceColumn: beneficiary_id
+
+	/// Beneficiary birth date as recorded in the source. Use annual Age at Year End for year-specific age analysis.
+	column 'Birth Date'
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-71c794a50432
+		sourceLineageTag: 00000000-0000-0000-0000-c377fd2ddd56
+		sourceColumn: birth_date
+
+	/// Beneficiary death date as recorded in the source. A blank date means no death date is recorded, not independently verified living status.
+	column 'Death Date'
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-9c03a2be9e2e
+		sourceLineageTag: 00000000-0000-0000-0000-afcedbae402e
+		sourceColumn: death_date
+
+	/// Beneficiary sex category as supplied by the source. For annual demographic filtering, use the related Demographic dimension.
+	column Sex
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-ded2a9362083
+		sourceLineageTag: 00000000-0000-0000-0000-8a02fa6b1fc7
+		sourceColumn: sex
+
+	/// Beneficiary race category as supplied by the source. For annual demographic filtering, use the related Demographic dimension.
+	column Race
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-6eb94a4efc01
+		sourceLineageTag: 00000000-0000-0000-0000-dc672e254797
+		sourceColumn: race
+
+	/// Latest recorded source-system state code for the beneficiary. May differ from the state recorded in earlier annual summaries; not a relationship key to the State dimension.
+	column 'Latest State Code'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-d9b01c497c93
+		sourceLineageTag: 00000000-0000-0000-0000-5567ad176791
+		sourceColumn: latest_state_code
+
+	/// Latest recorded source-system county code for the beneficiary. Interpret with the corresponding state code; not necessarily the county in earlier summary years.
+	column 'Latest County Code'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-abbadbd8c478
+		sourceLineageTag: 00000000-0000-0000-0000-379edcb4d232
+		sourceColumn: latest_county_code
+
+	/// Earliest summary year observed for the beneficiary in the loaded data; not necessarily the first year of Medicare enrollment.
+	column 'First Summary Year'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-995f7d28389d
+		sourceLineageTag: 00000000-0000-0000-0000-aa126f931875
+		sourceColumn: first_summary_year
+
+	/// Latest summary year observed for the beneficiary in the loaded data; not necessarily the last year of Medicare enrollment.
+	column 'Last Summary Year'
+		dataType: int64
+		lineageTag: 00000000-0000-0000-0000-73c9bc0b8893
+		sourceLineageTag: 00000000-0000-0000-0000-401fc9ff022b
+		sourceColumn: last_summary_year
+
+	/// Recorded load timestamp for this gold-layer beneficiary record. Operational lineage metadata, not a birth, death, or coverage date.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		lineageTag: 00000000-0000-0000-0000-4464cc5b0cf9
+		sourceLineageTag: 00000000-0000-0000-0000-4fd6297e63b3
+		sourceColumn: _gold_load_ts
+
+	partition Beneficiary-partition = entity
+		mode: directQuery
+		source
+			entityName: Beneficiary
+			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5'
+
+		annotation ONT_PinnedAtUtc = 2026-10-29T15:47:42.5701133+00:00
+
+		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-4f0a9fa9337a
+
+		annotation ONT_ItemId = 00000000-0000-0000-0000-171fc01efbf5
+
+		annotation ONT_ItemKind = SemanticModel
+
+		annotation ONT_WorkspaceName = WS_Databricks
+
+		annotation ONT_ItemName = SM_ADX_Gold_CMS_After
+

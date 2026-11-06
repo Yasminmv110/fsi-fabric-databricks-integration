@@ -1,0 +1,35 @@
+table dim_year
+	lineageTag: 00000000-0000-0000-0000-89681e0fa75b
+	sourceLineageTag: [gold].[dim_year]
+
+	column calendar_year
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 00000000-0000-0000-0000-1318c8544c50
+		sourceLineageTag: calendar_year
+		summarizeBy: sum
+		sourceColumn: calendar_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column _gold_load_ts
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 00000000-0000-0000-0000-04210be65c65
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_year = entity
+		mode: directLake
+		source
+			entityName: dim_year
+			schemaName: gold
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

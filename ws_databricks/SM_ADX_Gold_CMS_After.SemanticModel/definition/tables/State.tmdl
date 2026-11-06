@@ -1,0 +1,34 @@
+/// State-code dimension used to filter annual beneficiary utilization and population health summaries by the state recorded for the summary year. Codes are source-system geographic identifiers, not necessarily postal abbreviations. Does not filter provider claims.
+table State
+	lineageTag: 00000000-0000-0000-0000-a9dd1d786bdd
+	sourceLineageTag: [gold].[dim_state]
+
+	/// Source-system state identifier and key of the State dimension. Joins to state codes in annual beneficiary and population summaries; do not assume postal abbreviations or provider location.
+	column 'State Code'
+		dataType: string
+		lineageTag: 00000000-0000-0000-0000-67440076eb15
+		sourceLineageTag: state_code
+		summarizeBy: none
+		sourceColumn: state_code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Recorded load timestamp for this gold-layer state record. Operational lineage metadata.
+	column 'Gold Load Timestamp'
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 00000000-0000-0000-0000-bc9b68eca2f0
+		sourceLineageTag: _gold_load_ts
+		summarizeBy: none
+		sourceColumn: _gold_load_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_state = entity
+		mode: directLake
+		source
+			entityName: dim_state
+			schemaName: gold
+			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
+

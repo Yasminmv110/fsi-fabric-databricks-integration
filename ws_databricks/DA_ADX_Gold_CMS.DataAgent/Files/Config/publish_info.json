@@ -1,0 +1,4 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/publishInfo/1.0.0/schema.json",
+  "description": "DA_ADX_Gold_CMS enables natural-language exploration of Medicare beneficiary utilization, reimbursement, chronic-condition prevalence, and provider claims using the SM_ADX_Gold_CMS_After semantic model. It helps users compare annual trends, analyze population health by state and demographics, and rank providers by claim volume, while applying consistent business measures and clearly explaining data limitations."
+}
