@@ -6,7 +6,7 @@ $fixture = Join-Path ([IO.Path]::GetTempPath()) ('fabric-repo-check-' + [guid]::
 $checker = Join-Path $PSScriptRoot 'Test-Repository.ps1'
 
 function Assert-Check {
-    param([string]$ExpectedError)
+    param([string]$ExpectedError, [string]$ForbiddenValue)
 
     $failure = $null
     try {
@@ -18,6 +18,9 @@ function Assert-Check {
         if ($null -ne $failure) { throw "Expected success, got: $failure" }
     } elseif ($null -eq $failure -or -not $failure.Contains($ExpectedError)) {
         throw "Expected '$ExpectedError', got: $failure"
+    }
+    if ($ForbiddenValue -and $failure -and $failure.Contains($ForbiddenValue)) {
+        throw 'A privacy diagnostic exposed the original identifier.'
     }
 }
 
@@ -60,9 +63,10 @@ try {
     [IO.File]::WriteAllText($json, ($credential | ConvertTo-Json))
     Assert-Check 'credential value detected'
     [IO.File]::WriteAllText($json, '{"valid":true}')
-    $identifierPath = Join-Path $fixture ([guid]::NewGuid().ToString() + '.txt')
+    $identifier = [guid]::NewGuid().ToString()
+    $identifierPath = Join-Path $fixture ($identifier + '.txt')
     [IO.File]::WriteAllText($identifierPath, 'fixture')
-    Assert-Check 'original GUID detected'
+    Assert-Check 'original GUID detected' -ForbiddenValue $identifier
     Remove-Item -LiteralPath $identifierPath
     [IO.File]::WriteAllText($json, ('{"token":"' + 'ghp_' + ('x' * 30) + '"}'))
     Assert-Check 'credential signature detected'

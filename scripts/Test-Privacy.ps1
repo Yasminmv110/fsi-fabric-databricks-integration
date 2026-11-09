@@ -32,6 +32,8 @@ foreach ($relative in ($paths | Sort-Object -Unique)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
         continue
     }
+    $displayPath = [regex]::Replace($relative, $guidPattern, '[GUID_REDACTED]')
+    $displayPath = [regex]::Replace($displayPath, $objectPattern, '[OBJECT_ID_REDACTED]')
     $fileCount++
     $lines = @($relative) + @(Get-Content -LiteralPath $path)
     for ($index = 0; $index -lt $lines.Count; $index++) {
@@ -39,27 +41,27 @@ foreach ($relative in ($paths | Sort-Object -Unique)) {
         $location = if ($index -eq 0) { 'filename' } else { "line $index" }
         foreach ($match in [regex]::Matches($line, $guidPattern)) {
             if ($match.Value -notmatch '^00000000-0000-0000-0000-') {
-                $failures.Add("${relative}: ${location}: original GUID detected (value redacted).")
+                $failures.Add("${displayPath}: ${location}: original GUID detected (value redacted).")
             }
         }
         foreach ($match in [regex]::Matches($line, $objectPattern)) {
             $prefix = if ($match.Value.Length -eq 20) { '0' * 10 } else { '0' * 20 }
             if (-not $match.Value.StartsWith($prefix)) {
-                $failures.Add("${relative}: ${location}: original object ID detected (value redacted).")
+                $failures.Add("${displayPath}: ${location}: original object ID detected (value redacted).")
             }
         }
         foreach ($match in [regex]::Matches($line, $hostPattern)) {
             if (-not (Test-Placeholder $match.Value)) {
-                $failures.Add("${relative}: ${location}: environment hostname detected (value redacted).")
+                $failures.Add("${displayPath}: ${location}: environment hostname detected (value redacted).")
             }
         }
         if ($line -match $tokenPattern) {
-            $failures.Add("${relative}: ${location}: credential signature detected (value redacted).")
+            $failures.Add("${displayPath}: ${location}: credential signature detected (value redacted).")
         }
         foreach ($pattern in @($assignmentPattern, $urlSecretPattern)) {
             foreach ($match in [regex]::Matches($line, $pattern)) {
                 if (-not (Test-Placeholder $match.Groups['value'].Value)) {
-                    $failures.Add("${relative}: ${location}: credential value detected (value redacted).")
+                    $failures.Add("${displayPath}: ${location}: credential value detected (value redacted).")
                 }
             }
         }
