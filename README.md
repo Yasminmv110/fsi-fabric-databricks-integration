@@ -20,7 +20,7 @@ by the offline repository checks.
 
 The integration concepts apply to financial services and insurance. The
 included analytics assets use **CMS beneficiary and provider claims concepts**;
-they are a healthcare/insurance example, not a banking dataset. Data files and
+they are a healthcare/insurance example. Data files and
 the upstream data preparation notebook are not included.
 
 ## Start here
