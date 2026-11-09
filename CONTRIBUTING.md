@@ -20,11 +20,23 @@ validation performed, and any limitations.
   describe the resulting item changes in the pull request.
 - Preserve unrelated local changes and existing environment-specific references.
 
+An explicitly approved privacy sanitization is an exception to the manual-edit
+restriction: replace original environment identifiers consistently, including
+filenames and embedded configuration, then validate the resulting templates.
+Do not treat sanitized exports as deployable without recreating/rebinding items.
+
 ## Configuration and data
 
 - Keep `.env.example` limited to documented, non-secret placeholders.
 - Keep local settings in ignored environment files; never commit tokens,
   passwords, connection strings containing secrets, or customer data.
+- Published GUID values must use the synthetic placeholder namespace
+  `00000000-0000-0000-0000-xxxxxxxxxxxx` (hexadecimal suffix). Use distinct
+  placeholders for distinct source values and reuse each mapping consistently.
+  The all-zero value is an unresolved placeholder, not a live resource.
+- Replace source hostnames with `HOST_PLACEHOLDER` and source workspace names
+  with `WORKSPACE_NAME_PLACEHOLDER`. Preserve public schema URLs and functional
+  column names such as `beneficiary_id`.
 - Prefer Microsoft Entra authentication and approved secret management for
   future integrations. Grant only the access needed for the demo.
 - Do not provision resources, run paid workloads, or change workspace settings
@@ -57,8 +69,8 @@ git diff --check
 ```
 
 Also preview Markdown and Mermaid rendering. The offline checks and GitHub
-Actions workflow do not execute SQL, validate service-managed schemas, scan
-for all secrets, or prove cloud behavior. See [validation](docs/validation.md)
+Actions workflow do not execute SQL, validate service-managed schemas, detect
+every secret format, or prove cloud behavior. See [validation](docs/validation.md)
 for exact coverage and the separate, approval-required live acceptance checks.
 
 Keep onboarding prose in `docs/`, read-only SQL examples in `warehouse/`, and

@@ -1,60 +1,59 @@
-relationship 'Annual Beneficiary Utilization_to_Beneficiary'
+﻿relationship 'Annual Beneficiary Utilization_to_Beneficiary'
 	fromColumn: 'Annual Beneficiary Utilization'.'Beneficiary ID'
 	toColumn: Beneficiary.'Beneficiary ID'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-c868ac34a04b
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Annual Beneficiary Utilization_to_Calendar Year'
 	fromColumn: 'Annual Beneficiary Utilization'.'Summary Year'
 	toColumn: 'Calendar Year'.'Calendar Year'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-c1041cc352f4
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Annual Beneficiary Utilization_to_State'
 	fromColumn: 'Annual Beneficiary Utilization'.'State Code'
 	toColumn: State.'State Code'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-b544d2cbdc80
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Annual Beneficiary Utilization_to_Demographic'
 	fromColumn: 'Annual Beneficiary Utilization'.'Demographic Key'
 	toColumn: Demographic.'Demographic Key'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-4353906193be
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Annual Provider Claims Summary_to_Provider'
 	fromColumn: 'Annual Provider Claims Summary'.'Provider Number'
 	toColumn: Provider.'Provider Number'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-e5507b4d6574
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Annual Provider Claims Summary_to_Calendar Year'
 	fromColumn: 'Annual Provider Claims Summary'.'Claim Year'
 	toColumn: 'Calendar Year'.'Calendar Year'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-e82e18b663dc
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Annual Provider Claims Summary_to_Claim Type'
 	fromColumn: 'Annual Provider Claims Summary'.'Claim Type'
 	toColumn: 'Claim Type'.'Claim Type'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-7517a66380ea
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Population Health Summary_to_Calendar Year'
 	fromColumn: 'Population Health Summary'.'Summary Year'
 	toColumn: 'Calendar Year'.'Calendar Year'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-1ac87a099ec9
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Population Health Summary_to_State'
 	fromColumn: 'Population Health Summary'.'State Code'
 	toColumn: State.'State Code'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-a061cd720f4e
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000
 
 relationship 'Population Health Summary_to_Demographic'
 	fromColumn: 'Population Health Summary'.'Demographic Key'
 	toColumn: Demographic.'Demographic Key'
 
-	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-afacf6defff3
-
+	annotation ONT_SourceRelationship = 00000000-0000-0000-0000-000000000000

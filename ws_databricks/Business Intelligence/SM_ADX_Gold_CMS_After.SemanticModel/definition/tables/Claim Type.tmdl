@@ -1,12 +1,12 @@
-/// Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.
+﻿/// Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.
 table 'Claim Type'
-	lineageTag: 00000000-0000-0000-0000-6c075610a2c4
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_claim_type]
 
 	/// Claim category key: Inpatient or Outpatient. Relates to Annual Provider Claims Summary; beneficiary claim-count measures also interpret this selection explicitly.
 	column 'Claim Type'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-f6b5d61cac70
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: claim_type
 		summarizeBy: none
 		sourceColumn: claim_type
@@ -16,7 +16,7 @@ table 'Claim Type'
 	/// Readable definition of the claim category: Part A institutional inpatient claims or Part B institutional outpatient claims.
 	column 'Claim Type Description'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-fa14a5363b99
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: claim_type_description
 		summarizeBy: none
 		sourceColumn: claim_type_description
@@ -28,7 +28,7 @@ table 'Claim Type'
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-ea5ba2644e79
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -41,4 +41,3 @@ table 'Claim Type'
 			entityName: dim_claim_type
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

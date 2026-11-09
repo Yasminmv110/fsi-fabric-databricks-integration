@@ -1,9 +1,8 @@
-expression DatabaseQuery =
+﻿expression DatabaseQuery =
 		let
-		    database = Sql.Database("HOST_PLACEHOLDER.datawarehouse.fabric.microsoft.com", "00000000-0000-0000-0000-df276da610c0")
+		    database = Sql.Database("HOST_PLACEHOLDER.datawarehouse.fabric.microsoft.com", "00000000-0000-0000-0000-000000000000")
 		in
 		    database
-	lineageTag: 00000000-0000-0000-0000-74f259c5629d
+	lineageTag: 00000000-0000-0000-0000-000000000000
 
 	annotation PBI_IncludeFutureArtifacts = False
-

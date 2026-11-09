@@ -1,11 +1,11 @@
-table dim_state
-	lineageTag: 00000000-0000-0000-0000-7eae86185499
+﻿table dim_state
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_state]
 
 	column state_code
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-d2a81b9e7866
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: state_code
 		summarizeBy: none
 		sourceColumn: state_code
@@ -16,7 +16,7 @@ table dim_state
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: datetime2
-		lineageTag: 00000000-0000-0000-0000-5df16ea4913b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -31,4 +31,3 @@ table dim_state
 			expressionSource: DatabaseQuery
 
 	annotation PBI_ResultType = Table
-

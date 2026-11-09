@@ -1,12 +1,12 @@
-table fact_population_health_summary
-	lineageTag: 00000000-0000-0000-0000-3c22c0b11cb7
+﻿table fact_population_health_summary
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[fact_population_health_summary]
 
 	column summary_year
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-76731bf65bc6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: summary_year
 		summarizeBy: sum
 		sourceColumn: summary_year
@@ -16,7 +16,7 @@ table fact_population_health_summary
 	column state_code
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-5aa984773498
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: state_code
 		summarizeBy: none
 		sourceColumn: state_code
@@ -27,7 +27,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-9331bbf58073
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: demographic_key
 		summarizeBy: sum
 		sourceColumn: demographic_key
@@ -38,7 +38,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-832f9a82f123
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: beneficiary_count
 		summarizeBy: sum
 		sourceColumn: beneficiary_count
@@ -49,7 +49,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-e45be06aa081
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: deceased_count
 		summarizeBy: sum
 		sourceColumn: deceased_count
@@ -60,7 +60,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-d0da1079f662
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: esrd_count
 		summarizeBy: sum
 		sourceColumn: esrd_count
@@ -71,7 +71,7 @@ table fact_population_health_summary
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		sourceProviderType: decimal(9, 2)
-		lineageTag: 00000000-0000-0000-0000-3f57d0cd619a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_age
 		summarizeBy: sum
 		sourceColumn: avg_age
@@ -84,7 +84,7 @@ table fact_population_health_summary
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		sourceProviderType: decimal(9, 2)
-		lineageTag: 00000000-0000-0000-0000-a1eaf9e47ead
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_chronic_condition_count
 		summarizeBy: sum
 		sourceColumn: avg_chronic_condition_count
@@ -97,7 +97,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-15a9fd3cdcfb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: multi_chronic_3plus_count
 		summarizeBy: sum
 		sourceColumn: multi_chronic_3plus_count
@@ -108,7 +108,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-ff1c95526684
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: alzheimers_count
 		summarizeBy: sum
 		sourceColumn: alzheimers_count
@@ -119,7 +119,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-02c05955827b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: heart_failure_count
 		summarizeBy: sum
 		sourceColumn: heart_failure_count
@@ -130,7 +130,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-33156cdcb59b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: chronic_kidney_disease_count
 		summarizeBy: sum
 		sourceColumn: chronic_kidney_disease_count
@@ -141,7 +141,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-54685645fe34
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: cancer_count
 		summarizeBy: sum
 		sourceColumn: cancer_count
@@ -152,7 +152,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-aa49ff6a1c50
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: copd_count
 		summarizeBy: sum
 		sourceColumn: copd_count
@@ -163,7 +163,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-141379d5c2f9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: depression_count
 		summarizeBy: sum
 		sourceColumn: depression_count
@@ -174,7 +174,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-1e872db4402e
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: diabetes_count
 		summarizeBy: sum
 		sourceColumn: diabetes_count
@@ -185,7 +185,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-d1ce841ea645
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: ischemic_heart_disease_count
 		summarizeBy: sum
 		sourceColumn: ischemic_heart_disease_count
@@ -196,7 +196,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-ab839eb0fa47
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: osteoporosis_count
 		summarizeBy: sum
 		sourceColumn: osteoporosis_count
@@ -207,7 +207,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-eb6b5ff0a683
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: rheumatoid_osteo_arthritis_count
 		summarizeBy: sum
 		sourceColumn: rheumatoid_osteo_arthritis_count
@@ -218,7 +218,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-81a6a8ea80b9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: stroke_tia_count
 		summarizeBy: sum
 		sourceColumn: stroke_tia_count
@@ -229,7 +229,7 @@ table fact_population_health_summary
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		sourceProviderType: decimal(9, 4)
-		lineageTag: 00000000-0000-0000-0000-4080a3dfb361
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: diabetes_prevalence_rate
 		summarizeBy: sum
 		sourceColumn: diabetes_prevalence_rate
@@ -242,7 +242,7 @@ table fact_population_health_summary
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		sourceProviderType: decimal(9, 4)
-		lineageTag: 00000000-0000-0000-0000-80facd8cc429
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: heart_failure_prevalence_rate
 		summarizeBy: sum
 		sourceColumn: heart_failure_prevalence_rate
@@ -255,7 +255,7 @@ table fact_population_health_summary
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
 		sourceProviderType: decimal(9, 4)
-		lineageTag: 00000000-0000-0000-0000-2be56b04379a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: ischemic_heart_disease_prevalence_rate
 		summarizeBy: sum
 		sourceColumn: ischemic_heart_disease_prevalence_rate
@@ -267,7 +267,7 @@ table fact_population_health_summary
 	column total_medicare_reimbursement_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-e561aaf22929
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: total_medicare_reimbursement_amt
@@ -279,7 +279,7 @@ table fact_population_health_summary
 	column medicare_reimbursement_per_beneficiary_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-99bf303afd86
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: medicare_reimbursement_per_beneficiary_amt
 		summarizeBy: sum
 		sourceColumn: medicare_reimbursement_per_beneficiary_amt
@@ -291,7 +291,7 @@ table fact_population_health_summary
 	column total_beneficiary_responsibility_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-ebda833a00d6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_beneficiary_responsibility_amt
 		summarizeBy: sum
 		sourceColumn: total_beneficiary_responsibility_amt
@@ -304,7 +304,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-4f487b4e8391
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_count
@@ -315,7 +315,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-7613fcbb54d6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_length_of_stay_days
 		summarizeBy: sum
 		sourceColumn: inpatient_length_of_stay_days
@@ -326,7 +326,7 @@ table fact_population_health_summary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-c029c5079295
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_count
@@ -336,7 +336,7 @@ table fact_population_health_summary
 	column inpatient_claim_payment_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-369d8cacd0b2
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_payment_amt
@@ -348,7 +348,7 @@ table fact_population_health_summary
 	column outpatient_claim_payment_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-b2d2b96cf1fe
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_payment_amt
@@ -360,7 +360,7 @@ table fact_population_health_summary
 	column inpatient_claims_per_1000
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-4cd9990d336a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claims_per_1000
 		summarizeBy: sum
 		sourceColumn: inpatient_claims_per_1000
@@ -372,7 +372,7 @@ table fact_population_health_summary
 	column outpatient_claims_per_1000
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-4d0b9b036bbd
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claims_per_1000
 		summarizeBy: sum
 		sourceColumn: outpatient_claims_per_1000
@@ -385,7 +385,7 @@ table fact_population_health_summary
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: datetime2
-		lineageTag: 00000000-0000-0000-0000-c5ae78511039
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -400,4 +400,3 @@ table fact_population_health_summary
 			expressionSource: DatabaseQuery
 
 	annotation PBI_ResultType = Table
-

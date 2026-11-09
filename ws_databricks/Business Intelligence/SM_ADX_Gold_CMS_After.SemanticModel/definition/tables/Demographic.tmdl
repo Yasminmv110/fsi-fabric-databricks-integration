@@ -1,6 +1,6 @@
-/// Demographic dimension keyed by Demographic Key, with sex, race, age band, and display-sort columns. Filters Annual Beneficiary Utilization and Population Health Summary. Represents the demographic grouping attached to each annual summary, not a provider characteristic.
+﻿/// Demographic dimension keyed by Demographic Key, with sex, race, age band, and display-sort columns. Filters Annual Beneficiary Utilization and Population Health Summary. Represents the demographic grouping attached to each annual summary, not a provider characteristic.
 table Demographic
-	lineageTag: 00000000-0000-0000-0000-26a759f3cf7a
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_demographic]
 
 	/// Unique key identifying a demographic combination of sex, race, and age band. Joins to annual beneficiary utilization and population health summaries.
@@ -8,7 +8,7 @@ table Demographic
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-7b88e4dbd4ed
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: demographic_key
 		summarizeBy: none
 		sourceColumn: demographic_key
@@ -18,7 +18,7 @@ table Demographic
 	/// Source sex category for this annual demographic grouping. Use to slice beneficiary and population-health measures; does not filter provider claims.
 	column Sex
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-9ba378bb9313
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: sex
 		summarizeBy: none
 		sourceColumn: sex
@@ -28,7 +28,7 @@ table Demographic
 	/// Source race category for this annual demographic grouping. Use to slice beneficiary and population-health measures; does not filter provider claims.
 	column Race
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-2029e8377dfe
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: race
 		summarizeBy: none
 		sourceColumn: race
@@ -38,7 +38,7 @@ table Demographic
 	/// Age-range label for this demographic grouping. Use with annual beneficiary and population summaries; Age Band Sort Order supplies the intended display sequence.
 	column 'Age Band'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-c6998dfdfccc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: age_band
 		summarizeBy: none
 		sourceColumn: age_band
@@ -50,7 +50,7 @@ table Demographic
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-bea989b8d723
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: sex_sort
 		summarizeBy: sum
 		sourceColumn: sex_sort
@@ -62,7 +62,7 @@ table Demographic
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-7d852cf7cabf
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: race_sort
 		summarizeBy: sum
 		sourceColumn: race_sort
@@ -74,7 +74,7 @@ table Demographic
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-a5fe1124a6a1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: age_band_sort
 		summarizeBy: sum
 		sourceColumn: age_band_sort
@@ -86,7 +86,7 @@ table Demographic
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-e564afdbc523
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -99,4 +99,3 @@ table Demographic
 			entityName: dim_demographic
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

@@ -1,33 +1,33 @@
-{
+﻿{
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/fewShots/1.0.0/schema.json",
   "fewShots": [
     {
-      "id": "00000000-0000-0000-0000-755aa690fce7",
+      "id": "00000000-0000-0000-0000-000000000000",
       "question": "Show beneficiaries, beneficiary-year observations, Medicare reimbursement, and reimbursement per beneficiary by year",
       "query": "SELECT summary_year,\r\n    COUNT(DISTINCT beneficiary_id) AS distinct_beneficiaries,\r\n    COUNT_BIG(*) AS beneficiary_year_observations,\r\n    SUM(total_medicare_reimbursement_amt)\r\n        AS total_medicare_reimbursement_usd,\r\n    SUM(total_medicare_reimbursement_amt)\r\n        / NULLIF(\r\n            CAST(COUNT(DISTINCT beneficiary_id) AS decimal(19, 4)),\r\n            0\r\n        ) AS reimbursement_per_beneficiary_usd\r\nFROM gold.fact_beneficiary_annual_utilization\r\nGROUP BY summary_year\r\nORDER BY summary_year;"
     },
     {
-      "id": "00000000-0000-0000-0000-9df23cb12eb8",
+      "id": "00000000-0000-0000-0000-000000000000",
       "question": "Which 10 state codes had the highest total Medicare reimbursement in the latest available beneficiary summary year?",
       "query": "-- Enter a SQL query that could answer the qSELECT TOP (10)\r\n  select  summary_year,\r\n    state_code,\r\n    COUNT(DISTINCT beneficiary_id) AS distinct_beneficiaries,\r\n    SUM(total_medicare_reimbursement_amt)\r\n        AS total_medicare_reimbursement_usd\r\nFROM gold.fact_beneficiary_annual_utilization\r\nWHERE summary_year = (\r\n    SELECT MAX(summary_year)\r\n    FROM gold.fact_beneficiary_annual_utilization\r\n)\r\nGROUP BY summary_year, state_code\r\nORDER BY total_medicare_reimbursement_usd DESC, state_code;"
     },
     {
-      "id": "00000000-0000-0000-0000-02e855c4213d",
+      "id": "00000000-0000-0000-0000-000000000000",
       "question": "Show diabetes prevalence by sex, race, and age band in the latest available beneficiary summary year.",
       "query": "\r\n    select f.summary_year,\r\n    d.sex,\r\n    d.race,\r\n    d.age_band,\r\n    COUNT_BIG(*) AS beneficiary_year_observations,\r\n    SUM(CAST(\r\n        CASE WHEN f.has_diabetes = 1 THEN 1 ELSE 0 END\r\n        AS bigint\r\n    )) AS diabetes_observations,\r\n    100.0 * SUM(CAST(\r\n        CASE WHEN f.has_diabetes = 1 THEN 1 ELSE 0 END\r\n        AS bigint\r\n    )) / NULLIF(COUNT_BIG(*), 0) AS diabetes_prevalence_pct\r\nFROM gold.fact_beneficiary_annual_utilization AS f\r\nLEFT JOIN gold.dim_demographic AS d\r\n    ON f.demographic_key = d.demographic_key\r\nWHERE f.summary_year = (\r\n    SELECT MAX(summary_year)\r\n    FROM gold.fact_beneficiary_annual_utilization\r\n)\r\nGROUP BY\r\n    f.summary_year,\r\n    d.sex,\r\n    d.race,\r\n    d.age_band,\r\n    d.age_band_sort\r\nORDER BY\r\n    d.sex,\r\n    d.race,\r\n    d.age_band_sort,\r\n    d.age_band;"
     },
     {
-      "id": "00000000-0000-0000-0000-7a5f38fbb5dc",
+      "id": "00000000-0000-0000-0000-000000000000",
       "question": "Which 10 providers had the most inpatient claims in the latest year with inpatient provider claims?",
       "query": "SELECT TOP (10) claim_year,\r\n    provider_number,\r\n    SUM(claim_count) AS inpatient_claim_count,\r\n    SUM(total_claim_payment_amt) AS inpatient_claim_payment_usd,\r\n    SUM(total_claim_payment_amt)\r\n        / NULLIF(\r\n            CAST(SUM(claim_count) AS decimal(19, 4)),\r\n            0\r\n        ) AS payment_per_claim_usd\r\nFROM gold.fact_provider_annual_summary\r\nWHERE claim_type = 'Inpatient'\r\n  AND claim_year = (\r\n      SELECT MAX(claim_year)\r\n      FROM gold.fact_provider_annual_summary\r\n      WHERE claim_type = 'Inpatient'\r\n  )\r\nGROUP BY claim_year, provider_number\r\nORDER BY inpatient_claim_count DESC, provider_number;"
     },
     {
-      "id": "00000000-0000-0000-0000-42e0e8bbc1be",
+      "id": "00000000-0000-0000-0000-000000000000",
       "question": "Show annual diabetes and heart failure prevalence by state code using the population health summary",
       "query": "SELECT\r\n    summary_year,\r\n    state_code,\r\n    SUM(CAST(beneficiary_count AS bigint))\r\n        AS beneficiary_year_observations,\r\n    100.0 * SUM(CAST(diabetes_count AS bigint))\r\n        / NULLIF(\r\n            SUM(CAST(beneficiary_count AS bigint)),\r\n            0\r\n        ) AS diabetes_prevalence_pct,\r\n    100.0 * SUM(CAST(heart_failure_count AS bigint))\r\n        / NULLIF(\r\n            SUM(CAST(beneficiary_count AS bigint)),\r\n            0\r\n        ) AS heart_failure_prevalence_pct\r\nFROM gold.fact_population_health_summary\r\nGROUP BY summary_year, state_code\r\nORDER BY summary_year, state_code;"
     },
     {
-      "id": "00000000-0000-0000-0000-4ac1d093c95e",
+      "id": "00000000-0000-0000-0000-000000000000",
       "question": "Show annual Medicare reimbursement and its year-over-year percentage change",
       "query": "WITH annual AS (\r\n    SELECT\r\n        summary_year,\r\n        SUM(total_medicare_reimbursement_amt)\r\n            AS reimbursement_usd\r\n    FROM gold.fact_beneficiary_annual_utilization\r\n    GROUP BY summary_year\r\n)\r\nSELECT\r\n    current_year.summary_year,\r\n    current_year.reimbursement_usd,\r\n    prior_year.reimbursement_usd AS prior_year_reimbursement_usd,\r\n    current_year.reimbursement_usd\r\n        - prior_year.reimbursement_usd AS change_usd,\r\n    100.0 * (\r\n        current_year.reimbursement_usd\r\n        - prior_year.reimbursement_usd\r\n    ) / NULLIF(\r\n        prior_year.reimbursement_usd,\r\n        0\r\n    ) AS yoy_change_pct\r\nFROM annual AS current_year\r\nLEFT JOIN annual AS prior_year\r\n    ON prior_year.summary_year = current_year.summary_year - 1\r\nORDER BY current_year.summary_year;"
     }

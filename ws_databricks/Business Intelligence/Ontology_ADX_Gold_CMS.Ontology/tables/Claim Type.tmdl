@@ -1,44 +1,43 @@
-/// Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.
+﻿/// Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.
 table 'Claim Type'
-	lineageTag: 00000000-0000-0000-0000-f48233fe19d5
-	sourceLineageTag: 00000000-0000-0000-0000-6c075610a2c4
+	lineageTag: 00000000-0000-0000-0000-000000000000
+	sourceLineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Claim category key: Inpatient or Outpatient. Relates to Annual Provider Claims Summary; beneficiary claim-count measures also interpret this selection explicitly.
 	column 'Claim Type'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-95f0d218b79e
-		sourceLineageTag: 00000000-0000-0000-0000-f6b5d61cac70
+		lineageTag: 00000000-0000-0000-0000-000000000000
+		sourceLineageTag: 00000000-0000-0000-0000-000000000000
 		sourceColumn: claim_type
 
 	/// Readable definition of the claim category: Part A institutional inpatient claims or Part B institutional outpatient claims.
 	column 'Claim Type Description'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-02393ab38e4f
-		sourceLineageTag: 00000000-0000-0000-0000-fa14a5363b99
+		lineageTag: 00000000-0000-0000-0000-000000000000
+		sourceLineageTag: 00000000-0000-0000-0000-000000000000
 		sourceColumn: claim_type_description
 
 	/// Recorded load timestamp for this gold-layer claim-type record. Operational lineage metadata, not a claim date.
 	column 'Gold Load Timestamp'
 		dataType: dateTime
-		lineageTag: 00000000-0000-0000-0000-63111f7f58c0
-		sourceLineageTag: 00000000-0000-0000-0000-ea5ba2644e79
+		lineageTag: 00000000-0000-0000-0000-000000000000
+		sourceLineageTag: 00000000-0000-0000-0000-000000000000
 		sourceColumn: _gold_load_ts
 
 	partition 'Claim Type-partition' = entity
 		mode: directQuery
 		source
 			entityName: Claim Type
-			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5'
+			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000'
 
 		annotation ONT_PinnedAtUtc = 2026-10-29T15:47:42.5701133+00:00
 
-		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-4f0a9fa9337a
+		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-000000000000
 
-		annotation ONT_ItemId = 00000000-0000-0000-0000-171fc01efbf5
+		annotation ONT_ItemId = 00000000-0000-0000-0000-000000000000
 
 		annotation ONT_ItemKind = SemanticModel
 
 		annotation ONT_WorkspaceName = WS_Databricks
 
 		annotation ONT_ItemName = SM_ADX_Gold_CMS_After
-

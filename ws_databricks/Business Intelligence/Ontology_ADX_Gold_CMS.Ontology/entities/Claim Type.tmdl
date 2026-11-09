@@ -1,12 +1,12 @@
-/// Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.
+﻿/// Claim-type dimension distinguishing inpatient Part A institutional claims from outpatient Part B institutional claims. Filters Annual Provider Claims Summary through its active relationship. Beneficiary claim-count measures also apply this selection explicitly; population and reimbursement measures do not.
 entity 'Claim Type'
-	lineageTag: 00000000-0000-0000-0000-82f80b6c5b69
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	backingTable: 'Claim Type'
 
 	/// Claim category key: Inpatient or Outpatient. Relates to Annual Provider Claims Summary; beneficiary claim-count measures also interpret this selection explicitly.
 	property claim_type
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-95f0d218b79e
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 		backingConfiguration
 			valueColumn: 'Claim Type'.'Claim Type'
@@ -18,7 +18,7 @@ entity 'Claim Type'
 	/// Readable definition of the claim category: Part A institutional inpatient claims or Part B institutional outpatient claims.
 	property claim_type_description
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-02393ab38e4f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 		backingConfiguration
 			valueColumn: 'Claim Type'.'Claim Type Description'
@@ -30,7 +30,7 @@ entity 'Claim Type'
 	/// Recorded load timestamp for this gold-layer claim-type record. Operational lineage metadata, not a claim date.
 	property _gold_load_ts
 		dataType: dateTime
-		lineageTag: 00000000-0000-0000-0000-63111f7f58c0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 		backingConfiguration
 			valueColumn: 'Claim Type'.'Gold Load Timestamp'
@@ -40,4 +40,3 @@ entity 'Claim Type'
 		synonym 'Gold Layer Load Timestamp'
 
 		synonym 'Gold Load Time'
-

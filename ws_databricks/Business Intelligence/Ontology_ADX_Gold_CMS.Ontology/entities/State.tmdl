@@ -1,12 +1,12 @@
-/// State-code dimension used to filter annual beneficiary utilization and population health summaries by the state recorded for the summary year. Codes are source-system geographic identifiers, not necessarily postal abbreviations. Does not filter provider claims.
+﻿/// State-code dimension used to filter annual beneficiary utilization and population health summaries by the state recorded for the summary year. Codes are source-system geographic identifiers, not necessarily postal abbreviations. Does not filter provider claims.
 entity State
-	lineageTag: 00000000-0000-0000-0000-3e4aa7af1a1d
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	backingTable: State
 
 	/// Source-system state identifier and key of the State dimension. Joins to state codes in annual beneficiary and population summaries; do not assume postal abbreviations or provider location.
 	property state_code
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-d30cdb9c05ff
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 		backingConfiguration
 			valueColumn: State.'State Code'
@@ -18,7 +18,7 @@ entity State
 	/// Recorded load timestamp for this gold-layer state record. Operational lineage metadata.
 	property _gold_load_ts
 		dataType: dateTime
-		lineageTag: 00000000-0000-0000-0000-9f792d47057d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 		backingConfiguration
 			valueColumn: State.'Gold Load Timestamp'
@@ -28,4 +28,3 @@ entity State
 		synonym 'Gold Layer Load Timestamp'
 
 		synonym 'Gold Load Time'
-

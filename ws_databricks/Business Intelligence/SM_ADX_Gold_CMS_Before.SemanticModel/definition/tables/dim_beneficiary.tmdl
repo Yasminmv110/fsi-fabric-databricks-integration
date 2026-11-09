@@ -1,11 +1,11 @@
-table dim_beneficiary
-	lineageTag: 00000000-0000-0000-0000-5f67b0f4f638
+﻿table dim_beneficiary
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_beneficiary]
 
 	column beneficiary_id
 		dataType: string
 		sourceProviderType: varchar(50)
-		lineageTag: 00000000-0000-0000-0000-0826b6ec4ca5
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: beneficiary_id
 		summarizeBy: none
 		sourceColumn: beneficiary_id
@@ -16,7 +16,7 @@ table dim_beneficiary
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: date
-		lineageTag: 00000000-0000-0000-0000-18612041f34a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: birth_date
 		summarizeBy: none
 		sourceColumn: birth_date
@@ -27,7 +27,7 @@ table dim_beneficiary
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: date
-		lineageTag: 00000000-0000-0000-0000-7924429758d0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: death_date
 		summarizeBy: none
 		sourceColumn: death_date
@@ -37,7 +37,7 @@ table dim_beneficiary
 	column sex
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-9304396a7023
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: sex
 		summarizeBy: none
 		sourceColumn: sex
@@ -47,7 +47,7 @@ table dim_beneficiary
 	column race
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-e0faf07e2fcf
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: race
 		summarizeBy: none
 		sourceColumn: race
@@ -57,7 +57,7 @@ table dim_beneficiary
 	column latest_state_code
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-3fa647454899
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: latest_state_code
 		summarizeBy: none
 		sourceColumn: latest_state_code
@@ -67,7 +67,7 @@ table dim_beneficiary
 	column latest_county_code
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-d8543d04f956
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: latest_county_code
 		summarizeBy: none
 		sourceColumn: latest_county_code
@@ -78,7 +78,7 @@ table dim_beneficiary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-db839ace2deb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: first_summary_year
 		summarizeBy: sum
 		sourceColumn: first_summary_year
@@ -89,7 +89,7 @@ table dim_beneficiary
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-ce9749227cfd
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: last_summary_year
 		summarizeBy: sum
 		sourceColumn: last_summary_year
@@ -100,7 +100,7 @@ table dim_beneficiary
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: datetime2
-		lineageTag: 00000000-0000-0000-0000-05f4130cf85c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -115,4 +115,3 @@ table dim_beneficiary
 			expressionSource: DatabaseQuery
 
 	annotation PBI_ResultType = Table
-

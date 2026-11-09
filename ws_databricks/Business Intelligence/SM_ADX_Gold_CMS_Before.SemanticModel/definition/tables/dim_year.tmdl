@@ -1,12 +1,12 @@
-table dim_year
-	lineageTag: 00000000-0000-0000-0000-89681e0fa75b
+﻿table dim_year
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_year]
 
 	column calendar_year
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-1318c8544c50
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: calendar_year
 		summarizeBy: sum
 		sourceColumn: calendar_year
@@ -17,7 +17,7 @@ table dim_year
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: datetime2
-		lineageTag: 00000000-0000-0000-0000-04210be65c65
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -32,4 +32,3 @@ table dim_year
 			expressionSource: DatabaseQuery
 
 	annotation PBI_ResultType = Table
-

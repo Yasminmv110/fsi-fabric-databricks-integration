@@ -1,0 +1,54 @@
+﻿{
+  "sources": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "csms-onelake-source",
+      "type": "FabricOneLakeEvents",
+      "properties": {
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "00000000-0000-0000-0000-000000000000",
+        "oneLakePaths": [
+          "/Files/",
+          "/Tables/"
+        ],
+        "includedEventTypes": [
+          "Microsoft.Fabric.OneLake.FileCreated",
+          "Microsoft.Fabric.OneLake.FileDeleted",
+          "Microsoft.Fabric.OneLake.FileRenamed",
+          "Microsoft.Fabric.OneLake.FolderCreated",
+          "Microsoft.Fabric.OneLake.FolderDeleted",
+          "Microsoft.Fabric.OneLake.FolderRenamed"
+        ]
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "csms-customendpoint",
+      "type": "CustomEndpoint",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "csms-onelake-stream"
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "name": "csms-onelake-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "csms-onelake-source"
+        }
+      ]
+    }
+  ],
+  "operators": [],
+  "compatibilityLevel": "1.1"
+}

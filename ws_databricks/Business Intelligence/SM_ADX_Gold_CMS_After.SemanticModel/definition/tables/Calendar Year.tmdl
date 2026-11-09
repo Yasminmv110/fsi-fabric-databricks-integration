@@ -1,13 +1,13 @@
-/// Shared year dimension filtering beneficiary and population summaries by Summary Year and provider claims by Claim Year. Fact tables can have different year coverage; provider claims include 2007 while beneficiary summaries currently cover 2008-2010.
+﻿/// Shared year dimension filtering beneficiary and population summaries by Summary Year and provider claims by Claim Year. Fact tables can have different year coverage; provider claims include 2007 while beneficiary summaries currently cover 2008-2010.
 table 'Calendar Year'
-	lineageTag: 00000000-0000-0000-0000-f26c23291488
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_year]
 
 	/// Four-digit calendar year shared by beneficiary/population Summary Year and provider Claim Year. Use this dimension for consistent year filters across the fact tables.
 	column 'Calendar Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-74f4532bdf47
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: calendar_year
 		summarizeBy: none
 		sourceColumn: calendar_year
@@ -19,7 +19,7 @@ table 'Calendar Year'
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-15588b9f1ca1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -32,4 +32,3 @@ table 'Calendar Year'
 			entityName: dim_year
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

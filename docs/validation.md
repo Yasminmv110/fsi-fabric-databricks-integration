@@ -25,7 +25,8 @@ It performs no network calls or cloud mutations.
 | Markdown fences | Matching backtick/tilde fences; not Markdown style or Mermaid syntax |
 | JSON syntax | `.json`, `.platform`, `.pbir`, `.pbism`; not Fabric JSON schema compatibility or SQL strings |
 | Report references | Existing model directory for exported `datasetReference.byPath`; not deployed bindings or model semantics |
-| Checker regression scenarios | Valid encoded link/reference, missing target, unclosed fence, ignored code example, invalid JSON, missing model |
+| Privacy patterns | Non-placeholder GUIDs in file contents/names, environment cloud hosts, common token/private-key signatures and credential assignments; failures redact values |
+| Checker regression scenarios | Thirteen success/failure scenarios covering links, fences, JSON, report references, GUID values/filenames, cloud hosts and credentials |
 
 [GitHub Actions](../.github/workflows/validate.yml) runs the checker, its
 regression scenarios, and whitespace checks without Azure/Fabric credentials.
@@ -40,7 +41,29 @@ It checks the pushed/PR checkout, not uncommitted local work.
   workflows. Documentation changes must not rewrite managed exports.
 - Review for credentials, detailed data, source tenant endpoints and IDs.
   Enable repository secret scanning/push protection where available; the local
-  checker is **not** a secret scanner.
+  privacy patterns are not a complete security scanner.
+
+## Identifier and history policy
+
+The [privacy checker](../scripts/Test-Privacy.ps1) runs as part of the repository
+check and may also run on its own. GUIDs in the synthetic namespace
+`00000000-0000-0000-0000-xxxxxxxxxxxx` are placeholders, not original resources.
+The all-zero placeholder cannot preserve unique object identities; regenerate
+and rebind exported items through supported tooling before deployment.
+Functional fields such as `beneficiary_id`, public schema version paths, Git
+hashes, and public Git authorship metadata are not environment credentials.
+
+The checker covers tracked/non-ignored working files, not ignored local settings,
+Git objects, commit messages, remote branches, PR refs, caches or forks.
+After a historical disclosure, cleaning the latest tree is insufficient:
+rewrite affected history only with owner approval, verify rewritten content and
+ref names, and push with explicit leases. Collaborators must replace old clones
+or carefully resynchronize without merging old history back.
+
+Existing clones, GitHub caches, forks and hidden pull-request refs can retain
+old objects after a force push. Contact GitHub Support for retained-object
+cleanup where needed. Revoke/rotate any real credential immediately if found;
+rewriting history does not invalidate it.
 
 ## Live acceptance checklist
 

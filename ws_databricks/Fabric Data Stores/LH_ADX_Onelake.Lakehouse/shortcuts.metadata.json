@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "name": "insurance",
     "path": "/Tables/bronze",
@@ -6,7 +6,7 @@
       "type": "OneLake",
       "oneLake": {
         "path": "Tables/bronze/insurance",
-        "itemId": "00000000-0000-0000-0000-b1a2b4da1ff6",
+        "itemId": "00000000-0000-0000-0000-000000000000",
         "workspaceId": "00000000-0000-0000-0000-000000000000",
         "artifactType": "DatabricksCatalog"
       }

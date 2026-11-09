@@ -8,6 +8,7 @@ if ([string]::IsNullOrWhiteSpace($Root)) {
     $Root = Split-Path -Parent $PSScriptRoot
 }
 $Root = (Resolve-Path -LiteralPath $Root).Path
+& (Join-Path $PSScriptRoot 'Test-Privacy.ps1') -Root $Root
 $paths = @(& git -C $Root -c core.quotepath=false ls-files --cached --others --exclude-standard)
 if ($LASTEXITCODE -ne 0) {
     throw "Cannot enumerate repository files under $Root."
@@ -94,4 +95,4 @@ if ($failures.Count -gt 0) {
 }
 
 Write-Output "PASS: $markdownCount Markdown files, $jsonCount JSON-format files, $reportCount report references checked."
-Write-Output 'Offline structure checks only; cloud behavior, SQL, item schemas, secrets and Mermaid rendering are not validated.'
+Write-Output 'Offline structure and pattern-based privacy checks only; cloud behavior, SQL, item schemas and Mermaid rendering are not validated.'

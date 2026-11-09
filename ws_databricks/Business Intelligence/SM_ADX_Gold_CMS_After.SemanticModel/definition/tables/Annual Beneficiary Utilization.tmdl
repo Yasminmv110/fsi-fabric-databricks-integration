@@ -1,144 +1,144 @@
-/// Annual beneficiary-level fact table at beneficiary-year grain, with annual geography/demographics, age, coverage months, condition indicators, Medicare reimbursement, and inpatient/outpatient utilization. Supports year/state/demographic/beneficiary analysis. Multi-year population averages and prevalence measures are beneficiary-year weighted; Total Beneficiaries counts distinct people. No provider relationship.
+﻿/// Annual beneficiary-level fact table at beneficiary-year grain, with annual geography/demographics, age, coverage months, condition indicators, Medicare reimbursement, and inpatient/outpatient utilization. Supports year/state/demographic/beneficiary analysis. Multi-year population averages and prevalence measures are beneficiary-year weighted; Total Beneficiaries counts distinct people. No provider relationship.
 table 'Annual Beneficiary Utilization'
-	lineageTag: 00000000-0000-0000-0000-068509ae3ddd
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[fact_beneficiary_annual_utilization]
 
 	/// Distinct beneficiaries with annual utilization records in the current year, state, demographic, and beneficiary context. Non-additive across years. Provider and claim-type dimensions do not filter this population.
 	measure 'Total Beneficiaries' = DISTINCTCOUNTNOBLANK('Annual Beneficiary Utilization'[Beneficiary ID])
 		formatString: #,0
 		displayFolder: Population
-		lineageTag: 00000000-0000-0000-0000-8201768d6502
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Number of beneficiary-year observations in the current context. Denominator for observation-weighted averages and prevalence; a person can contribute once per selected year.
 	measure 'Beneficiary-Year Count' = COUNTROWS('Annual Beneficiary Utilization')
 		formatString: #,0
 		displayFolder: Population
-		lineageTag: 00000000-0000-0000-0000-982efca5144c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Mean age at year end across nonblank beneficiary-year observations in the selected years, states, demographics, and beneficiaries. Not an average of subgroup averages.
 	measure 'Average Age' = AVERAGE('Annual Beneficiary Utilization'[Age at Year End])
 		formatString: 0.0
 		displayFolder: Population
-		lineageTag: 00000000-0000-0000-0000-e50e22c12527
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Mean chronic condition count across nonblank beneficiary-year observations in the current context.
 	measure 'Average Chronic Condition Count' = AVERAGE('Annual Beneficiary Utilization'[Chronic Condition Count])
 		formatString: 0.00
 		displayFolder: Population
-		lineageTag: 00000000-0000-0000-0000-e4486e51f94d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Total annual Medicare reimbursement, including inpatient, outpatient, and carrier amounts. Responds to year, state, demographic, and beneficiary filters, not provider or claim-type filters. Not equivalent to institutional claim payments.
 	measure 'Total Medicare Reimbursement' = SUM('Annual Beneficiary Utilization'[Total Medicare Reimbursement Amount])
 		formatString: $#,0.00;($#,0.00);$0.00
 		displayFolder: Reimbursement
-		lineageTag: 00000000-0000-0000-0000-fc7f4f427a2b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Selected-period Medicare reimbursement divided by distinct beneficiaries in that period. For multiple years, this is cumulative reimbursement per distinct person, not per beneficiary-year. Blank for an empty denominator.
 	measure 'Reimbursement per Beneficiary' = DIVIDE([Total Medicare Reimbursement], [Total Beneficiaries])
 		formatString: $#,0.00;($#,0.00);$0.00
 		displayFolder: Reimbursement
-		lineageTag: 00000000-0000-0000-0000-6edeb298307c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Inpatient plus outpatient claim counts from annual beneficiary utilization. Use with Calendar Year, State, Demographic, Beneficiary, and Claim Type dimensions. No provider attribution is available; Provider does not filter this measure. Excludes claims outside beneficiary summary coverage.
 	measure 'Total Beneficiary Claims' = [Beneficiary Inpatient Claim Count] + [Beneficiary Outpatient Claim Count]
 		formatString: #,0
 		displayFolder: Claims\Beneficiary
-		lineageTag: 00000000-0000-0000-0000-cecf32f3a88b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Inpatient claims in annual beneficiary utilization, respecting year, state, demographic, beneficiary, and selected Claim Type. Blank when Inpatient is excluded. Provider filters are not supported.
 	measure 'Beneficiary Inpatient Claim Count' = IF("Inpatient" IN VALUES('Claim Type'[Claim Type]), SUM('Annual Beneficiary Utilization'[Inpatient Claim Count]))
 		formatString: #,0
 		displayFolder: Claims\Beneficiary
-		lineageTag: 00000000-0000-0000-0000-14e0a2d223d8
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Outpatient claims in annual beneficiary utilization, respecting year, state, demographic, beneficiary, and selected Claim Type. Blank when Outpatient is excluded. Provider filters are not supported.
 	measure 'Beneficiary Outpatient Claim Count' = IF("Outpatient" IN VALUES('Claim Type'[Claim Type]), SUM('Annual Beneficiary Utilization'[Outpatient Claim Count]))
 		formatString: #,0
 		displayFolder: Claims\Beneficiary
-		lineageTag: 00000000-0000-0000-0000-5e7725d0672d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with Alzheimer's disease. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Alzheimer''s Disease Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Alzheimer's Disease] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-d7277312da56
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with heart failure. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Heart Failure Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Heart Failure] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-b48b8e64bb7a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with chronic kidney disease. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Chronic Kidney Disease Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Chronic Kidney Disease] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-db8e2255a324
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with cancer. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Cancer Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Cancer] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-22ac52100f5f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with COPD. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'COPD Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has COPD] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-0902872d7827
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with depression. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Depression Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Depression] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-b6685c6ce1b6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with diabetes. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Diabetes Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Diabetes] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-abc4b9964578
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with ischemic heart disease. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Ischemic Heart Disease Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Ischemic Heart Disease] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-53bc86ed2abb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with osteoporosis. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Osteoporosis Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Osteoporosis] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-9dc47a2144e2
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with rheumatoid/osteo arthritis. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Rheumatoid/Osteo Arthritis Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Rheumatoid/Osteo Arthritis] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-2711a7dc2c5f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with stroke/TIA. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'Stroke/TIA Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has Stroke/TIA] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-3ee2d083124f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations flagged with end-stage renal disease. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure 'End-Stage Renal Disease Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Has End-Stage Renal Disease] = 1)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-8726407b3e4b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Share of beneficiary-year observations with three or more chronic conditions. Respects year, state, demographic, and beneficiary filters; not provider or claim type. Multiple years are observation-weighted. Blank for an empty denominator.
 	measure '3+ Chronic Conditions Prevalence Rate' = DIVIDE(CALCULATE([Beneficiary-Year Count], KEEPFILTERS('Annual Beneficiary Utilization'[Chronic Condition Count] >= 3)), [Beneficiary-Year Count])
 		formatString: 0.00%
 		displayFolder: Population\Prevalence
-		lineageTag: 00000000-0000-0000-0000-2230ece6b7be
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Beneficiary identifier for this annual observation; foreign key to Beneficiary. A beneficiary can appear in multiple summary years.
 	column 'Beneficiary ID'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-a8db50f264ad
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: beneficiary_id
 		summarizeBy: none
 		sourceColumn: beneficiary_id
@@ -149,7 +149,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Summary Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-c95fb9211cb5
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: summary_year
 		summarizeBy: none
 		sourceColumn: summary_year
@@ -159,7 +159,7 @@ table 'Annual Beneficiary Utilization'
 	/// Source state code recorded for this beneficiary in the summary year. Foreign key to State; may differ from the beneficiary dimension's latest state.
 	column 'State Code'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-9e2f51cfaf05
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: state_code
 		summarizeBy: none
 		sourceColumn: state_code
@@ -171,7 +171,7 @@ table 'Annual Beneficiary Utilization'
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-8c96e9387716
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: demographic_key
 		summarizeBy: none
 		sourceColumn: demographic_key
@@ -181,7 +181,7 @@ table 'Annual Beneficiary Utilization'
 	/// Source county code recorded for the beneficiary in the summary year. Interpret in combination with State Code.
 	column 'County Code'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-d566abd3edf4
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: county_code
 		summarizeBy: none
 		sourceColumn: county_code
@@ -192,7 +192,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Age at Year End'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-432bb6143902
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: age_at_year_end
 		summarizeBy: sum
 		sourceColumn: age_at_year_end
@@ -203,7 +203,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Is Deceased'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-302b31edb119
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: is_deceased
 		summarizeBy: sum
 		sourceColumn: is_deceased
@@ -214,7 +214,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has End-Stage Renal Disease'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-56af95746fcb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_esrd
 		summarizeBy: sum
 		sourceColumn: has_esrd
@@ -225,7 +225,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Part A Coverage Months'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-e5f63fcf0dd1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: part_a_coverage_months
 		summarizeBy: sum
 		sourceColumn: part_a_coverage_months
@@ -236,7 +236,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Part B Coverage Months'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-b95ffdc38c40
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: part_b_coverage_months
 		summarizeBy: sum
 		sourceColumn: part_b_coverage_months
@@ -247,7 +247,7 @@ table 'Annual Beneficiary Utilization'
 	column 'HMO Coverage Months'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-f0bed0b3944d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: hmo_coverage_months
 		summarizeBy: sum
 		sourceColumn: hmo_coverage_months
@@ -258,7 +258,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Part D Coverage Months'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-a2c8d86f8f9c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: part_d_coverage_months
 		summarizeBy: sum
 		sourceColumn: part_d_coverage_months
@@ -269,7 +269,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Alzheimer''s Disease'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-a88026608112
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_alzheimers
 		summarizeBy: sum
 		sourceColumn: has_alzheimers
@@ -280,7 +280,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Heart Failure'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-afaa5c5b7183
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_heart_failure
 		summarizeBy: sum
 		sourceColumn: has_heart_failure
@@ -291,7 +291,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Chronic Kidney Disease'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-995b5014116d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_chronic_kidney_disease
 		summarizeBy: sum
 		sourceColumn: has_chronic_kidney_disease
@@ -302,7 +302,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Cancer'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-74a8352ad7c6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_cancer
 		summarizeBy: sum
 		sourceColumn: has_cancer
@@ -313,7 +313,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has COPD'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-ec13a3fa88e9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_copd
 		summarizeBy: sum
 		sourceColumn: has_copd
@@ -324,7 +324,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Depression'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-ded0c6e9c5a5
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_depression
 		summarizeBy: sum
 		sourceColumn: has_depression
@@ -335,7 +335,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Diabetes'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-8205a7ede0e6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_diabetes
 		summarizeBy: sum
 		sourceColumn: has_diabetes
@@ -346,7 +346,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Ischemic Heart Disease'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-a3ef95d4c045
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_ischemic_heart_disease
 		summarizeBy: sum
 		sourceColumn: has_ischemic_heart_disease
@@ -357,7 +357,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Osteoporosis'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-d97220a49d41
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_osteoporosis
 		summarizeBy: sum
 		sourceColumn: has_osteoporosis
@@ -368,7 +368,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Rheumatoid/Osteo Arthritis'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-f1982bccf5dd
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_rheumatoid_osteo_arthritis
 		summarizeBy: sum
 		sourceColumn: has_rheumatoid_osteo_arthritis
@@ -379,7 +379,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Has Stroke/TIA'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-57b05861781d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_stroke_tia
 		summarizeBy: sum
 		sourceColumn: has_stroke_tia
@@ -390,7 +390,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Chronic Condition Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-48c1cc235b85
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: chronic_condition_count
 		summarizeBy: sum
 		sourceColumn: chronic_condition_count
@@ -400,7 +400,7 @@ table 'Annual Beneficiary Utilization'
 	/// Annual Medicare reimbursement amount in US dollars for inpatient services in the beneficiary summary. Distinct from the inpatient claim-payment aggregate.
 	column 'Inpatient Medicare Reimbursement Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-998fe770ac1f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_medicare_reimbursement_amt
@@ -412,7 +412,7 @@ table 'Annual Beneficiary Utilization'
 	/// Annual Medicare reimbursement amount in US dollars for outpatient services in the beneficiary summary. Distinct from the outpatient claim-payment aggregate.
 	column 'Outpatient Medicare Reimbursement Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-a92196fd998c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_medicare_reimbursement_amt
@@ -424,7 +424,7 @@ table 'Annual Beneficiary Utilization'
 	/// Annual Medicare reimbursement amount in US dollars for carrier services in the beneficiary summary. Carrier claims are not included in the inpatient/outpatient claim-count measures.
 	column 'Carrier Medicare Reimbursement Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-d4d0370187a6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: carrier_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: carrier_medicare_reimbursement_amt
@@ -436,7 +436,7 @@ table 'Annual Beneficiary Utilization'
 	/// Total Medicare reimbursement in US dollars for the beneficiary-year, including inpatient, outpatient, and carrier amounts. Source for Total Medicare Reimbursement; not equivalent to total institutional claim payments.
 	column 'Total Medicare Reimbursement Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-d906998f4e14
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: total_medicare_reimbursement_amt
@@ -448,7 +448,7 @@ table 'Annual Beneficiary Utilization'
 	/// Total beneficiary financial responsibility in US dollars recorded in the annual summary. Distinct from Medicare reimbursement and from claim-derived cost-share aggregates.
 	column 'Total Beneficiary Responsibility Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-ff125ef529c8
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_beneficiary_responsibility_amt
 		summarizeBy: sum
 		sourceColumn: total_beneficiary_responsibility_amt
@@ -461,7 +461,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Inpatient Claim Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-de2ea52c405c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_count
@@ -472,7 +472,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Inpatient Length of Stay (Days)'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-8bc0f8f715bb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_length_of_stay_days
 		summarizeBy: sum
 		sourceColumn: inpatient_length_of_stay_days
@@ -483,7 +483,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Inpatient Utilization Days'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-eb1a8733475a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_utilization_days
 		summarizeBy: sum
 		sourceColumn: inpatient_utilization_days
@@ -493,7 +493,7 @@ table 'Annual Beneficiary Utilization'
 	/// Aggregated inpatient claim payments in US dollars for this beneficiary-year. Claim-derived payment metric, distinct from annual-summary inpatient Medicare reimbursement.
 	column 'Inpatient Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-816c38219c28
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_payment_amt
@@ -505,7 +505,7 @@ table 'Annual Beneficiary Utilization'
 	/// Aggregated inpatient beneficiary cost sharing in US dollars for this beneficiary-year, as recorded in the claim summary.
 	column 'Inpatient Cost Share Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-b64cc882639f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_cost_share_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_cost_share_amt
@@ -518,7 +518,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Outpatient Claim Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-d24c75426661
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_count
@@ -529,7 +529,7 @@ table 'Annual Beneficiary Utilization'
 	column 'Outpatient Visit Days'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-416ea8764bae
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_visit_days
 		summarizeBy: sum
 		sourceColumn: outpatient_visit_days
@@ -539,7 +539,7 @@ table 'Annual Beneficiary Utilization'
 	/// Aggregated outpatient claim payments in US dollars for this beneficiary-year. Claim-derived payment metric, distinct from annual-summary outpatient Medicare reimbursement.
 	column 'Outpatient Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-56f32239d221
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_payment_amt
@@ -551,7 +551,7 @@ table 'Annual Beneficiary Utilization'
 	/// Aggregated outpatient beneficiary cost sharing in US dollars for this beneficiary-year, as recorded in the claim summary.
 	column 'Outpatient Cost Share Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-0e3626c08233
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_cost_share_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_cost_share_amt
@@ -563,7 +563,7 @@ table 'Annual Beneficiary Utilization'
 	/// Total institutional claim payments in US dollars recorded for this beneficiary-year across inpatient and outpatient claims. Distinct from total Medicare reimbursement, which also includes carrier amounts.
 	column 'Total Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-ceb96d2f2529
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: total_claim_payment_amt
@@ -577,7 +577,7 @@ table 'Annual Beneficiary Utilization'
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-925ede2dbddc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -590,4 +590,3 @@ table 'Annual Beneficiary Utilization'
 			entityName: fact_beneficiary_annual_utilization
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

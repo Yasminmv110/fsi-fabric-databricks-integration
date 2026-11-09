@@ -1,13 +1,13 @@
-/// Preaggregated population-health fact table at Summary Year, State Code, and Demographic Key grain. Contains beneficiary/condition counts, averages, prevalence, reimbursement, and institutional utilization. Additive counts can be summed across disjoint groups, but averages, rates, and per-beneficiary values must be recomputed or weighted rather than summed. Does not support provider attribution.
+﻿/// Preaggregated population-health fact table at Summary Year, State Code, and Demographic Key grain. Contains beneficiary/condition counts, averages, prevalence, reimbursement, and institutional utilization. Additive counts can be summed across disjoint groups, but averages, rates, and per-beneficiary values must be recomputed or weighted rather than summed. Does not support provider attribution.
 table 'Population Health Summary'
-	lineageTag: 00000000-0000-0000-0000-5861106e3078
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[fact_population_health_summary]
 
 	/// Calendar year represented by this population summary group. Foreign key to Calendar Year and part of the year/state/demographic grain.
 	column 'Summary Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-d640147e31e4
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: summary_year
 		summarizeBy: none
 		sourceColumn: summary_year
@@ -17,7 +17,7 @@ table 'Population Health Summary'
 	/// Source state code for this population group. Foreign key to State and part of the year/state/demographic grain.
 	column 'State Code'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-5e9e0bdf7fec
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: state_code
 		summarizeBy: none
 		sourceColumn: state_code
@@ -29,7 +29,7 @@ table 'Population Health Summary'
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-5c76d78582f9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: demographic_key
 		summarizeBy: none
 		sourceColumn: demographic_key
@@ -40,7 +40,7 @@ table 'Population Health Summary'
 	column 'Beneficiary Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-d694931a9880
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: beneficiary_count
 		summarizeBy: sum
 		sourceColumn: beneficiary_count
@@ -51,7 +51,7 @@ table 'Population Health Summary'
 	column 'Deceased Beneficiary Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-5c24190d2a08
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: deceased_count
 		summarizeBy: sum
 		sourceColumn: deceased_count
@@ -62,7 +62,7 @@ table 'Population Health Summary'
 	column 'End-Stage Renal Disease Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-63d84913982a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: esrd_count
 		summarizeBy: sum
 		sourceColumn: esrd_count
@@ -73,7 +73,7 @@ table 'Population Health Summary'
 	column 'Average Age'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-f4e35c4c57d1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_age
 		summarizeBy: sum
 		sourceColumn: avg_age
@@ -86,7 +86,7 @@ table 'Population Health Summary'
 	column 'Average Chronic Condition Count'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-db4cf4453d7c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_chronic_condition_count
 		summarizeBy: sum
 		sourceColumn: avg_chronic_condition_count
@@ -99,7 +99,7 @@ table 'Population Health Summary'
 	column 'Beneficiaries with 3+ Chronic Conditions'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-c175f3320ff9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: multi_chronic_3plus_count
 		summarizeBy: sum
 		sourceColumn: multi_chronic_3plus_count
@@ -110,7 +110,7 @@ table 'Population Health Summary'
 	column 'Alzheimer''s Disease Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-ec28099c0757
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: alzheimers_count
 		summarizeBy: sum
 		sourceColumn: alzheimers_count
@@ -121,7 +121,7 @@ table 'Population Health Summary'
 	column 'Heart Failure Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-849c4dbb2b34
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: heart_failure_count
 		summarizeBy: sum
 		sourceColumn: heart_failure_count
@@ -132,7 +132,7 @@ table 'Population Health Summary'
 	column 'Chronic Kidney Disease Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-59c6bab4f5ca
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: chronic_kidney_disease_count
 		summarizeBy: sum
 		sourceColumn: chronic_kidney_disease_count
@@ -143,7 +143,7 @@ table 'Population Health Summary'
 	column 'Cancer Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-41803abc9b22
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: cancer_count
 		summarizeBy: sum
 		sourceColumn: cancer_count
@@ -154,7 +154,7 @@ table 'Population Health Summary'
 	column 'COPD Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-745f0460e7c7
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: copd_count
 		summarizeBy: sum
 		sourceColumn: copd_count
@@ -165,7 +165,7 @@ table 'Population Health Summary'
 	column 'Depression Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-def737665701
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: depression_count
 		summarizeBy: sum
 		sourceColumn: depression_count
@@ -176,7 +176,7 @@ table 'Population Health Summary'
 	column 'Diabetes Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-17c3e4b1a42d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: diabetes_count
 		summarizeBy: sum
 		sourceColumn: diabetes_count
@@ -187,7 +187,7 @@ table 'Population Health Summary'
 	column 'Ischemic Heart Disease Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-77bb9c029747
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: ischemic_heart_disease_count
 		summarizeBy: sum
 		sourceColumn: ischemic_heart_disease_count
@@ -198,7 +198,7 @@ table 'Population Health Summary'
 	column 'Osteoporosis Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-a570769e4196
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: osteoporosis_count
 		summarizeBy: sum
 		sourceColumn: osteoporosis_count
@@ -209,7 +209,7 @@ table 'Population Health Summary'
 	column 'Rheumatoid/Osteo Arthritis Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-b5e9ba1f0d97
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: rheumatoid_osteo_arthritis_count
 		summarizeBy: sum
 		sourceColumn: rheumatoid_osteo_arthritis_count
@@ -220,7 +220,7 @@ table 'Population Health Summary'
 	column 'Stroke/TIA Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-c0915a1af7c8
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: stroke_tia_count
 		summarizeBy: sum
 		sourceColumn: stroke_tia_count
@@ -231,7 +231,7 @@ table 'Population Health Summary'
 	column 'Diabetes Prevalence Rate'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-f5f108d8cda1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: diabetes_prevalence_rate
 		summarizeBy: sum
 		sourceColumn: diabetes_prevalence_rate
@@ -244,7 +244,7 @@ table 'Population Health Summary'
 	column 'Heart Failure Prevalence Rate'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-3c2f87098060
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: heart_failure_prevalence_rate
 		summarizeBy: sum
 		sourceColumn: heart_failure_prevalence_rate
@@ -257,7 +257,7 @@ table 'Population Health Summary'
 	column 'Ischemic Heart Disease Prevalence Rate'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-6f150c21a172
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: ischemic_heart_disease_prevalence_rate
 		summarizeBy: sum
 		sourceColumn: ischemic_heart_disease_prevalence_rate
@@ -269,7 +269,7 @@ table 'Population Health Summary'
 	/// Total Medicare reimbursement in US dollars for this annual population group, including inpatient, outpatient, and carrier amounts. Additive across disjoint groups and years.
 	column 'Total Medicare Reimbursement Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-d7c8ef4c0c1c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: total_medicare_reimbursement_amt
@@ -281,7 +281,7 @@ table 'Population Health Summary'
 	/// Precomputed Medicare reimbursement per beneficiary in US dollars for this annual group. Non-additive; do not sum or average group ratios equally. The Reimbursement per Beneficiary measure uses distinct people over the selected period.
 	column 'Medicare Reimbursement per Beneficiary'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-f8e5a2951e56
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: medicare_reimbursement_per_beneficiary_amt
 		summarizeBy: sum
 		sourceColumn: medicare_reimbursement_per_beneficiary_amt
@@ -293,7 +293,7 @@ table 'Population Health Summary'
 	/// Total beneficiary financial responsibility in US dollars recorded for this annual population group. Distinct from Medicare reimbursement and claim payment amounts.
 	column 'Total Beneficiary Responsibility Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-1c2af7d9e529
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_beneficiary_responsibility_amt
 		summarizeBy: sum
 		sourceColumn: total_beneficiary_responsibility_amt
@@ -306,7 +306,7 @@ table 'Population Health Summary'
 	column 'Inpatient Claim Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-63fa1f236371
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_count
@@ -317,7 +317,7 @@ table 'Population Health Summary'
 	column 'Inpatient Length of Stay (Days)'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-c4b7dc3dc22e
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_length_of_stay_days
 		summarizeBy: sum
 		sourceColumn: inpatient_length_of_stay_days
@@ -328,7 +328,7 @@ table 'Population Health Summary'
 	column 'Outpatient Claim Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-5d0a300c87f9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_count
@@ -338,7 +338,7 @@ table 'Population Health Summary'
 	/// Total inpatient claim payments in US dollars for this annual population group. Distinct from annual-summary Medicare reimbursement.
 	column 'Inpatient Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-6b30b0ca941c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_payment_amt
@@ -350,7 +350,7 @@ table 'Population Health Summary'
 	/// Total outpatient claim payments in US dollars for this annual population group. Distinct from annual-summary Medicare reimbursement.
 	column 'Outpatient Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-15439e9d6d94
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_payment_amt
@@ -362,7 +362,7 @@ table 'Population Health Summary'
 	/// Precomputed inpatient claim count per 1,000 beneficiaries in this annual group. Non-additive; recompute as 1,000 times aggregated inpatient claims divided by matching beneficiary-year counts.
 	column 'Inpatient Claims per 1,000'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-0e8f56715181
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claims_per_1000
 		summarizeBy: sum
 		sourceColumn: inpatient_claims_per_1000
@@ -374,7 +374,7 @@ table 'Population Health Summary'
 	/// Precomputed outpatient claim count per 1,000 beneficiaries in this annual group. Non-additive; recompute as 1,000 times aggregated outpatient claims divided by matching beneficiary-year counts.
 	column 'Outpatient Claims per 1,000'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-ab54884c2a17
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claims_per_1000
 		summarizeBy: sum
 		sourceColumn: outpatient_claims_per_1000
@@ -388,7 +388,7 @@ table 'Population Health Summary'
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-362bdd8280bd
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -401,4 +401,3 @@ table 'Population Health Summary'
 			entityName: fact_population_health_summary
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

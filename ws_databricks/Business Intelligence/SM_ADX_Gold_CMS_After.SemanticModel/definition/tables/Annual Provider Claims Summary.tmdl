@@ -1,30 +1,30 @@
-/// Provider claims fact table at Provider Number, Claim Year, and Claim Type grain, containing claim/beneficiary counts, payments, cost sharing, and claim characteristics. Supports year/provider/claim-type analysis only. Beneficiary counts are not additive across providers/types/years; average columns require appropriate weighting. Coverage differs from annual beneficiary summaries, so totals need not match across all years.
+﻿/// Provider claims fact table at Provider Number, Claim Year, and Claim Type grain, containing claim/beneficiary counts, payments, cost sharing, and claim characteristics. Supports year/provider/claim-type analysis only. Beneficiary counts are not additive across providers/types/years; average columns require appropriate weighting. Coverage differs from annual beneficiary summaries, so totals need not match across all years.
 table 'Annual Provider Claims Summary'
-	lineageTag: 00000000-0000-0000-0000-89e90bc18c96
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[fact_provider_annual_summary]
 
 	/// Claim counts from annual provider claims summary. Use with Calendar Year, Provider, and Claim Type dimensions. State, Demographic, and Beneficiary dimensions do not filter this measure; joint provider/demographic or provider/state attribution is unavailable. Includes years outside beneficiary summary coverage.
 	measure 'Total Provider Claims' = SUM('Annual Provider Claims Summary'[Claim Count])
 		formatString: #,0
 		displayFolder: Claims\Provider
-		lineageTag: 00000000-0000-0000-0000-83c5a617977e
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Provider-summary inpatient claim count in current year/provider context, intersected with the selected Claim Type. State, demographic, and beneficiary filters are not supported.
 	measure 'Provider Inpatient Claim Count' = CALCULATE([Total Provider Claims], KEEPFILTERS('Claim Type'[Claim Type] = "Inpatient"))
 		formatString: #,0
 		displayFolder: Claims\Provider
-		lineageTag: 00000000-0000-0000-0000-b83c789c4735
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Provider-summary outpatient claim count in current year/provider context, intersected with the selected Claim Type. State, demographic, and beneficiary filters are not supported.
 	measure 'Provider Outpatient Claim Count' = CALCULATE([Total Provider Claims], KEEPFILTERS('Claim Type'[Claim Type] = "Outpatient"))
 		formatString: #,0
 		displayFolder: Claims\Provider
-		lineageTag: 00000000-0000-0000-0000-aeaa0bc28b1b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Provider identifier for this claim summary group. Foreign key to Provider and part of the provider/year/claim-type grain.
 	column 'Provider Number'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-304c91eb97e2
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: provider_number
 		summarizeBy: none
 		sourceColumn: provider_number
@@ -35,7 +35,7 @@ table 'Annual Provider Claims Summary'
 	column 'Claim Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-cf12dbacd281
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: claim_year
 		summarizeBy: none
 		sourceColumn: claim_year
@@ -45,7 +45,7 @@ table 'Annual Provider Claims Summary'
 	/// Inpatient or Outpatient category for this provider/year group. Foreign key to Claim Type and part of the provider/year/claim-type grain.
 	column 'Claim Type'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-fda4a89dde99
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: claim_type
 		summarizeBy: none
 		sourceColumn: claim_type
@@ -56,7 +56,7 @@ table 'Annual Provider Claims Summary'
 	column 'Claim Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-789a9a7f5fdc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: claim_count
 		summarizeBy: sum
 		sourceColumn: claim_count
@@ -67,7 +67,7 @@ table 'Annual Provider Claims Summary'
 	column 'Beneficiary Count'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-05528e2b177c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: beneficiary_count
 		summarizeBy: sum
 		sourceColumn: beneficiary_count
@@ -77,7 +77,7 @@ table 'Annual Provider Claims Summary'
 	/// Total claim payments in US dollars for this provider/year/claim-type group. Additive across disjoint claim groups; not the same metric as annual beneficiary Medicare reimbursement.
 	column 'Total Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-a3d042e2f11a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: total_claim_payment_amt
@@ -89,7 +89,7 @@ table 'Annual Provider Claims Summary'
 	/// Mean claim payment in US dollars within this provider/year/claim-type group. Non-additive; recompute overall mean from total payments divided by claim count rather than averaging group means.
 	column 'Average Claim Payment Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-01cc66349c7c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: avg_claim_payment_amt
@@ -101,7 +101,7 @@ table 'Annual Provider Claims Summary'
 	/// Total primary-payer paid amount in US dollars recorded for claims in this provider/year/claim-type group. Distinct from the claim payment and beneficiary cost-share fields.
 	column 'Total Primary Payer Paid Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-1206292161cc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_primary_payer_paid_amt
 		summarizeBy: sum
 		sourceColumn: total_primary_payer_paid_amt
@@ -113,7 +113,7 @@ table 'Annual Provider Claims Summary'
 	/// Total beneficiary claim cost sharing in US dollars for this provider/year/claim-type group. Distinct from payer payments and annual-summary beneficiary responsibility.
 	column 'Total Beneficiary Cost Share Amount'
 		dataType: double
-		lineageTag: 00000000-0000-0000-0000-2547dbbad16a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_beneficiary_cost_share_amt
 		summarizeBy: sum
 		sourceColumn: total_beneficiary_cost_share_amt
@@ -126,7 +126,7 @@ table 'Annual Provider Claims Summary'
 	column 'Average Claim Duration (Days)'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-419f229cd7a0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_claim_duration_days
 		summarizeBy: sum
 		sourceColumn: avg_claim_duration_days
@@ -139,7 +139,7 @@ table 'Annual Provider Claims Summary'
 	column 'Total Length of Stay (Days)'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-1e10496ff9b8
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_length_of_stay_days
 		summarizeBy: sum
 		sourceColumn: total_length_of_stay_days
@@ -150,7 +150,7 @@ table 'Annual Provider Claims Summary'
 	column 'Average Length of Stay (Days)'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-cc6593fc7891
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_length_of_stay_days
 		summarizeBy: sum
 		sourceColumn: avg_length_of_stay_days
@@ -163,7 +163,7 @@ table 'Annual Provider Claims Summary'
 	column 'Average Diagnosis Code Count'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-31d4380e6411
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_diagnosis_code_count
 		summarizeBy: sum
 		sourceColumn: avg_diagnosis_code_count
@@ -176,7 +176,7 @@ table 'Annual Provider Claims Summary'
 	column 'Average Procedure Code Count'
 		dataType: decimal
 		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
-		lineageTag: 00000000-0000-0000-0000-3633621509fc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: avg_procedure_code_count
 		summarizeBy: sum
 		sourceColumn: avg_procedure_code_count
@@ -190,7 +190,7 @@ table 'Annual Provider Claims Summary'
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-9d9c37c488c1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -203,4 +203,3 @@ table 'Annual Provider Claims Summary'
 			entityName: fact_provider_annual_summary
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

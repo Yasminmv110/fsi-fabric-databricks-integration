@@ -1,37 +1,36 @@
-/// Shared year dimension filtering beneficiary and population summaries by Summary Year and provider claims by Claim Year. Fact tables can have different year coverage; provider claims include 2007 while beneficiary summaries currently cover 2008-2010.
+﻿/// Shared year dimension filtering beneficiary and population summaries by Summary Year and provider claims by Claim Year. Fact tables can have different year coverage; provider claims include 2007 while beneficiary summaries currently cover 2008-2010.
 table 'Calendar Year'
-	lineageTag: 00000000-0000-0000-0000-cb7468b76f16
-	sourceLineageTag: 00000000-0000-0000-0000-f26c23291488
+	lineageTag: 00000000-0000-0000-0000-000000000000
+	sourceLineageTag: 00000000-0000-0000-0000-000000000000
 
 	/// Four-digit calendar year shared by beneficiary/population Summary Year and provider Claim Year. Use this dimension for consistent year filters across the fact tables.
 	column 'Calendar Year'
 		dataType: int64
-		lineageTag: 00000000-0000-0000-0000-7a76a1604b2a
-		sourceLineageTag: 00000000-0000-0000-0000-74f4532bdf47
+		lineageTag: 00000000-0000-0000-0000-000000000000
+		sourceLineageTag: 00000000-0000-0000-0000-000000000000
 		sourceColumn: calendar_year
 
 	/// Recorded load timestamp for this gold-layer year record. Operational lineage metadata, not the analytical calendar year.
 	column 'Gold Load Timestamp'
 		dataType: dateTime
-		lineageTag: 00000000-0000-0000-0000-913a32b1e1fa
-		sourceLineageTag: 00000000-0000-0000-0000-15588b9f1ca1
+		lineageTag: 00000000-0000-0000-0000-000000000000
+		sourceLineageTag: 00000000-0000-0000-0000-000000000000
 		sourceColumn: _gold_load_ts
 
 	partition 'Calendar Year-partition' = entity
 		mode: directQuery
 		source
 			entityName: Calendar Year
-			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-4f0a9fa9337a/00000000-0000-0000-0000-171fc01efbf5'
+			expressionSource: 'DirectQuery to AS - 00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000'
 
 		annotation ONT_PinnedAtUtc = 2026-10-29T15:47:42.5701133+00:00
 
-		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-4f0a9fa9337a
+		annotation ONT_WorkspaceId = 00000000-0000-0000-0000-000000000000
 
-		annotation ONT_ItemId = 00000000-0000-0000-0000-171fc01efbf5
+		annotation ONT_ItemId = 00000000-0000-0000-0000-000000000000
 
 		annotation ONT_ItemKind = SemanticModel
 
 		annotation ONT_WorkspaceName = WS_Databricks
 
 		annotation ONT_ItemName = SM_ADX_Gold_CMS_After
-

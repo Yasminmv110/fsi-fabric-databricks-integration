@@ -1,11 +1,11 @@
-table fact_beneficiary_annual_utilization
-	lineageTag: 00000000-0000-0000-0000-5d43f0bde935
+﻿table fact_beneficiary_annual_utilization
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[fact_beneficiary_annual_utilization]
 
 	column beneficiary_id
 		dataType: string
 		sourceProviderType: varchar(50)
-		lineageTag: 00000000-0000-0000-0000-ca583fefbf6f
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: beneficiary_id
 		summarizeBy: none
 		sourceColumn: beneficiary_id
@@ -16,7 +16,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-5889a6d93567
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: summary_year
 		summarizeBy: sum
 		sourceColumn: summary_year
@@ -26,7 +26,7 @@ table fact_beneficiary_annual_utilization
 	column state_code
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-034c7bb9e571
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: state_code
 		summarizeBy: none
 		sourceColumn: state_code
@@ -37,7 +37,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-c14a49b8b1a1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: demographic_key
 		summarizeBy: sum
 		sourceColumn: demographic_key
@@ -47,7 +47,7 @@ table fact_beneficiary_annual_utilization
 	column county_code
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-2896e48cd5e6
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: county_code
 		summarizeBy: none
 		sourceColumn: county_code
@@ -58,7 +58,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-83d86a90f489
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: age_at_year_end
 		summarizeBy: sum
 		sourceColumn: age_at_year_end
@@ -69,7 +69,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-668147586602
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: is_deceased
 		summarizeBy: sum
 		sourceColumn: is_deceased
@@ -80,7 +80,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-56228951537d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_esrd
 		summarizeBy: sum
 		sourceColumn: has_esrd
@@ -91,7 +91,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-527383383528
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: part_a_coverage_months
 		summarizeBy: sum
 		sourceColumn: part_a_coverage_months
@@ -102,7 +102,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-3f7846a198c0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: part_b_coverage_months
 		summarizeBy: sum
 		sourceColumn: part_b_coverage_months
@@ -113,7 +113,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-cc4642f07eac
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: hmo_coverage_months
 		summarizeBy: sum
 		sourceColumn: hmo_coverage_months
@@ -124,7 +124,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-d510296f940b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: part_d_coverage_months
 		summarizeBy: sum
 		sourceColumn: part_d_coverage_months
@@ -135,7 +135,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-7736d9a678e0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_alzheimers
 		summarizeBy: sum
 		sourceColumn: has_alzheimers
@@ -146,7 +146,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-5bc5a3516951
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_heart_failure
 		summarizeBy: sum
 		sourceColumn: has_heart_failure
@@ -157,7 +157,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-3c93ffaf5074
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_chronic_kidney_disease
 		summarizeBy: sum
 		sourceColumn: has_chronic_kidney_disease
@@ -168,7 +168,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-6100fd66ba11
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_cancer
 		summarizeBy: sum
 		sourceColumn: has_cancer
@@ -179,7 +179,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-963047eeaaf8
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_copd
 		summarizeBy: sum
 		sourceColumn: has_copd
@@ -190,7 +190,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-c830ff0b2f60
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_depression
 		summarizeBy: sum
 		sourceColumn: has_depression
@@ -201,7 +201,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-5ac2b4d8e2bb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_diabetes
 		summarizeBy: sum
 		sourceColumn: has_diabetes
@@ -212,7 +212,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-6d76cd97a772
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_ischemic_heart_disease
 		summarizeBy: sum
 		sourceColumn: has_ischemic_heart_disease
@@ -223,7 +223,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-29273337984a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_osteoporosis
 		summarizeBy: sum
 		sourceColumn: has_osteoporosis
@@ -234,7 +234,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-e2ca372335ea
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_rheumatoid_osteo_arthritis
 		summarizeBy: sum
 		sourceColumn: has_rheumatoid_osteo_arthritis
@@ -245,7 +245,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-2d3e31607f16
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_stroke_tia
 		summarizeBy: sum
 		sourceColumn: has_stroke_tia
@@ -256,7 +256,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-84d13248b066
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: chronic_condition_count
 		summarizeBy: sum
 		sourceColumn: chronic_condition_count
@@ -266,7 +266,7 @@ table fact_beneficiary_annual_utilization
 	column inpatient_medicare_reimbursement_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-49fa3686bd0e
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_medicare_reimbursement_amt
@@ -278,7 +278,7 @@ table fact_beneficiary_annual_utilization
 	column outpatient_medicare_reimbursement_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-8529c52797bd
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_medicare_reimbursement_amt
@@ -290,7 +290,7 @@ table fact_beneficiary_annual_utilization
 	column carrier_medicare_reimbursement_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-8afd41e11a01
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: carrier_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: carrier_medicare_reimbursement_amt
@@ -302,7 +302,7 @@ table fact_beneficiary_annual_utilization
 	column total_medicare_reimbursement_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-d0ed5397ff9d
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_medicare_reimbursement_amt
 		summarizeBy: sum
 		sourceColumn: total_medicare_reimbursement_amt
@@ -314,7 +314,7 @@ table fact_beneficiary_annual_utilization
 	column total_beneficiary_responsibility_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-c25cf8ddacb0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_beneficiary_responsibility_amt
 		summarizeBy: sum
 		sourceColumn: total_beneficiary_responsibility_amt
@@ -327,7 +327,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-ff4b8be4321a
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_count
@@ -338,7 +338,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-68c665714a76
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_length_of_stay_days
 		summarizeBy: sum
 		sourceColumn: inpatient_length_of_stay_days
@@ -349,7 +349,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-b515533844bc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_utilization_days
 		summarizeBy: sum
 		sourceColumn: inpatient_utilization_days
@@ -359,7 +359,7 @@ table fact_beneficiary_annual_utilization
 	column inpatient_claim_payment_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-4460f8912c6e
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_claim_payment_amt
@@ -371,7 +371,7 @@ table fact_beneficiary_annual_utilization
 	column inpatient_cost_share_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-e7e97a82f2be
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: inpatient_cost_share_amt
 		summarizeBy: sum
 		sourceColumn: inpatient_cost_share_amt
@@ -384,7 +384,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-db8eac5b20cc
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_count
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_count
@@ -395,7 +395,7 @@ table fact_beneficiary_annual_utilization
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-1f7b798b8f52
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_visit_days
 		summarizeBy: sum
 		sourceColumn: outpatient_visit_days
@@ -405,7 +405,7 @@ table fact_beneficiary_annual_utilization
 	column outpatient_claim_payment_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-d388beb26df5
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_claim_payment_amt
@@ -417,7 +417,7 @@ table fact_beneficiary_annual_utilization
 	column outpatient_cost_share_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-ea7bf3f7993b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: outpatient_cost_share_amt
 		summarizeBy: sum
 		sourceColumn: outpatient_cost_share_amt
@@ -429,7 +429,7 @@ table fact_beneficiary_annual_utilization
 	column total_claim_payment_amt
 		dataType: double
 		sourceProviderType: decimal(18, 2)
-		lineageTag: 00000000-0000-0000-0000-4c65b13490a4
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: total_claim_payment_amt
 		summarizeBy: sum
 		sourceColumn: total_claim_payment_amt
@@ -442,7 +442,7 @@ table fact_beneficiary_annual_utilization
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: datetime2
-		lineageTag: 00000000-0000-0000-0000-564a1ea931c4
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -457,4 +457,3 @@ table fact_beneficiary_annual_utilization
 			expressionSource: DatabaseQuery
 
 	annotation PBI_ResultType = Table
-

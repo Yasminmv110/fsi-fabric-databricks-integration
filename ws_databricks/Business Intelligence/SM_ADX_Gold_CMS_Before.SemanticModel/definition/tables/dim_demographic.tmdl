@@ -1,12 +1,12 @@
-table dim_demographic
-	lineageTag: 00000000-0000-0000-0000-5671967c93ba
+﻿table dim_demographic
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_demographic]
 
 	column demographic_key
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-d2ef09577158
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: demographic_key
 		summarizeBy: sum
 		sourceColumn: demographic_key
@@ -16,7 +16,7 @@ table dim_demographic
 	column sex
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-a760c0115c5b
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: sex
 		summarizeBy: none
 		sourceColumn: sex
@@ -26,7 +26,7 @@ table dim_demographic
 	column race
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-e72a8ead2467
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: race
 		summarizeBy: none
 		sourceColumn: race
@@ -36,7 +36,7 @@ table dim_demographic
 	column age_band
 		dataType: string
 		sourceProviderType: varchar(10)
-		lineageTag: 00000000-0000-0000-0000-2e880241f7a5
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: age_band
 		summarizeBy: none
 		sourceColumn: age_band
@@ -47,7 +47,7 @@ table dim_demographic
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-738bc13eb245
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: sex_sort
 		summarizeBy: sum
 		sourceColumn: sex_sort
@@ -58,7 +58,7 @@ table dim_demographic
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-2b1fd419add0
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: race_sort
 		summarizeBy: sum
 		sourceColumn: race_sort
@@ -69,7 +69,7 @@ table dim_demographic
 		dataType: int64
 		formatString: 0
 		sourceProviderType: int
-		lineageTag: 00000000-0000-0000-0000-132635954ff9
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: age_band_sort
 		summarizeBy: sum
 		sourceColumn: age_band_sort
@@ -80,7 +80,7 @@ table dim_demographic
 		dataType: dateTime
 		formatString: General Date
 		sourceProviderType: datetime2
-		lineageTag: 00000000-0000-0000-0000-fb44f7fc27eb
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -95,4 +95,3 @@ table dim_demographic
 			expressionSource: DatabaseQuery
 
 	annotation PBI_ResultType = Table
-

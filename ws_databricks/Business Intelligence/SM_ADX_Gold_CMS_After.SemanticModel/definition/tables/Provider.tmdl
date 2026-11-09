@@ -1,12 +1,12 @@
-/// Provider dimension keyed by Provider Number, containing observed claim-year range and indicators for inpatient/outpatient claims. Filters Annual Provider Claims Summary only; the model has no provider-to-beneficiary/state/demographic attribution.
+﻿/// Provider dimension keyed by Provider Number, containing observed claim-year range and indicators for inpatient/outpatient claims. Filters Annual Provider Claims Summary only; the model has no provider-to-beneficiary/state/demographic attribution.
 table Provider
-	lineageTag: 00000000-0000-0000-0000-b50eb019b287
+	lineageTag: 00000000-0000-0000-0000-000000000000
 	sourceLineageTag: [gold].[dim_provider]
 
 	/// Source provider identifier and unique key of the Provider dimension. Joins to Annual Provider Claims Summary; not assumed to be a National Provider Identifier.
 	column 'Provider Number'
 		dataType: string
-		lineageTag: 00000000-0000-0000-0000-41fc986643ed
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: provider_number
 		summarizeBy: none
 		sourceColumn: provider_number
@@ -17,7 +17,7 @@ table Provider
 	column 'First Claim Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-fdaacd671184
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: first_claim_year
 		summarizeBy: none
 		sourceColumn: first_claim_year
@@ -28,7 +28,7 @@ table Provider
 	column 'Last Claim Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-9eeccec0aefd
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: last_claim_year
 		summarizeBy: none
 		sourceColumn: last_claim_year
@@ -39,7 +39,7 @@ table Provider
 	column 'Has Inpatient Claims'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-bc252d964fe8
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_inpatient_claims
 		summarizeBy: none
 		sourceColumn: has_inpatient_claims
@@ -50,7 +50,7 @@ table Provider
 	column 'Has Outpatient Claims'
 		dataType: int64
 		formatString: 0
-		lineageTag: 00000000-0000-0000-0000-b848b2a6510c
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: has_outpatient_claims
 		summarizeBy: none
 		sourceColumn: has_outpatient_claims
@@ -62,7 +62,7 @@ table Provider
 		dataType: dateTime
 		isHidden
 		formatString: General Date
-		lineageTag: 00000000-0000-0000-0000-42fc3ecf6fc1
+		lineageTag: 00000000-0000-0000-0000-000000000000
 		sourceLineageTag: _gold_load_ts
 		summarizeBy: none
 		sourceColumn: _gold_load_ts
@@ -75,4 +75,3 @@ table Provider
 			entityName: dim_provider
 			schemaName: gold
 			expressionSource: 'DirectLake - WH_ADX_CMS_Gold'
-

@@ -46,7 +46,27 @@ try {
     [IO.File]::WriteAllText($json, '{"valid":true}')
     [IO.File]::WriteAllText($report, '{"datasetReference":{"byPath":{"path":"Missing.SemanticModel"}}}')
     Assert-Check 'missing report model'
-    Write-Output 'PASS: six checker regression scenarios.'
+    [IO.File]::WriteAllText($report, '{"datasetReference":{"byPath":{"path":"Model.SemanticModel"}}}')
+    [IO.File]::WriteAllText($json, ('{"workspaceId":"' + [guid]::NewGuid().ToString() + '"}'))
+    Assert-Check 'original GUID detected'
+    [IO.File]::WriteAllText($json, '{"workspaceId":"00000000-0000-0000-0000-000000000001"}')
+    Assert-Check
+    [IO.File]::WriteAllText($json, ('{"endpoint":"test-source.' + 'datawarehouse.fabric.microsoft.com"}'))
+    Assert-Check 'environment hostname detected'
+    [IO.File]::WriteAllText($json, '{"endpoint":"HOST_PLACEHOLDER.datawarehouse.fabric.microsoft.com"}')
+    Assert-Check
+    $credential = @{}
+    $credential[('pass' + 'word')] = 'fixture-value'
+    [IO.File]::WriteAllText($json, ($credential | ConvertTo-Json))
+    Assert-Check 'credential value detected'
+    [IO.File]::WriteAllText($json, '{"valid":true}')
+    $identifierPath = Join-Path $fixture ([guid]::NewGuid().ToString() + '.txt')
+    [IO.File]::WriteAllText($identifierPath, 'fixture')
+    Assert-Check 'original GUID detected'
+    Remove-Item -LiteralPath $identifierPath
+    [IO.File]::WriteAllText($json, ('{"token":"' + 'ghp_' + ('x' * 30) + '"}'))
+    Assert-Check 'credential signature detected'
+    Write-Output 'PASS: thirteen checker regression scenarios.'
 } finally {
     if (Test-Path -LiteralPath $fixture) {
         Remove-Item -LiteralPath $fixture -Recurse -Force
