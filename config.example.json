@@ -1,0 +1,8 @@
+{
+  "fabricWorkspaceName": "<your-fabric-workspace-name>",
+  "storageItemName": "ADX_OneLake_Storage",
+  "storageItemDescription": "OneLake managed storage for Azure Databricks Unity Catalog (demo)",
+  "accessConnectorResourceId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Databricks/accessConnectors/<connector-name>",
+  "accessConnectorPrincipalId": "",
+  "databricksCatalogName": "insurance_onelake"
+}

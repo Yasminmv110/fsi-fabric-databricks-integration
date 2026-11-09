@@ -1,4 +1,2 @@
-# Local environment settings; keep the shareable placeholder example tracked.
-.env
-.env.*
-!.env.example
+# Local settings hold real workspace, item and resource IDs - never commit
+config.local.json
