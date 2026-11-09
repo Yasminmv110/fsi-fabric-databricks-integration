@@ -1,0 +1,23 @@
+name: Repository checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-checks:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check documentation and exported references
+        shell: powershell
+        run: '& .\scripts\Test-Repository.ps1'
+      - name: Test the checker
+        shell: powershell
+        run: '& .\scripts\Test-Repository.Tests.ps1'
+      - name: Check whitespace
+        shell: powershell
+        run: git show --format= --check HEAD

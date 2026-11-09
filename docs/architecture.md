@@ -1,86 +1,158 @@
-# Demo architecture
+# Fabric + Azure Databricks Architecture
 
-## Scope and evidence
+[Home](../README.md) | [Setup](getting-started.md) | [Asset catalog](asset-catalog.md)
 
-This document describes an intended Microsoft Fabric + Azure Databricks demo.
-The repository contains Fabric-exported definitions, not a verified deployment.
-The inventory below is based on directory names; it does not establish that
-connections, transformations, refreshes, or report bindings work.
+This repository contains Fabric exports for a Databricks-to-Fabric demo and
+reference guidance for the reverse direction. An exported relationship is not
+evidence of a working connection: identifiers require rebinding and live
+execution remains environment-dependent.
 
-## Intended logical flow
+## Application architecture
 
+Solid arrows show data made available to a consumer or transformed into a
+destination. Dashed arrows show catalog metadata or identity configuration.
+They do not represent automatic deployment. Only the Gold load materializes
+new data in the main path; catalog mirroring and shortcuts do not replicate it.
+
+<!-- mermaid-checked: no \n, no em-dash/en-dash, no {} in labels, subgraphs are id["label"], arrows are -->|"label"|, all subgraphs closed by end, ids unique -->
 ```mermaid
-flowchart LR
-    Source["Approved demo data"] --> DBX["Azure Databricks / Unity Catalog"]
-    DBX -. "Configure and validate integration" .-> Fabric["Fabric mirrored catalogs / OneLake access"]
-    Fabric -. "Validate downstream dependencies" .-> Stores["Fabric lakehouses / warehouse"]
-    Stores -. "Validate model bindings and refresh" .-> Model["Semantic models"]
-    Model -. "Validate report results" .-> Report["Power BI report"]
+flowchart TD
+    subgraph OwnerPlatform["Databricks - source ownership"]
+        SourceTables[("Silver Delta tables on ADLS")]
+        SourceCatalog["Unity Catalog"]
+    end
+    subgraph ConsumerPlatform["Fabric - analytics workspace"]
+        CatalogItem["Mirrored Databricks catalog"]
+        ShortcutLake["Lakehouse shortcuts and SQL endpoint"]
+        GoldStore[("Gold Warehouse star schema")]
+        BusinessModel["Power BI semantic model"]
+        OverviewReport["Power BI report"]
+        BusinessOntology["Business ontology"]
+        QuestionAgent["Data Agent"]
+    end
+    AccessIdentity["Microsoft Entra identities"]
+    SourceCatalog -.->|"catalog metadata sync"| CatalogItem
+    SourceTables -->|"read through catalog shortcuts"| CatalogItem
+    CatalogItem -->|"OneLake shortcuts"| ShortcutLake
+    ShortcutLake -->|"reviewed Gold load procedures"| GoldStore
+    GoldStore -->|"Direct Lake data access"| BusinessModel
+    BusinessModel -->|"report queries"| OverviewReport
+    BusinessModel -->|"business entity mappings"| BusinessOntology
+    GoldStore -->|"warehouse queries"| QuestionAgent
+    BusinessOntology -->|"entity context"| QuestionAgent
+    AccessIdentity -.->|"source and consumer permissions"| SourceCatalog
+    AccessIdentity -.->|"workspace and item access"| CatalogItem
 ```
 
-Dashed arrows represent intended relationships, not confirmed wiring. No data
-movement or refresh strategy is selected by this scaffold. Confirm the supported
-integration mode, table compatibility, access model, and data freshness before
-implementing it, then record the choice in an [ADR](../decisions/adr-template.md).
+### Technology stack summary
 
-## Existing repository groups
+| Layer | Technology | Version | Purpose |
+|---|---|---|---|
+| Source governance | Azure Databricks Unity Catalog | Tenant-dependent | Own and expose supported Delta tables |
+| Source storage | ADLS Gen2 and Delta | Check supported table features | Retain source data ownership |
+| Fabric access | Mirrored catalog and OneLake shortcuts | Managed service | Read source data without replication |
+| Transformation | Fabric Warehouse T-SQL | Managed service | Materialize Gold dimensions and facts |
+| BI | Power BI semantic model and report | Managed service | Measures, relationships and visualization |
+| Business context | Fabric Ontology and Data Agent | Check availability in tenant | Entity mappings and natural-language queries |
 
-| Group under `ws_databricks` | Observed item types | Intended role; not validated |
-| --- | --- | --- |
-| [Azure Databricks Store](../ws_databricks/Azure%20Databricks%20Store/) | Mirrored Azure Databricks catalogs, eventstream | Source integration and event ingestion experiments |
-| [Fabric Data Stores](../ws_databricks/Fabric%20Data%20Stores/) | Lakehouses, warehouse | Data access, storage, and serving |
-| [Business Intelligence](../ws_databricks/Business%20Intelligence/) | Semantic models, report, ontology | Modeling and analytics consumption |
-| [Agents](../ws_databricks/Agents/) | Data agent | Exploratory conversational access to configured data |
+### Data storage and external services
 
-These are inventory labels, not guarantees that each item participates in the
-same flow. Item names are preserved; their presence does not indicate deployment
-or operational health.
+The primary path reads Databricks-owned data in place. Gold warehouse loading
+is a separate transformation with storage and compute costs, not part of
+mirroring. No upstream source files or Databricks transformation notebook are
+included. The optional Eventstream export is not required by the core path.
 
-## Prerequisites and boundaries
+### Key architectural decisions
 
-- Access to a Fabric workspace on an appropriate capacity, with required
-  workloads enabled and permissions approved by its administrator.
-- An Azure Databricks workspace with Unity Catalog and supported source tables.
-  Validate the current integration's external-access requirements, permissions,
-  networking constraints, and regional availability.
-- Explicitly configured Fabric connections and downstream model/report bindings.
-  Workspace exports are not a substitute for provisioning or credentials.
-- Approved synthetic or de-identified data with known expected results.
+- Preserve Fabric-managed item folders and rebind through supported tools.
+- Keep mirroring, physical transformation and semantic modeling distinct.
+- Treat provider claims and beneficiary annual summaries as different grains;
+  their totals and supported filters are not interchangeable.
 
-Fabric item folders are service-managed export boundaries. This scaffold leaves
-all existing items untouched. Authoring/importing items, provisioning Azure
-resources, configuring identities, and setting up networking remain separate
-tasks requiring explicit scope and validation.
+These are documentation principles, not accepted ADRs. Record future decisions
+with the [ADR template](../decisions/adr-template.md).
 
-## Configuration and identity
+## Component relationships
 
-[`.env.example`](../.env.example) documents optional local identifiers for Azure,
-Fabric, and Databricks. It is a convention for future tooling, not an executable
-configuration contract: nothing currently reads these variables. Do not copy
-secrets into it or assume it configures Fabric connections.
+This view traces the CMS path represented by the exports. Solid arrows denote
+data dependencies; dashed arrows denote configuration/context. It is not a
+claim that the source tables are populated or the exported bindings are usable.
 
-Use approved Microsoft Entra identities and least-privilege permissions. Treat
-Databricks source access, Fabric connection access, workspace/item permissions,
-and report-consumer permissions as distinct controls. Do not assume source
-authorization automatically secures every downstream artifact. Use approved
-secret management if a future integration requires credentials.
+<!-- mermaid-checked: no \n, no em-dash/en-dash, no {} in labels, subgraphs are id["label"], arrows are -->|"label"|, all subgraphs closed by end, ids unique -->
+```mermaid
+flowchart LR
+    subgraph AccessComponents["Catalog and Lakehouse"]
+        cMirror["ADX_Mirror_CMS_Data"]
+        cLake["LH_ADX_Mirror"]
+    end
+    subgraph TransformComponents["Warehouse"]
+        cSilver["Silver SQL tables"]
+        cLoad["gold.usp_load_gold_dim_fact"]
+        cGold["WH_ADX_CMS_Gold dimensions and facts"]
+    end
+    subgraph ExperienceComponents["Analytics and AI"]
+        cBefore["SM_ADX_Gold_CMS_Before"]
+        cAfter["SM_ADX_Gold_CMS_After"]
+        cReport["RPT_ADX_Gold_CMS_Overview"]
+        cOntology["Ontology_ADX_Gold_CMS"]
+        cAgent["DA_ADX_Gold_CMS"]
+    end
+    cMirror -->|"bronze and silver shortcuts"| cLake
+    cLake -->|"SQL endpoint visibility"| cSilver
+    cSilver -->|"cross-database source reads"| cLoad
+    cLoad -->|"full rebuild and validation"| cGold
+    cGold -->|"SQL endpoint binding"| cBefore
+    cGold -->|"Direct Lake binding"| cAfter
+    cAfter -->|"relative report reference"| cReport
+    cAfter -->|"semantic entity mappings"| cOntology
+    cGold -->|"warehouse data source"| cAgent
+    cOntology -.->|"configured entity context"| cAgent
+```
 
-## Validation before presenting
+### Component inventory
 
-1. Confirm which source tables and integration mode are in scope.
-2. Verify source and Fabric access using the intended demo identity.
-3. Inspect the configured connection and validate table visibility and freshness.
-4. Check downstream lakehouse/warehouse dependencies and model bindings.
-5. Refresh the semantic model where required and compare report outputs against
-   known source counts and business totals.
-6. Confirm consumers cannot access data beyond the approved demo scope.
-7. Record results, limitations, and resource cleanup responsibilities.
+| Component | Layer | Type | Responsibility |
+|---|---|---|---|
+| ADX_Mirror_CMS_Data | Access | Mirrored catalog | Surface selected Unity Catalog tables |
+| LH_ADX_Mirror | Access | Lakehouse | Expose bronze/silver shortcuts |
+| gold.usp_load_gold_dim_fact | Transformation | Stored procedure | Rebuild six dimensions and three facts from Silver |
+| WH_ADX_CMS_Gold | Storage | Warehouse | Persist the Gold star schema |
+| SM_ADX_Gold_CMS_Before | Analytics | Semantic model | Technical table naming and SQL endpoint expression |
+| SM_ADX_Gold_CMS_After | Analytics | Semantic model | Business names, measures and Direct Lake expression |
+| RPT_ADX_Gold_CMS_Overview | Presentation | Report | Reference the After semantic model |
+| Ontology_ADX_Gold_CMS | Context | Ontology | Map business entities to the After model |
+| DA_ADX_Gold_CMS | AI | Data Agent | Query Gold with configured warehouse and ontology context |
 
-No end-to-end execution, performance, cost, or security validation is included
-in this documentation scaffold. Do not describe the demo as production-ready.
+See the [asset catalog](asset-catalog.md) for all exports, including the
+separate insurance catalog and Lakehouse.
+
+## Reverse direction: OneLake catalog federation
+
+[OneLake federation](patterns/onelake-federation.md) lets Databricks query
+Fabric-owned Lakehouse or Warehouse data read-only, without copying it.
+Unity Catalog contains the foreign catalog; OneLake remains the data store.
+This is not a Fabric-side federation node feeding the Gold warehouse.
+
+The repository does not include federation connections, storage credentials,
+or foreign-catalog deployment artifacts. Do not infer this path from an item
+whose name contains `onelake`: both exported catalog items have the
+`MirroredAzureDatabricksCatalog` type.
+
+## Status and validation
+
+| Capability | Evidence | Status |
+|---|---|---|
+| Catalog and shortcut wiring | Exported item definitions | Represented; live rebinding required |
+| Silver-to-Gold transformation | Warehouse DDL and procedures | Included; source preparation missing |
+| Report, model, ontology and agent | Exported definitions | Included; live queries unverified |
+| OneLake federation | Official reference guide | Documented alternative only |
+| Cloud end-to-end behavior | Requires tenant execution | Not established by local checks |
 
 ## References
 
-- [Microsoft Fabric mirroring overview](https://learn.microsoft.com/fabric/mirroring/overview)
-- [Configure a Fabric mirror from Azure Databricks Unity Catalog](https://learn.microsoft.com/fabric/mirroring/azure-databricks-tutorial)
-- [Repository contribution guidance](../CONTRIBUTING.md)
+Terminology reviewed against these references on 2026-11-09. Recheck current
+feature availability, identity support and networking requirements before use.
+
+- [Mirrored Databricks catalogs](https://learn.microsoft.com/en-us/fabric/mirroring/azure-databricks)
+- [Mirroring setup and Lakehouse shortcuts](https://learn.microsoft.com/en-us/fabric/mirroring/azure-databricks-tutorial)
+- [Enable OneLake catalog federation](https://learn.microsoft.com/en-us/azure/databricks/query-federation/onelake)

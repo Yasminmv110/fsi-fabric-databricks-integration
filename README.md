@@ -1,86 +1,104 @@
-# Microsoft Fabric + Azure Databricks demo
+# FSI Fabric + Databricks Integration Demo
 
-A demo repository for exploring Azure Databricks data engineering alongside
-Microsoft Fabric analytics. Existing Fabric workspace exports live under
-[`ws_databricks/`](ws_databricks/); this scaffold adds navigation, contribution
-guidance, and a place to record design decisions.
+Explore how Azure Databricks data can support Microsoft Fabric analytics,
+Power BI reports, and natural-language questions. Intended for data engineers,
+solution architects, and demo presenters.
 
-## Disclaimer
+**Status: exported demo assets, not a one-click deployment.** Live connections,
+source data, upstream transformations, and tenant-specific bindings are not
+provided. The documented cloud walkthrough has not been validated end-to-end
+by the offline repository checks.
 
-This is a demonstration, not a production-ready solution or an official Microsoft
-product sample. It is provided as-is under the [MIT license](LICENSE), without
-warranty. No deployment, connectivity, data accuracy, security posture, or
-end-to-end behavior has been validated by this scaffold. Exported items may
-contain environment-specific references and require manual configuration.
-Use synthetic or approved, de-identified data only; never commit credentials or
-customer data. Fabric capacity, Azure resources, and Databricks compute may incur
-charges. Review permissions, regional availability, feature support, and costs
-before running a demo.
+## What you can demonstrate
 
-## Status
+- Discover Databricks Unity Catalog tables in Fabric without copying their data.
+- Access mirrored tables through Lakehouse shortcuts.
+- Build a Gold warehouse star schema and consume it through a semantic model,
+  report, ontology, and Data Agent.
+- Compare this with the reverse direction: Databricks reading Fabric OneLake
+  data through catalog federation.
 
-| Area | Status | Notes |
-| --- | --- | --- |
-| Repository documentation | Scaffolded | Getting started, architecture, contribution guidance, and ADR template |
-| Fabric workspace artifacts | Present; not validated | Existing exports are preserved unchanged |
-| Azure Databricks integration | Not validated | Requires an accessible workspace, Unity Catalog, and configured connections |
-| Local configuration | Example only | No code currently loads the environment variables |
-| Provisioning and deployment | Not provided | No automated infrastructure or deployment workflow |
-| End-to-end tests | Not provided | Validate connections, permissions, refreshes, and results in your environment |
+The integration concepts apply to financial services and insurance. The
+included analytics assets use **CMS beneficiary and provider claims concepts**;
+they are a healthcare/insurance example, not a banking dataset. Data files and
+the upstream data preparation notebook are not included.
 
 ## Start here
 
-| Goal | Start here |
-| --- | --- |
-| Understand the intended flow and its limitations | [Architecture](docs/architecture.md) |
-| Explore the existing workspace exports | [Fabric workspace artifacts](ws_databricks/) |
-| Prepare local configuration placeholders | [Environment example](.env.example) |
-| Contribute safely | [Contribution guide](CONTRIBUTING.md) |
-| Record a design choice | [ADR template](decisions/adr-template.md) |
+| Your goal | Read this |
+|---|---|
+| Understand the design and data direction | [Architecture and diagrams](docs/architecture.md) |
+| Set up the main demo | [Getting started](docs/getting-started.md) |
+| Find an exported item or its dependencies | [Asset catalog](docs/asset-catalog.md) |
+| Present the demo and check results | [Demo walkthrough](docs/demo-walkthrough.md) |
+| Resolve a setup or data issue | [Troubleshooting](docs/troubleshooting.md) |
+| Make a contribution | [Contributing](CONTRIBUTING.md) |
 
-### Prepare for a demo
+## Choose an integration path
 
-1. Read the disclaimer and [architecture](docs/architecture.md).
-2. Obtain access to a suitable Fabric workspace and capacity, and an Azure
-   Databricks workspace with Unity Catalog. Confirm supported features and
-   permissions using the official documentation linked in the architecture.
-3. If useful for your own tooling, copy the example locally:
+| Path | Data owner and consumer | Repository coverage |
+|---|---|---|
+| [Mirrored Databricks catalog](docs/patterns/mirrored-catalog.md) | Databricks owns tables; Fabric reads them | Catalog items, shortcuts, warehouse, BI and agent exports |
+| [OneLake catalog federation](docs/patterns/onelake-federation.md) | Fabric owns tables; Databricks reads them | Reference guidance; no connection or foreign-catalog deployment |
 
-   ```powershell
-   Copy-Item .env.example .env
-   ```
+The Azure Databricks catalog item in Fabric is part of the mirrored-catalog
+path, not a third independent integration pattern. Catalog mirroring
+synchronizes metadata; shortcuts access the underlying data without replication.
 
-   Replace placeholders with your environment's identifiers. The file is not
-   automatically loaded and does not create resources or authenticate you.
-   Local environment files are ignored by Git; do not put secrets in tracked files.
-4. Review the existing exports and map their dependencies to your environment.
-   This repository does not currently provide a reproducible import or run procedure.
-5. Before presenting, validate source access, Fabric connections, data freshness,
-   semantic model refresh, and report results using approved demo data. Stop or
-   remove demo resources when finished, subject to your environment's policies.
+## Quick start
 
-## Repository layout
+1. Review the [prerequisites and setup gates](docs/getting-started.md).
+2. Use an isolated Fabric demo workspace and an approved Databricks source.
+3. Configure the mirrored catalog and verify the three required Silver tables.
+4. Restore supported exports using Fabric Git integration, then rebind
+   connections and downstream items through supported authoring tools.
+5. Load the Gold star schema only after reviewing its rebuild behavior.
+6. Run the [read-only validation queries](warehouse/validate-gold.sql), then
+   follow the [report and agent walkthrough](docs/demo-walkthrough.md).
 
-```text
-.
-|-- README.md
-|-- CONTRIBUTING.md
-|-- LICENSE
-|-- .env.example
-|-- .gitignore
-|-- docs/
-|   `-- architecture.md
-|-- decisions/
-|   `-- adr-template.md
-`-- ws_databricks/                  Existing Fabric workspace exports
-    |-- Readme.md
-    |-- Agents/
-    |-- Azure Databricks Store/
-    |-- Business Intelligence/
-    `-- Fabric Data Stores/
+Follow the detailed guide before running cloud operations. Merely cloning this
+repository or copying [.env.example](.env.example) does not configure resources.
+No repository code loads that file.
+
+## Repository map
+
+| Location | Purpose |
+|---|---|
+| [docs](docs) | Architecture, setup, pattern guides, demo and troubleshooting |
+| [ws_databricks](ws_databricks) | Service-managed Fabric item exports; preserve their hierarchy |
+| [warehouse](warehouse/README.md) | Read-only validation examples; authoritative DDL stays in the exports |
+| [notebooks](notebooks/README.md) | Upstream notebook requirements; no runnable notebook included |
+| [scripts](scripts) | Dependency-free offline repository checks |
+| [decisions](decisions) | Architecture decision template and future accepted decisions |
+
+### Naming
+
+`FSI` means financial services industry; `CMS` refers to Centers for Medicare
+& Medicaid Services; `LH`, `WH`, and `SM` mean Lakehouse, Warehouse, and Semantic
+Model. `ADX` is retained from the exported asset names; it does **not** indicate
+that Azure Data Explorer is a dependency of this demo.
+
+## Validate locally
+
+From the repository root in PowerShell:
+
+```powershell
+& .\scripts\Test-Repository.ps1
+git diff --check
 ```
 
-Fabric item folders (such as `.Notebook`, `.Lakehouse`, `.Warehouse`,
-`.MirroredAzureDatabricksCatalog`, `.SemanticModel`, and `.Report`) contain
-service-managed definitions. This documentation scaffold does not create or
-modify any of them.
+The checker validates local Markdown file targets and fence balance, JSON syntax,
+and report-to-model relative paths. It does not render Mermaid, validate Fabric
+schemas, execute SQL, scan for all secrets, or prove cloud connectivity.
+See [validation guidance](docs/validation.md).
+
+## Safety, cost and limitations
+
+Use approved synthetic or public demo data, never customer or patient data.
+Review exports for environment identifiers before publishing; placeholders do
+not constitute a security certification. Keep credentials out of Git.
+
+Fabric capacity, Databricks compute, storage and network traffic can incur
+charges. Stop demo compute and remove only resources you own after the session.
+This is not a production deployment blueprint: validate access controls,
+networking, licensing, data quality and supportability in your tenant.

@@ -48,7 +48,20 @@ validation performed, and any limitations.
 - [ ] Relevant documentation and ADRs are updated.
 - [ ] Validation steps and outcomes are included in the pull request.
 
-For documentation-only changes, review links, Markdown rendering, and
-`git diff --check`; cloud execution is not required. There is currently no
-automated build or test suite for this scaffold. Future executable changes
-should include focused tests and a reproducible, cost-aware validation procedure.
+For documentation and supporting-script changes, run from the repository root:
+
+```powershell
+& .\scripts\Test-Repository.ps1
+& .\scripts\Test-Repository.Tests.ps1
+git diff --check
+```
+
+Also preview Markdown and Mermaid rendering. The offline checks and GitHub
+Actions workflow do not execute SQL, validate service-managed schemas, scan
+for all secrets, or prove cloud behavior. See [validation](docs/validation.md)
+for exact coverage and the separate, approval-required live acceptance checks.
+
+Keep onboarding prose in `docs/`, read-only SQL examples in `warehouse/`, and
+offline checks in `scripts/`. Do not duplicate exported DDL or create empty
+folders to imply an implemented feature. Future executable changes should
+include focused tests and a reproducible, cost-aware validation procedure.
