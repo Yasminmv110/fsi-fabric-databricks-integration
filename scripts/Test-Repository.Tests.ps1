@@ -74,7 +74,13 @@ try {
     Assert-Check 'original object ID detected'
     [IO.File]::WriteAllText($json, ('{"name":"' + ('0' * 10) + ('a' * 10) + '"}'))
     Assert-Check
-    Write-Output 'PASS: fifteen checker regression scenarios.'
+    $deletedPath = Join-Path $fixture 'deleted.md'
+    [IO.File]::WriteAllText($deletedPath, '# Deleted fixture')
+    & git -C $fixture add -- deleted.md
+    if ($LASTEXITCODE -ne 0) { throw 'Cannot stage deletion fixture.' }
+    Remove-Item -LiteralPath $deletedPath
+    Assert-Check
+    Write-Output 'PASS: sixteen checker regression scenarios.'
 } finally {
     if (Test-Path -LiteralPath $fixture) {
         Remove-Item -LiteralPath $fixture -Recurse -Force

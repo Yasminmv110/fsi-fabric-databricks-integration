@@ -12,6 +12,13 @@ $paths = @(& git -C $Root -c core.quotepath=false ls-files --cached --others --e
 if ($LASTEXITCODE -ne 0) {
     throw "Cannot enumerate repository files under $Root."
 }
+$deleted = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+foreach ($relative in @(& git -C $Root -c core.quotepath=false -c core.longpaths=true ls-files --deleted)) {
+    [void]$deleted.Add($relative)
+}
+if ($LASTEXITCODE -ne 0) {
+    throw "Cannot enumerate deleted repository files under $Root."
+}
 
 $guidPattern = '(?i)(?<![0-9a-f])[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}(?![0-9a-f])'
 $objectPattern = '(?i)(?<![0-9a-f])(?:[0-9a-f]{32}|[0-9a-f]{20})(?![0-9a-f])'
@@ -29,11 +36,14 @@ function Test-Placeholder {
 
 foreach ($relative in ($paths | Sort-Object -Unique)) {
     $path = Join-Path $Root $relative.Replace('/', '\')
-    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-        continue
-    }
     $displayPath = [regex]::Replace($relative, $guidPattern, '[GUID_REDACTED]')
     $displayPath = [regex]::Replace($displayPath, $objectPattern, '[OBJECT_ID_REDACTED]')
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        if (-not $deleted.Contains($relative)) {
+            $failures.Add("${displayPath}: file cannot be read; check permissions and Windows path length.")
+        }
+        continue
+    }
     $fileCount++
     $lines = @($relative) + @(Get-Content -LiteralPath $path)
     for ($index = 0; $index -lt $lines.Count; $index++) {

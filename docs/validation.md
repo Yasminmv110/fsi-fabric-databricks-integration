@@ -16,7 +16,9 @@ If script execution is restricted, use your organization's approved policy;
 do not disable security controls merely to run the checker.
 
 The [checker](../scripts/Test-Repository.ps1) reads tracked and non-ignored
-untracked files. Deleted files are skipped, but links/references to them fail.
+untracked files. Intentional tracked deletions are skipped, but links/references
+to them fail. Unreadable files fail the privacy check rather than being silently
+skipped; use a shorter checkout path if Windows path limits prevent reading.
 It performs no network calls or cloud mutations.
 
 | Check | Coverage and limits |
@@ -26,7 +28,7 @@ It performs no network calls or cloud mutations.
 | JSON syntax | `.json`, `.platform`, `.pbir`, `.pbism`; not Fabric JSON schema compatibility or SQL strings |
 | Report references | Existing model directory for exported `datasetReference.byPath`; not deployed bindings or model semantics |
 | Privacy patterns | Non-placeholder GUIDs and 20/32-character hex object IDs in file contents/names, environment cloud hosts, common token/private-key signatures and credential assignments; failures redact values |
-| Checker regression scenarios | Fifteen success/failure scenarios covering links, fences, JSON, report references, GUID values/filenames, object IDs, cloud hosts and credentials |
+| Checker regression scenarios | Sixteen success/failure scenarios covering links, fences, JSON, report references, GUID values/filenames, object IDs, cloud hosts, credentials and intentional tracked deletions |
 
 [GitHub Actions](../.github/workflows/validate.yml) runs the checker, its
 regression scenarios, and whitespace checks without Azure/Fabric credentials.
