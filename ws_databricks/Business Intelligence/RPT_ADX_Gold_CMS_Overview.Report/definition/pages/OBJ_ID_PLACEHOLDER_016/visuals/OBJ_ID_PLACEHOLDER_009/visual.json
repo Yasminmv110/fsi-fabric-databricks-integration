@@ -1,0 +1,67 @@
+﻿{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "OBJ_ID_PLACEHOLDER_009",
+  "position": {
+    "x": 24,
+    "y": 936,
+    "width": 1392,
+    "height": 62,
+    "z": 20000,
+    "tabOrder": 19
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Scope: beneficiary-linked inpatient and outpatient claims; provider-level claims are excluded. State values are source codes. Medicare reimbursement includes carrier services.\nMulti-year age and prevalence are beneficiary-year weighted. Reimbursement per beneficiary is cumulative over selected years divided by distinct people.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": "9pt",
+                      "color": "#526578"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "left"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

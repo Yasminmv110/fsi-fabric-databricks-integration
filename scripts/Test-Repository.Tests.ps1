@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param()
 
 $ErrorActionPreference = 'Stop'
@@ -52,7 +52,7 @@ try {
     [IO.File]::WriteAllText($report, '{"datasetReference":{"byPath":{"path":"Model.SemanticModel"}}}')
     [IO.File]::WriteAllText($json, ('{"workspaceId":"' + [guid]::NewGuid().ToString() + '"}'))
     Assert-Check 'original GUID detected'
-    [IO.File]::WriteAllText($json, '{"workspaceId":"00000000-0000-0000-0000-000000000001"}')
+    [IO.File]::WriteAllText($json, '{"workspaceId":"00000000-0000-0000-0000-000000000000"}')
     Assert-Check
     [IO.File]::WriteAllText($json, ('{"endpoint":"test-source.' + 'datawarehouse.fabric.microsoft.com"}'))
     Assert-Check 'environment hostname detected'
@@ -86,3 +86,4 @@ try {
         Remove-Item -LiteralPath $fixture -Recurse -Force
     }
 }
+
