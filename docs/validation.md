@@ -25,8 +25,8 @@ It performs no network calls or cloud mutations.
 | Markdown fences | Matching backtick/tilde fences; not Markdown style or Mermaid syntax |
 | JSON syntax | `.json`, `.platform`, `.pbir`, `.pbism`; not Fabric JSON schema compatibility or SQL strings |
 | Report references | Existing model directory for exported `datasetReference.byPath`; not deployed bindings or model semantics |
-| Privacy patterns | Non-placeholder GUIDs in file contents/names, environment cloud hosts, common token/private-key signatures and credential assignments; failures redact values |
-| Checker regression scenarios | Thirteen success/failure scenarios covering links, fences, JSON, report references, GUID values/filenames, cloud hosts and credentials |
+| Privacy patterns | Non-placeholder GUIDs and 20/32-character hex object IDs in file contents/names, environment cloud hosts, common token/private-key signatures and credential assignments; failures redact values |
+| Checker regression scenarios | Fifteen success/failure scenarios covering links, fences, JSON, report references, GUID values/filenames, object IDs, cloud hosts and credentials |
 
 [GitHub Actions](../.github/workflows/validate.yml) runs the checker, its
 regression scenarios, and whitespace checks without Azure/Fabric credentials.
@@ -48,6 +48,9 @@ It checks the pushed/PR checkout, not uncommitted local work.
 The [privacy checker](../scripts/Test-Privacy.ps1) runs as part of the repository
 check and may also run on its own. GUIDs in the synthetic namespace
 `00000000-0000-0000-0000-xxxxxxxxxxxx` are placeholders, not original resources.
+Report/page/visual hex IDs are also synthetic: 20-character IDs begin with ten
+zeros; compact 32-character IDs begin with twenty zeros. Their mappings must
+remain consistent across definitions, expressions and filenames.
 The all-zero placeholder cannot preserve unique object identities; regenerate
 and rebind exported items through supported tooling before deployment.
 Functional fields such as `beneficiary_id`, public schema version paths, Git

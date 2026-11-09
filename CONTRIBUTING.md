@@ -34,6 +34,10 @@ Do not treat sanitized exports as deployable without recreating/rebinding items.
   `00000000-0000-0000-0000-xxxxxxxxxxxx` (hexadecimal suffix). Use distinct
   placeholders for distinct source values and reuse each mapping consistently.
   The all-zero value is an unresolved placeholder, not a live resource.
+- Generated 20-character report/page/visual hex identifiers use ten leading
+  zeros plus a synthetic ten-character suffix. Compact 32-character object IDs
+  use twenty leading zeros plus a synthetic twelve-character suffix. Keep
+  filenames and every cross-reference consistent.
 - Replace source hostnames with `HOST_PLACEHOLDER` and source workspace names
   with `WORKSPACE_NAME_PLACEHOLDER`. Preserve public schema URLs and functional
   column names such as `beneficiary_id`.

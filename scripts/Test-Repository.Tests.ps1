@@ -66,7 +66,11 @@ try {
     Remove-Item -LiteralPath $identifierPath
     [IO.File]::WriteAllText($json, ('{"token":"' + 'ghp_' + ('x' * 30) + '"}'))
     Assert-Check 'credential signature detected'
-    Write-Output 'PASS: thirteen checker regression scenarios.'
+    [IO.File]::WriteAllText($json, ('{"name":"' + [guid]::NewGuid().ToString('N').Substring(0,20) + '"}'))
+    Assert-Check 'original object ID detected'
+    [IO.File]::WriteAllText($json, ('{"name":"' + ('0' * 10) + ('a' * 10) + '"}'))
+    Assert-Check
+    Write-Output 'PASS: fifteen checker regression scenarios.'
 } finally {
     if (Test-Path -LiteralPath $fixture) {
         Remove-Item -LiteralPath $fixture -Recurse -Force
