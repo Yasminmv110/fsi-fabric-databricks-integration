@@ -14,7 +14,7 @@ destination. Dashed arrows show catalog metadata or identity configuration.
 They do not represent automatic deployment. Only the Gold load materializes
 new data in the main path; catalog mirroring and shortcuts do not replicate it.
 
-<!-- mermaid-checked: no \n, no em-dash/en-dash, no {} in labels, subgraphs are id["label"], arrows are -->|"label"|, all subgraphs closed by end, ids unique -->
+```<!-- mermaid-checked: no \n, no em-dash/en-dash, no {} in labels, subgraphs are id["label"], arrows are -->|"label"|, all subgraphs closed by end, ids unique -->
 ```mermaid
 flowchart TD
     subgraph OwnerPlatform["Databricks - source ownership"]
