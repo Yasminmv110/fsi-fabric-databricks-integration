@@ -1,0 +1,2 @@
+# Local settings hold real workspace, item and resource IDs - never commit
+config.local.json
