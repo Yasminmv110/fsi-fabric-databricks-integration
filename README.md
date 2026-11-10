@@ -170,7 +170,7 @@ The included analytics assets use **CMS beneficiary and provider claims concepts
 |---|---|---|
 | [Mirrored Databricks catalog](docs/patterns/mirrored-catalog.md) | Databricks owns tables; Fabric reads them | Catalog items, shortcuts, warehouse, BI and agent exports |
 | [OneLake catalog federation](docs/patterns/onelake-federation.md) | Fabric owns tables; Databricks reads them | Reference guidance; no connection or foreign-catalog deployment |
-| [OneLake as Databricks storage](#azure-databricks-using-onelake-as-storage) | Databricks owns tables, stored in OneLake; Fabric reads them through a mirrored catalog |
+| [OneLake as Databricks storage](#azure-databricks-using-onelake-as-storage) | Databricks owns tables, stored in OneLake; Fabric reads them through a mirrored catalog | Setup scripts and SQL in `azure-databricks-storage-item`; the storage item itself isn't exported because Fabric Git doesn't support it yet |
 
 The Azure Databricks catalog item in Fabric is part of the mirrored-catalog
 path, not a third independent integration pattern. Catalog mirroring
