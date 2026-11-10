@@ -14,31 +14,6 @@ This demo covers three integration patterns:
 | 2 | OneLake catalog federation | OneLake (Fabric) | Fabric → Databricks |
 | 3 | Azure Databricks using OneLake as storage through the Azure Databricks Storage item | OneLake (Fabric storage item) | Databricks writes to OneLake |
 
-## Architecture diagram for patterns 2 and 3
-
-```mermaid
-flowchart LR
-    subgraph Fabric["Microsoft Fabric / OneLake"]
-        LH["Fabric Lakehouse tables"]
-        ADSI["Azure Databricks Storage item"]
-        Mirror["Mirrored Azure Databricks catalog"]
-    end
-
-    subgraph Databricks["Azure Databricks / Unity Catalog"]
-        Fed["Federated catalog"]
-        ExtLoc["External location -> ADSI path"]
-        UCCat["UC catalog using OneLake as managed storage"]
-        Tables["Managed tables and volumes"]
-    end
-
-    LH -->|"Pattern 2: query without copying"| Fed
-    Fed -->|"governed access via Unity Catalog"| Databricks
-
-    ADSI -->|"Pattern 3: external location target"| ExtLoc
-    ExtLoc --> UCCat --> Tables
-    Tables -->|"read in Fabric through mirrored catalog"| Mirror
-```
-
 ### 1. Azure Databricks with ADLS Gen2 as storage
 
 Unity Catalog tables stored in ADLS Gen2 are surfaced in Fabric through a **Mirrored Azure Databricks catalog**, so no data is copied.
