@@ -98,6 +98,56 @@ A Unity Catalog external location points at an **Azure Databricks Storage item**
 - Restrict data access to the Databricks managed identity through OneLake security.
 - Let Fabric users read the data through a mirrored Azure Databricks catalog.
 
+  ```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ECECFF", "primaryTextColor": "#000000", "primaryBorderColor": "#9370DB", "lineColor": "#555555", "secondaryColor": "#FFFFDE", "tertiaryColor": "#FFFFDE", "clusterBkg": "#FFFFDE", "clusterBorder": "#9370DB", "edgeLabelBackground": "#EEEEEE"}}}%%
+flowchart TD
+    subgraph OwnerPlatform["Azure Databricks - compute and governance"]
+        DatabricksUsers["Databricks users and workloads"]
+        DatabricksCompute["Databricks SQL or Spark compute"]
+        ManagedCatalog["Unity Catalog<br/>managed tables and volumes"]
+        CatalogPermissions["Unity Catalog<br/>permissions"]
+        ExternalLocation["Unity Catalog external location<br/>Storage type: OneLake"]
+        StorageCredential["Unity Catalog<br/>storage credential"]
+        DatabricksUsers -->|"create and use tables and volumes"| DatabricksCompute
+        ManagedCatalog -.->|"object metadata and authorization"| DatabricksCompute
+        CatalogPermissions -.->|"govern Databricks access"| ManagedCatalog
+        ManagedCatalog -.->|"managed storage path within"| ExternalLocation
+        StorageCredential -.->|"authenticates storage access"| ExternalLocation
+    end
+    AccessIdentity["Access Connector for Azure Databricks<br/>Microsoft Entra managed identity"]
+    subgraph StoragePlatform["Fabric - OneLake storage"]
+        StorageItem["Azure Databricks Storage item"]
+        OneLakeSecurity["OneLake security role<br/>ReadWrite: Databricks managed identity only"]
+        TableFiles[("Managed table files<br/>in OneLake")]
+        VolumeFiles[("Managed volume files<br/>in OneLake")]
+        OneLakeSecurity -.->|"controls direct data access"| StorageItem
+        StorageItem -->|"stores"| TableFiles
+        StorageItem -->|"stores"| VolumeFiles
+    end
+    subgraph ConsumerPlatform["Fabric - analytics consumption"]
+        MirroredCatalog["Mirrored Azure Databricks catalog<br/>Table metadata and OneLake shortcuts"]
+        SqlEndpoint["SQL analytics endpoint<br/>Read-only table queries"]
+        FabricUsers["Fabric users and workloads"]
+        FabricPermissions["Fabric workspace and<br/>mirrored item permissions"]
+        MirroredCatalog -.->|"exposes mirrored tables"| SqlEndpoint
+        FabricUsers -->|"query tables"| SqlEndpoint
+        FabricPermissions -.->|"authorize consumer access"| MirroredCatalog
+    end
+    AccessIdentity -.->|"referenced by"| StorageCredential
+    AccessIdentity -.->|"only member of storage security role"| OneLakeSecurity
+    AccessIdentity -.->|"Viewer role on Fabric workspace"| StorageItem
+    ExternalLocation -.->|"ID-based ABFSS path to item Files folder"| StorageItem
+    DatabricksCompute -->|"read and write table data"| TableFiles
+    DatabricksCompute -->|"read and write volume data"| VolumeFiles
+    ManagedCatalog -.->|"sync selected catalog and table metadata"| MirroredCatalog
+    TableFiles -->|"read through mirrored catalog shortcuts<br/>no table data replication"| SqlEndpoint
+    classDef lavender fill:#ECECFF,stroke:#9370DB,color:#000000;
+    class DatabricksUsers,DatabricksCompute,ManagedCatalog,CatalogPermissions,ExternalLocation,StorageCredential,AccessIdentity,StorageItem,OneLakeSecurity,TableFiles,VolumeFiles,MirroredCatalog,SqlEndpoint,FabricUsers,FabricPermissions lavender;
+    style OwnerPlatform fill:#FFFFDE,stroke:#9370DB,color:#000000
+    style StoragePlatform fill:#FFFFDE,stroke:#9370DB,color:#000000
+    style ConsumerPlatform fill:#FFFFDE,stroke:#9370DB,color:#000000
+```
+
 > [!NOTE]
 > The Azure Databricks Storage item is not yet supported by Fabric Git integration, so it isn't exported with the other Fabric items. See [azure-databricks-storage-item](azure-databricks-storage-item/README_AzureDatabricksStorage.md) for scripts and steps to recreate it. Parts of patterns 2 and 3 are in preview; check current Microsoft documentation before relying on them.
 
