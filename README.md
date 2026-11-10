@@ -40,7 +40,7 @@ A Unity Catalog external location points at an **Azure Databricks Storage item**
 > [!NOTE]
 > The Azure Databricks Storage item is not yet supported by Fabric Git integration, so it isn't exported with the other Fabric items. See [azure-databricks-storage-item](azure-databricks-storage-item/README_AzureDatabricksStorage.md) for scripts and steps to recreate it. Parts of patterns 2 and 3 are in preview; check current Microsoft documentation before relying on them.
 
-The integration concepts apply to financial services and insurance. The included analytics assets use **CMS beneficiary and provider claims concepts**; they are a healthcare/insurance example. Data files and the upstream data preparation notebook are not included.
+The included analytics assets use **CMS beneficiary and provider claims concepts**; they are a healthcare/insurance example. Data files and the upstream data preparation notebook are not included.
 
 ## Start here
 
