@@ -94,8 +94,7 @@ No repository code loads that file.
 
 `FSI` means financial services industry; `CMS` refers to Centers for Medicare
 & Medicaid Services; `LH`, `WH`, and `SM` mean Lakehouse, Warehouse, and Semantic
-Model. `ADX` is retained from the exported asset names; it does **not** indicate
-that Azure Data Explorer is a dependency of this demo.
+Model.
 
 ## Validate locally
 
