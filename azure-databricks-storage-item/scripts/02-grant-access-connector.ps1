@@ -27,6 +27,7 @@ if (-not $principalId) {
 if (-not $principalId) { throw 'Could not resolve the access connector managed identity. Set accessConnectorPrincipalId in config.local.json.' }
 
 $token   = az account get-access-token --resource https://api.fabric.microsoft.com --query accessToken -o tsv
+if (-not $token) { throw 'Could not get a Fabric token. Run: az login' }
 $headers = @{ Authorization = "Bearer $token"; 'Content-Type' = 'application/json' }
 
 # --- 2. Skip if already assigned ------------------------------------------

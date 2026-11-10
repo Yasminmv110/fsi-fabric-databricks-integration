@@ -25,14 +25,15 @@
 ```mermaid
 flowchart LR
   subgraph Databricks["Azure Databricks (compute + Unity Catalog)"]
-    UC["Catalog: insurance_onelake<br/>tables + volume"]
-    EL["External location<br/>onelake_dbx_storage"]
-    SC["Storage credential<br/>Access Connector managed identity"]
+    UC["Catalog: onelake_storage_insurance<br/>tables + volume"]
+    EL["External location<br/>adx_onelake_storage"]
+    SC["Storage credential<br/>Access Connector for Azure Databricks"]
     UC --> EL --> SC
   end
-  subgraph Fabric["Microsoft Fabric workspace"]
+  subgraph Fabric["Microsoft Fabric workspace:WS_Databricks"]
     ST["Azure Databricks Storage item<br/>(ADX_OneLake_Storage)"]
-    MC["Optional: Mirrored Azure Databricks catalog<br/>(how Fabric users read the data)"]
+    MC["Optional: Mirrored Azure Databricks catalog:
+onelake_storage_insurance<br/>(how Fabric users read the data)"]
   end
   SC -- "writes Delta / volume files<br/>abfss://&lt;WorkspaceID&gt;@onelake.../&lt;ItemID&gt;/Files/" --> ST
   MC -. reads .-> UC
