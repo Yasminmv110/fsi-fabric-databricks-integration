@@ -57,6 +57,38 @@ Databricks reads Fabric OneLake data through Unity Catalog without copying it.
 
 - Query Fabric lakehouse tables from Databricks as a federated catalog.
 - Govern access to Fabric data through Unity Catalog.
+  
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ECECFF", "primaryTextColor": "#000000", "primaryBorderColor": "#9370DB", "lineColor": "#555555", "secondaryColor": "#FFFFDE", "tertiaryColor": "#FFFFDE", "clusterBkg": "#FFFFDE", "clusterBorder": "#9370DB", "edgeLabelBackground": "#EEEEEE"}}}%%
+flowchart TD
+    subgraph SourcePlatform["Fabric - source ownership and storage"]
+        FabricLakehouse["Fabric lakehouse"]
+        SourceTables[("Delta table files<br/>in OneLake")]
+        FabricLakehouse -->|"stores table data"| SourceTables
+    end
+    subgraph ConsumerPlatform["Azure Databricks - compute and governance"]
+        StorageCredential["Unity Catalog<br/>storage credential"]
+        FabricConnection["Unity Catalog connection<br/>Type: OneLake"]
+        ForeignCatalog["Unity Catalog foreign catalog<br/>Fabric lakehouse tables"]
+        CatalogPermissions["Unity Catalog<br/>permissions"]
+        DatabricksCompute["Databricks SQL or Spark compute"]
+        DatabricksUsers["Databricks users and workloads"]
+        StorageCredential -.->|"authenticates connection"| FabricConnection
+        FabricConnection -.->|"connection used by"| ForeignCatalog
+        CatalogPermissions -.->|"govern Databricks access"| ForeignCatalog
+        ForeignCatalog -.->|"table metadata and authorization"| DatabricksCompute
+        DatabricksUsers -->|"query federated tables"| DatabricksCompute
+    end
+    AccessIdentity["Access Connector for Azure Databricks<br/>Microsoft Entra managed identity"]
+    AccessIdentity -.->|"referenced by"| StorageCredential
+    AccessIdentity -.->|"granted Fabric and OneLake read permissions"| FabricLakehouse
+    FabricLakehouse -.->|"expose lakehouse table metadata"| ForeignCatalog
+    SourceTables -->|"read-only access from Databricks<br/>no data copy"| DatabricksCompute
+    classDef lavender fill:#ECECFF,stroke:#9370DB,color:#000000;
+    class FabricLakehouse,SourceTables,StorageCredential,FabricConnection,ForeignCatalog,CatalogPermissions,DatabricksCompute,DatabricksUsers,AccessIdentity lavender;
+    style SourcePlatform fill:#FFFFDE,stroke:#9370DB,color:#000000
+    style ConsumerPlatform fill:#FFFFDE,stroke:#9370DB,color:#000000
+```
 
 ### 3. Azure Databricks using OneLake as storage
 
