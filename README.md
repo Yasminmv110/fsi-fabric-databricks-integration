@@ -22,7 +22,6 @@ Unity Catalog tables stored in ADLS Gen2 are surfaced in Fabric through a **Mirr
 - Access the mirrored tables through Lakehouse shortcuts.
 - Build a Gold warehouse star schema and consume it through a semantic model, report, ontology, and Data Agent.
 
-  <!-- mermaid-checked: no \n, no em-dash/en-dash, no {} in labels, subgraphs are id["label"], arrows are -->|"label"|, all subgraphs closed by end, ids unique -->
 ```mermaid
 flowchart TD
     subgraph OwnerPlatform["Databricks - source ownership"]
