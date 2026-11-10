@@ -2,7 +2,7 @@
 
 Explore three ways Azure Databricks and Microsoft Fabric can share data without copying it, and how that data feeds Fabric analytics, Power BI reports, and natural-language questions. Intended for data engineers, solution engineers, and demo presenters.
 
-**Status: exported demo assets, not a one-click deployment.** Live connections, source data, upstream transformations, and tenant-specific bindings are not provided. The documented cloud walkthrough has not been validated end-to-end by the offline repository checks.
+**Status: exported demo assets, not a one-click deployment.** Live connections, source data, upstream transformations, and tenant-specific bindings are not provided. 
 
 ## What you can demonstrate
 
