@@ -1,27 +1,46 @@
 # FSI Fabric + Databricks Integration Demo
 
-Explore how Azure Databricks data can support Microsoft Fabric analytics,
-Power BI reports, and natural-language questions. Intended for data engineers,
-solution engineers, and demo presenters.
+Explore three ways Azure Databricks and Microsoft Fabric can share data without copying it, and how that data feeds Fabric analytics, Power BI reports, and natural-language questions. Intended for data engineers, solution engineers, and demo presenters.
 
-**Status: exported demo assets, not a one-click deployment.** Live connections,
-source data, upstream transformations, and tenant-specific bindings are not
-provided. The documented cloud walkthrough has not been validated end-to-end
-by the offline repository checks.
+**Status: exported demo assets, not a one-click deployment.** Live connections, source data, upstream transformations, and tenant-specific bindings are not provided. The documented cloud walkthrough has not been validated end-to-end by the offline repository checks.
 
 ## What you can demonstrate
 
-- Discover Databricks Unity Catalog tables in Fabric without copying their data.
-- Access mirrored tables through Lakehouse shortcuts.
-- Build a Gold warehouse star schema and consume it through a semantic model,
-  report, ontology, and Data Agent.
-- Compare this with the reverse direction: Databricks reading Fabric OneLake
-  data through catalog federation.
+This demo covers three integration patterns:
 
-The integration concepts apply to financial services and insurance. The
-included analytics assets use **CMS beneficiary and provider claims concepts**;
-they are a healthcare/insurance example. Data files and
-the upstream data preparation notebook are not included.
+| # | Pattern | Where the data is stored | Direction |
+|---|---|---|---|
+| 1 | Azure Databricks with ADLS Gen2 storage, mirrored into Fabric | Your ADLS Gen2 account | Databricks → Fabric |
+| 2 | OneLake catalog federation | OneLake (Fabric) | Fabric → Databricks |
+| 3 | Azure Databricks using OneLake as storage through the Azure Databricks Storage item | OneLake (Fabric storage item) | Databricks writes to OneLake |
+
+### 1. Azure Databricks with ADLS Gen2 as storage
+
+Unity Catalog tables stored in ADLS Gen2 are surfaced in Fabric through a **Mirrored Azure Databricks catalog**, so no data is copied.
+
+- Discover Databricks Unity Catalog tables in Fabric.
+- Access the mirrored tables through Lakehouse shortcuts.
+- Build a Gold warehouse star schema and consume it through a semantic model, report, ontology, and Data Agent.
+
+### 2. OneLake catalog federation
+
+Databricks reads Fabric OneLake data through Unity Catalog without copying it.
+
+- Query Fabric lakehouse tables from Databricks as a federated catalog.
+- Govern access to Fabric data through Unity Catalog.
+
+### 3. Azure Databricks using OneLake as storage
+
+A Unity Catalog external location points at an **Azure Databricks Storage item** in Fabric, and a catalog uses it as managed storage. Databricks keeps the compute and governance, while the table and volume files are stored in OneLake.
+
+- Create Unity Catalog managed tables and volumes whose data is stored in OneLake.
+- Restrict data access to the Databricks managed identity through OneLake security.
+- Let Fabric users read the data through a mirrored Azure Databricks catalog.
+
+> [!NOTE]
+> The Azure Databricks Storage item is not yet supported by Fabric Git integration, so it isn't exported with the other Fabric items. See [infra/azure-databricks-storage](infra/azure-databricks-storage/README.md) for scripts and steps to recreate it. Parts of patterns 2 and 3 are in preview; check current Microsoft documentation before relying on them.
+
+The integration concepts apply to financial services and insurance. The included analytics assets use **CMS beneficiary and provider claims concepts**; they are a healthcare/insurance example. Data files and the upstream data preparation notebook are not included.
 
 ## Start here
 
