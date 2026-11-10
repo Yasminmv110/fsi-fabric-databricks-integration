@@ -22,6 +22,36 @@ Unity Catalog tables stored in ADLS Gen2 are surfaced in Fabric through a **Mirr
 - Access the mirrored tables through Lakehouse shortcuts.
 - Build a Gold warehouse star schema and consume it through a semantic model, report, ontology, and Data Agent.
 
+  <!-- mermaid-checked: no \n, no em-dash/en-dash, no {} in labels, subgraphs are id["label"], arrows are -->|"label"|, all subgraphs closed by end, ids unique -->
+```mermaid
+flowchart TD
+    subgraph OwnerPlatform["Databricks - source ownership"]
+        SourceTables[("Silver Delta tables on ADLS")]
+        SourceCatalog["Unity Catalog"]
+    end
+    subgraph ConsumerPlatform["Fabric - analytics workspace"]
+        CatalogItem["Mirrored Databricks catalog"]
+        ShortcutLake["Lakehouse shortcuts and SQL endpoint"]
+        GoldStore[("Gold Warehouse star schema")]
+        BusinessModel["Power BI semantic model"]
+        OverviewReport["Power BI report"]
+        BusinessOntology["Business ontology"]
+        QuestionAgent["Data Agent"]
+    end
+    AccessIdentity["Microsoft Entra identities"]
+    SourceCatalog -.->|"catalog metadata sync"| CatalogItem
+    SourceTables -->|"read through catalog shortcuts"| CatalogItem
+    CatalogItem -->|"OneLake shortcuts"| ShortcutLake
+    ShortcutLake -->|"reviewed Gold load procedures"| GoldStore
+    GoldStore -->|"Direct Lake data access"| BusinessModel
+    BusinessModel -->|"report queries"| OverviewReport
+    BusinessModel -->|"business entity mappings"| BusinessOntology
+    GoldStore -->|"warehouse queries"| QuestionAgent
+    BusinessOntology -->|"entity context"| QuestionAgent
+    AccessIdentity -.->|"source and consumer permissions"| SourceCatalog
+    AccessIdentity -.->|"workspace and item access"| CatalogItem
+```
+
 ### 2. OneLake catalog federation
 
 Databricks reads Fabric OneLake data through Unity Catalog without copying it.
