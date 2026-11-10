@@ -2,7 +2,7 @@
 
 Explore how Azure Databricks data can support Microsoft Fabric analytics,
 Power BI reports, and natural-language questions. Intended for data engineers,
-solution architects, and demo presenters.
+solution engineers, and demo presenters.
 
 **Status: exported demo assets, not a one-click deployment.** Live connections,
 source data, upstream transformations, and tenant-specific bindings are not
