@@ -97,8 +97,7 @@ A Unity Catalog external location points at an **Azure Databricks Storage item**
 - Create Unity Catalog managed tables and volumes whose data is stored in OneLake.
 - Restrict data access to the Databricks managed identity through OneLake security.
 - Let Fabric users read the data through a mirrored Azure Databricks catalog.
-
-  ```mermaid
+```mermaid
 %%{init: {"theme": "base", "themeVariables": {"primaryColor": "#ECECFF", "primaryTextColor": "#000000", "primaryBorderColor": "#9370DB", "lineColor": "#555555", "secondaryColor": "#FFFFDE", "tertiaryColor": "#FFFFDE", "clusterBkg": "#FFFFDE", "clusterBorder": "#9370DB", "edgeLabelBackground": "#EEEEEE"}}}%%
 flowchart TD
     subgraph OwnerPlatform["Azure Databricks - compute and governance"]
@@ -148,6 +147,7 @@ flowchart TD
     style ConsumerPlatform fill:#FFFFDE,stroke:#9370DB,color:#000000
 ```
 
+  
 > [!NOTE]
 > The Azure Databricks Storage item is not yet supported by Fabric Git integration, so it isn't exported with the other Fabric items. See [azure-databricks-storage-item](azure-databricks-storage-item/README_AzureDatabricksStorage.md) for scripts and steps to recreate it. Parts of patterns 2 and 3 are in preview; check current Microsoft documentation before relying on them.
 
